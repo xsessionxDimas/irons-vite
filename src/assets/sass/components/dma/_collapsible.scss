@@ -1,0 +1,27 @@
+.task-group {
+  border-radius: 8px;
+  border: 1px solid rgba(145, 158, 171, 0.24);
+
+  .el-collapse-item__header {
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    min-height: min-content;
+    line-height: 1.4;
+    padding-top: 10px;
+  }
+
+  .el-collapse-item__wrap {
+    border: none !important;
+  }
+
+  .el-collapse-item__arrow {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+
+    &.is-active {
+      -webkit-transform: rotate(270deg);
+      transform: rotate(270deg);
+    }
+  }
+}

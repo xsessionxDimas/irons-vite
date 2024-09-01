@@ -1,0 +1,21 @@
+export type DefectSheet = {
+    dailyScheduleId: string,
+    unitNumber: string,
+    equipmentModel: string,
+    brand: string,
+    smuDue: string,
+    workOrder: string,
+    psType: string,
+    dateService: string,
+    shift: string,
+    isActive: string,
+    startDate: string,
+    endDate: string,
+    createdOn: string,
+    createdBy: string,
+    changedOn: string,
+    changedBy: string,
+    status: string,
+    eFormId: string,
+    eFormKey: string
+}

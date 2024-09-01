@@ -1,0 +1,18 @@
+export type UpdateItem = {
+  cbmParameterId: number,
+  taskKey: string,
+  model: string,
+  serviceSize: string,
+  description: string,
+  uom: string,
+  typeParameter: string,
+  status: string,
+  minValue: string,
+  maxValue: string,
+  component: string,
+  cbmGroup: string,
+  taskNo: string,
+  taskNoDetail: string,
+  rating: string,
+  isActive: boolean,
+};

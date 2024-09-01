@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/amadm/api/master_data/shift",t=`${a}/bulk`,s=`${a}/validate_upload`,_=`${a}/export`,U=`${a}/lookup`,o=`${a}/update`;export{t as B,a as C,_ as E,U as L,o as U,s as a};

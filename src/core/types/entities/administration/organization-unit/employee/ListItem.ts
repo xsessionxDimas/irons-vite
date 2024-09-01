@@ -1,0 +1,26 @@
+export type ListItem = {
+    employeeId: string,
+    company: string,
+    profileUrl: string,
+    name: string,
+    email: string,
+    position: string,
+    siteName: string,
+    vendor: string,
+    superiorName: string,
+    isActive: boolean,
+    employeeCode: string,
+    // Commented the existing code, in case we need it in the future, if we don't need just delete these
+    // Employee: string,
+    // AdAccount: string,
+    // Phone: string,
+    // Gender: string,
+    // Position: string,
+    // Location: string,
+    // StartDate: string,
+    // EndDate: string,
+    // CreatedOn: Date,
+    // CreatedBy: string,
+    // ChangedOn: Date,
+    // ChangedBy: string
+}

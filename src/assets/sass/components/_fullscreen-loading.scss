@@ -1,0 +1,10 @@
+.el-loading-mask.is-fullscreen {
+  .el-loading-spinner {
+    circle {
+      stroke: white;
+    }
+    .el-loading-text {
+      color: white;
+    }
+  }
+}

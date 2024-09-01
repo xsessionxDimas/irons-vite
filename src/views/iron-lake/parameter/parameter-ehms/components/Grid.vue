@@ -1,0 +1,138 @@
+<template>
+  <template v-if="listStore.loading">
+      <div v-loading="listStore.loading" style="height: 100px"></div>
+  </template>
+  <template v-else>
+    <el-table v-loading="listStore.loading"
+    :data="props.listData"
+    style="width: 100%"
+    @sort-change="handleSort"
+    :empty-text="'No Data'">
+        <el-table-column label="No" width="90" align="center">
+            <template #default="scope">
+                <span>{{ startIndex + scope.$index }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="cbmParameterId" label="ID CBM Parameter" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'cbmParameterId')" />
+        <el-table-column prop="componentId" label="ID Component" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'componentId')" />
+        <el-table-column prop="typeParameterId" label="ID Type Parameter" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'typeParameterId')" />
+        <el-table-column prop="cbmGroup" label="CBM Group" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'cbmGroup')" />
+        <el-table-column prop="cbmArea" label="AREA CBM" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'cbmArea')" />
+        <el-table-column prop="modelId" label="Model" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'modelId')" />
+        <el-table-column prop="psTypeId" label="PS Type" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'psTypeId')" />
+        <el-table-column prop="taskNumber" label="Task Number" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'taskNumber')" />
+        <el-table-column prop="detailNumber" label="No detail" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'detailNumber')" />
+        <el-table-column prop="cbmParameter" label="CBM Parameter" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'cbmParameter')" />
+        <el-table-column prop="parameter" label="Parameter" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'parameter')" />
+        <el-table-column prop="minValue" label="Value Min" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'minValue')" />
+        <el-table-column prop="maxValue" label="Value Max" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'maxValue')" />
+        <el-table-column prop="uom" label="UOM" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'uom')" />
+        <el-table-column prop="statusConverter" label="Status Converter" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'statusConverter')" />
+        <el-table-column prop="statusDescriptionConverter" label="Status Converter Description" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'statusDescriptionConverter')" />
+        <el-table-column prop="status" label="Status" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'status')" />
+        <el-table-column prop="statusDescription" label="Status Description" width="170" sortable :sort-method="(a, b) => customSort(a, b, 'statusDescription')" />
+        <el-table-column prop="validFrom" label="Start Date" align="center" width="170" sortable>
+            <template #default="scope">
+                <span>{{ formatDateOnlyAU(scope.row.validFrom) }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="validTo" label="End Date" align="center" width="170" sortable>
+            <template #default="scope">
+                <span>{{ formatDateOnlyAU(scope.row.validTo) }}</span>
+            </template>
+      </el-table-column>
+        <el-table-column prop="isActive" label="Is Active" width="100" sortable>
+            <template #default="scope">
+                <template v-if="scope.row.isActive">
+                    <div class="row justify-content-center">
+                        <inline-svg src="/media/svg/tables/rows/check.svg" />
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="row justify-content-center">
+                        <inline-svg src="/media/svg/tables/rows/minus.svg" />
+                    </div>
+                </template>
+            </template>
+        </el-table-column>
+        <el-table-column prop="changedOn" label="Changed on" align="center" width="170" sortable>
+            <template #default="scope">
+                <span>{{ formatDateAU(scope.row.changedOn) }}</span>
+            </template>
+        </el-table-column>
+        <el-table-column prop="changedBy" label="Changed by" sortable width="300" :sort-method="(a, b) => customSort(a, b, 'changedBy')" />
+        <el-table-column label="" width="80">
+            <template #default="scope">
+                <div class="row justify-content-center">
+                    <el-tooltip class="box-item" effect="dark" content="Edit" placement="top">
+                        <button class="btn btn-sm btn-icon btn-bg-light me-1" @click="handleEditRow(scope.row)">
+                            <inline-svg src="/media/svg/tables/rows/pencil-edit-blue.svg" width="12" height="12" />
+                        </button>
+                    </el-tooltip>
+                </div>
+            </template>
+        </el-table-column>
+    </el-table>
+  </template>
+</template>
+
+<script lang="ts" setup>
+/* import componenets here */
+import { ElTable, ElTableColumn } from "element-plus";
+import {
+  useParameterEhmsListStore
+} from "@/store/pinia/iron-lake/parameter/parameter-ehms/useParameterEhmsListStore";
+import {
+  ListItem
+} from "@/core/types/entities/iron-lake/parameter/parameter-ehms/ListItem";
+import {
+  PropType,
+  defineProps,
+  defineEmits,
+  ref
+} from "vue";
+import { computed } from "@vue/reactivity";
+import {
+  useParameterEhmsFormStore
+} from "@/store/pinia/iron-lake/parameter/parameter-ehms/useParameterEhmsFormStore";
+import {
+  formatDateAU,
+  formatDateOnlyAU
+} from "@/core/helpers/date-format";
+import { dynamicSortCaseInsensitive } from "@/core/helpers/table-sort";
+
+const props = defineProps({
+  listData: {
+    required: true,
+    type: Array as PropType<ListItem[]>,
+  },
+  page: {
+    required: true,
+    type: Number,
+    default: 1
+  }
+});
+
+const listStore = useParameterEhmsListStore();
+const formStore = useParameterEhmsFormStore();
+const emits = defineEmits(["show-dialog"]);
+const startIndex = computed(() => {
+  return ((props.page - 1) * 10) + 1
+});
+const columnOrder = ref("");
+const handleSort = (sort) => {
+  columnOrder.value = sort.order
+  const payload = {
+    prop: sort.prop,
+    order: sort.order,
+  };
+  listStore.setSort(payload);
+}
+const customSort = (objA, objB, field) => {
+  return dynamicSortCaseInsensitive(objA[field], objB[field], columnOrder.value);
+}
+const handleEditRow = (item: ListItem) => {
+  formStore.setFormData(item, listStore.stateTypeParameterOption);
+  emits("show-dialog", null);
+}
+</script>

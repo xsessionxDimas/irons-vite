@@ -1,0 +1,521 @@
+import PaginationType from "@/core/types/misc/Pagination";
+import { Option } from "@/core/types/misc/Option";
+import ApiService from "@/core/services/ApiService";
+import {
+  CRUD_API_URL,
+  EXPORT_API_URL,
+  LOOKUP_API_URL,
+} from "./urls";
+import { defineStore } from "pinia";
+import { AxiosResponse } from "axios";
+import { ApiResponse } from "@/core/types/misc/ApiResponse";
+import {
+  ListItem
+} from "@/core/types/entities/iron-lake/task/history-daily-schedule/ListItem";
+import {
+  FilterData
+} from "@/core/types/entities/iron-lake/task/history-daily-schedule/FilterData";
+import {
+  LookupItem
+} from "@/core/types/entities/iron-lake/task/history-daily-schedule/LookupItem";
+import {
+  LookupItem as DailyScheduleLookUp
+} from "@/core/types/entities/iron-lake/task/daily-schedule/LookupItem";
+import { SingleApiResponse } from "@/core/types/misc/SingleApiResponse";
+import { mapOption } from "@/core/helpers/mapOption";
+import {
+  LOOKUP_API_URL as LOOKUP_DAILY_SCHEDULE_API_URL
+} from "../daily-schedule/urls";
+import {
+  LOOKUP_API_URL as LOOKUP_MAINTENANCE_STRATEGY_ASSIGNMENT_API_URL
+} from "../../maintenance/maintenance-strategy-assignment/urls";
+
+export const useHistoryDailyScheduleListStore = defineStore({
+  id: "historydailyscheduleList",
+  state: () => {
+    return {
+      stateFilterData: {
+        UnitNumber: "",
+        SmuDue: "",
+        WorkOrder: "",
+        PsType: "",
+        DateService: "",
+        LastWorkOrder: "",
+        LastPsType: "",
+        LastDateService: "",
+        StartDate: "",
+        EndDate: "",
+        UnitNumberTo: "",
+        SmuDueTo: "",
+        WorkOrderTo: "",
+        PsTypeTo: "",
+        DateServiceTo: "",
+        LastWorkOrderTo: "",
+        LastPsTypeTo: "",
+        LastDateServiceTo: "",
+        StartDateTo: "",
+        EndDateTo: "",
+        Status: "",
+        Page: 1,
+        PageSize: 10,
+        Order: "",
+        ver: "v1",
+      } as FilterData,
+      stateLastUsedFilterData: {
+        UnitNumber: "",
+        SmuDue: "",
+        WorkOrder: "",
+        PsType: "",
+        DateService: "",
+        LastWorkOrder: "",
+        LastPsType: "",
+        LastDateService: "",
+        StartDate: "",
+        EndDate: "",
+        UnitNumberTo: "",
+        SmuDueTo: "",
+        WorkOrderTo: "",
+        PsTypeTo: "",
+        DateServiceTo: "",
+        LastWorkOrderTo: "",
+        LastPsTypeTo: "",
+        LastDateServiceTo: "",
+        StartDateTo: "",
+        EndDateTo: "",
+        Status: "",
+        Page: 1,
+        PageSize: 10,
+        Order: "",
+        ver: "v1",
+      } as FilterData,
+      statePageName: "historydailyschedule",
+      stateDisplayData: [] as ListItem[],
+      statePagination: new PaginationType(),
+      stateLoading: false as boolean,
+      statePaginationLoading: false as boolean,
+      statePsTypeOption: [] as Option[],
+      stateSmuDueOption: [] as Option[],
+      stateUnitNumberOption: [] as Option[],
+      stateWorkOrderOption: [] as Option[],
+      stateLastWorkOrderOption: [] as Option[],
+      stateLastPsTypeOption: [] as Option[],
+      stateDateServiceOption: [] as Option[],
+      stateLastDateServiceOption: [] as Option[],
+      stateStatusOption: [] as Option[],
+    };
+  },
+  getters: {
+    pageName: (state) => {
+      return state.statePageName;
+    },
+    pagination: (state) => {
+      return state.statePagination;
+    },
+    displayData: (state) => {
+      return state.stateDisplayData;
+    },
+    filterData: (state) => {
+      return state.stateFilterData;
+    },
+    lastUsedFilterData: (state) => {
+      return state.stateLastUsedFilterData;
+    },
+    loading: (state) => {
+      return state.stateLoading;
+    },
+    paginationLoading: (state) => {
+      return state.statePaginationLoading;
+    },
+    psTypeOption: (state) => {
+      return state.statePsTypeOption;
+    },
+    dateServiceOption: (state) => {
+      return state.stateDateServiceOption;
+    },
+    lastDateServiceOption: (state) => {
+      return state.stateLastDateServiceOption;
+    },
+    smuDueOption: (state) => {
+      return state.stateSmuDueOption;
+    },
+    unitNumberOption: (state) => {
+      return state.stateUnitNumberOption;
+    },
+    workOrderOption: (state) => {
+      return state.stateWorkOrderOption;
+    },
+    lastWorkOrderOption: (state) => {
+      return state.stateLastWorkOrderOption;
+    },
+    lastPsTypeOption: (state) => {
+      return state.stateLastPsTypeOption;
+    },
+    statusOption: (state) => {
+      return state.stateStatusOption;
+    },
+  },
+  actions: {
+    async getData(isPageRefresh = true) {
+      const params = {
+        UnitNumber: this.stateFilterData.UnitNumber,
+        SmuDue: this.stateFilterData.SmuDue,
+        PsType: this.stateFilterData.PsType,
+        DateService: this.stateFilterData.DateService
+          ? this.stateFilterData.DateService.toLocaleString()
+          : "",
+        WorkOrder: this.stateFilterData.WorkOrder,
+        LastPsType: this.stateFilterData.PsType,
+        LastDateService: this.stateFilterData.DateService
+          ? this.stateFilterData.LastDateService.toLocaleString()
+          : "",
+        LastWorkOrder: this.stateFilterData.LastWorkOrder,
+        StartDate: this.stateFilterData.StartDate
+          ? this.stateFilterData.StartDate.toLocaleString()
+          : "",
+        EndDate: this.stateFilterData.EndDate
+          ? this.stateFilterData.EndDate.toLocaleString()
+          : "",
+        UnitNumberTo: this.stateFilterData.UnitNumberTo,
+        SmuDueTo: this.stateFilterData.SmuDueTo,
+        PsTypeTo: this.stateFilterData.PsTypeTo,
+        DateServiceTo: this.stateFilterData.DateServiceTo
+          ? this.stateFilterData.DateServiceTo.toLocaleString()
+          : "",
+        WorkOrderTo: this.stateFilterData.WorkOrderTo,
+        LastPsTypeTo: this.stateFilterData.PsTypeTo,
+        LastDateServiceTo: this.stateFilterData.DateServiceTo
+          ? this.stateFilterData.DateServiceTo.toLocaleString()
+          : "",
+        LastWorkOrderTo: this.stateFilterData.LastWorkOrderTo,
+        StartDateTo: this.stateFilterData.StartDateTo
+          ? this.stateFilterData.StartDateTo.toLocaleString()
+          : "",
+        EndDateTo: this.stateFilterData.EndDateTo
+          ? this.stateFilterData.EndDate.toLocaleString()
+          : "",
+        Status: this.stateFilterData.Status,
+        Page: this.stateFilterData.Page.toString(),
+        PageSize: this.stateFilterData.PageSize.toString(),
+        Order: this.stateFilterData.Order,
+        ver: this.stateFilterData.ver,
+      };
+      if (params.Status == "Closed") params.Status = "close"
+      try {
+        if (isPageRefresh) this.stateLoading = true;
+        if (!isPageRefresh) this.stateDisplayData = [...[]];
+        const response: AxiosResponse<ApiResponse<ListItem>> =
+          await ApiService.get(
+            CRUD_API_URL,
+            "",
+            new URLSearchParams(params).toString(),
+          );
+        this.stateDisplayData = response.data.result.content;
+        this.setTotalPage(response.data.result.total);
+        this.stateLastUsedFilterData = {
+          ...this.stateFilterData,
+        } as FilterData;
+      } catch (error) {
+        console.log(error);
+      }
+      this.stateLoading = false;
+    },
+    async getLookup() {
+      const params = {
+        ver: this.stateFilterData.ver,
+      };
+      try {
+        const response: AxiosResponse<SingleApiResponse<LookupItem>> =
+          await ApiService.get(
+            LOOKUP_API_URL,
+            "",
+            new URLSearchParams(params).toString(),
+          );
+        this.stateLastDateServiceOption = mapOption(response.data.result.content.lastDateService)
+        this.stateLastWorkOrderOption = mapOption(response.data.result.content.lastWorkOrder)
+        this.stateStatusOption = mapOption(response.data.result.content.status)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getMaintenanceAssignmentLookup() {
+      const params = {
+        ver: this.stateFilterData.ver,
+      };
+      try {
+        const response: AxiosResponse<SingleApiResponse<any>> =
+          await ApiService.get(
+            LOOKUP_MAINTENANCE_STRATEGY_ASSIGNMENT_API_URL,
+            "",
+            new URLSearchParams(params).toString(),
+          );
+        this.stateLastPsTypeOption = mapOption(response.data.result.content.maintenanceStrategyParId)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getDailyScheduleLookup() {
+      const params = {
+        ver: this.stateFilterData.ver,
+      };
+      try {
+        const response: AxiosResponse<SingleApiResponse<DailyScheduleLookUp>> =
+          await ApiService.get(
+            LOOKUP_DAILY_SCHEDULE_API_URL,
+            "",
+            new URLSearchParams(params).toString(),
+          );
+        this.stateSmuDueOption = mapOption(response.data.result.content.smuDue)
+        this.stateWorkOrderOption = mapOption(response.data.result.content.workOrder)
+        this.stateUnitNumberOption = mapOption(response.data.result.content.unitNumber)
+        this.statePsTypeOption = mapOption(response.data.result.content.psType)
+        this.stateDateServiceOption = mapOption(response.data.result.content.dateService)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async export() {
+      const params = {
+        UnitNumber: this.stateFilterData.UnitNumber,
+        SmuDue: this.stateFilterData.SmuDue,
+        PsType: this.stateFilterData.PsType,
+        DateService: this.stateFilterData.DateService
+          ? this.stateFilterData.DateService.toLocaleString()
+          : "",
+        LastPsType: this.stateFilterData.PsType,
+        LastDateService: this.stateFilterData.DateService
+          ? this.stateFilterData.LastDateService.toLocaleString()
+          : "",
+        WorkOrder: this.stateFilterData.WorkOrder,
+        LastWorkOrder: this.stateFilterData.LastWorkOrder,
+        StartDate: this.stateFilterData.StartDate
+          ? this.stateFilterData.StartDate.toLocaleString()
+          : "",
+        EndDate: this.stateFilterData.EndDate
+          ? this.stateFilterData.EndDate.toLocaleString()
+          : "",
+        UnitNumberTo: this.stateFilterData.UnitNumberTo,
+        SmuDueTo: this.stateFilterData.SmuDueTo,
+        PsTypeTo: this.stateFilterData.PsTypeTo,
+        DateServiceTo: this.stateFilterData.DateServiceTo
+          ? this.stateFilterData.DateServiceTo.toLocaleString()
+          : "",
+        WorkOrderTo: this.stateFilterData.WorkOrderTo,
+        LastPsTypeTo: this.stateFilterData.PsTypeTo,
+        LastDateServiceTo: this.stateFilterData.DateServiceTo
+          ? this.stateFilterData.DateServiceTo.toLocaleString()
+          : "",
+        LastWorkOrderTo: this.stateFilterData.WorkOrderTo,
+        StartDateTo: this.stateFilterData.StartDateTo
+          ? this.stateFilterData.StartDateTo.toLocaleString()
+          : "",
+        EndDateTo: this.stateFilterData.EndDateTo
+          ? this.stateFilterData.EndDate.toLocaleString()
+          : "",
+        ver: this.stateFilterData.ver,
+        Gmt: new Date().toTimeString().slice(12, 17),
+        Status: this.stateFilterData.Status,
+      };
+      if (params.Status == "Closed") params.Status = "close"
+      try {
+        const response: AxiosResponse<Blob> = await ApiService.getBlob(
+          EXPORT_API_URL,
+          "",
+          new URLSearchParams(params).toString(),
+        );
+        return response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    setTotalPage(totalPage: number) {
+      this.pagination.totalPage = totalPage;
+      this.pagination.getPaginationStartIndex();
+      this.pagination.getPaginationLastIndex();
+    },
+    async setPage(newPage: number) {
+      this.statePaginationLoading = true;
+      this.statePagination.handleCurrentPageChange(newPage);
+      this.stateFilterData.Page = this.statePagination.currentPage;
+      await this.getData(false);
+      setTimeout(() => {
+        this.statePaginationLoading = false;
+      }, 200);
+    },
+    async setSort({ prop, order }) {
+      if (!prop && !order) {
+        this.stateFilterData.Order = "";
+      } else {
+        const formatedOrder = order == "ascending" ? "asc" : "desc";
+        this.stateFilterData.Order = `${prop}_${formatedOrder}`;
+      }
+      this.statePagination.handleCurrentPageChange(1);
+      this.stateFilterData.Page = this.statePagination.currentPage;
+      await this.getData(false);
+    },
+    setUnitNumber(value: string) {
+      this.stateFilterData.UnitNumber = value;
+    },
+    setSmuDue(value: string) {
+      this.stateFilterData.SmuDue = value;
+    },
+    setWorkOrder(value: string) {
+      this.stateFilterData.WorkOrder = value;
+    },
+    setPsType(value: string) {
+      this.stateFilterData.PsType = value;
+    },
+    setDateService(value: string) {
+      this.stateFilterData.DateService = value;
+    },
+    setLastWorkOrder(value: string) {
+      this.stateFilterData.LastWorkOrder = value;
+    },
+    setLastPsType(value: string) {
+      this.stateFilterData.LastPsType = value;
+    },
+    setLastDateService(value: string) {
+      this.stateFilterData.LastDateService = value;
+    },
+    setStartDate(value: string) {
+      this.stateFilterData.StartDate = value;
+    },
+    setEndDate(value: string) {
+      this.stateFilterData.EndDate = value;
+    },
+    setUnitNumberTo(value: string) {
+      this.stateFilterData.UnitNumberTo = value;
+    },
+    setSmuDueTo(value: string) {
+      this.stateFilterData.SmuDueTo = value;
+    },
+    setWorkOrderTo(value: string) {
+      this.stateFilterData.WorkOrderTo = value;
+    },
+    setPsTypeTo(value: string) {
+      this.stateFilterData.PsTypeTo = value;
+    },
+    setDateServiceTo(value: string) {
+      this.stateFilterData.DateServiceTo = value;
+    },
+    setLastWorkOrderTo(value: string) {
+      this.stateFilterData.LastWorkOrderTo = value;
+    },
+    setLastPsTypeTo(value: string) {
+      this.stateFilterData.LastPsTypeTo = value;
+    },
+    setLastDateServiceTo(value: string) {
+      this.stateFilterData.LastDateServiceTo = value;
+    },
+    setStartDateTo(value: string) {
+      this.stateFilterData.StartDateTo = value;
+    },
+    setEndDateTo(value: string) {
+      this.stateFilterData.EndDateTo = value;
+    },
+    setStatus(value: string) {
+      this.stateFilterData.Status = value;
+    },
+    async resetFilter() {
+      this.stateFilterData.UnitNumber = "";
+      this.stateFilterData.SmuDue = "";
+      this.stateFilterData.WorkOrder = "";
+      this.stateFilterData.PsType = "";
+      this.stateFilterData.DateService = "";
+      this.stateFilterData.LastWorkOrder = "";
+      this.stateFilterData.LastPsType = "";
+      this.stateFilterData.LastDateService = "";
+      this.stateFilterData.StartDate = "";
+      this.stateFilterData.EndDate = "";
+      this.stateFilterData.UnitNumberTo = "";
+      this.stateFilterData.SmuDueTo = "";
+      this.stateFilterData.WorkOrderTo = "";
+      this.stateFilterData.PsTypeTo = "";
+      this.stateFilterData.DateServiceTo = "";
+      this.stateFilterData.LastWorkOrderTo = "";
+      this.stateFilterData.LastPsTypeTo = "";
+      this.stateFilterData.LastDateServiceTo = "";
+      this.stateFilterData.StartDateTo = "";
+      this.stateFilterData.EndDateTo = "";
+      this.stateFilterData.Status = "";
+      const checkUnitNumber = this.stateLastUsedFilterData.UnitNumber !== "";
+      const checkSmuDue = this.stateLastUsedFilterData.SmuDue !== "";
+      const checkWorkOrder = this.stateLastUsedFilterData.WorkOrder !== "";
+      const checkPsType = this.stateLastUsedFilterData.PsType !== "";
+      const checkDateService = this.stateLastUsedFilterData.DateService !== "";
+      const checkLastWorkOrder = this.stateLastUsedFilterData.LastWorkOrder !== "";
+      const checkLastPsType = this.stateLastUsedFilterData.LastPsType !== "";
+      const checkLastDateService = this.stateLastUsedFilterData.LastDateService !== "";
+      const checkStartDate = this.stateLastUsedFilterData.StartDate !== "";
+      const checkEndDate = this.stateLastUsedFilterData.EndDate !== "";
+      const checkUnitNumberTo = this.stateLastUsedFilterData.UnitNumberTo !== "";
+      const checkSmuDueTo = this.stateLastUsedFilterData.SmuDueTo !== "";
+      const checkWorkOrderTo = this.stateLastUsedFilterData.WorkOrderTo !== "";
+      const checkPsTypeTo = this.stateLastUsedFilterData.PsTypeTo !== "";
+      const checkDateServiceTo = this.stateLastUsedFilterData.DateServiceTo !== "";
+      const checkLastWorkOrderTo = this.stateLastUsedFilterData.LastWorkOrderTo !== "";
+      const checkLastPsTypeTo = this.stateLastUsedFilterData.LastPsTypeTo !== "";
+      const checkLastDateServiceTo = this.stateLastUsedFilterData.LastDateServiceTo !== "";
+      const checkStartDateTo = this.stateLastUsedFilterData.StartDateTo !== "";
+      const checkEndDateTo = this.stateLastUsedFilterData.EndDateTo !== "";
+      const checkStatus = this.stateLastUsedFilterData.Status !== "";
+      if (
+        checkUnitNumber ||
+        checkSmuDue ||
+        checkWorkOrder ||
+        checkPsType ||
+        checkStartDate ||
+        checkEndDate ||
+        checkDateService ||
+        checkLastWorkOrder ||
+        checkLastPsType ||
+        checkLastDateService ||
+        checkUnitNumberTo ||
+        checkSmuDueTo ||
+        checkWorkOrderTo ||
+        checkPsTypeTo ||
+        checkDateServiceTo ||
+        checkLastWorkOrderTo ||
+        checkLastPsTypeTo ||
+        checkLastDateServiceTo ||
+        checkStartDateTo ||
+        checkEndDateTo ||
+        checkStatus
+      ) {
+        await this.getData();
+      }
+    },
+    resetState() {
+      this.stateFilterData = {
+        UnitNumber: "",
+        SmuDue: "",
+        WorkOrder: "",
+        PsType: "",
+        DateService: "",
+        LastWorkOrder: "",
+        LastPsType: "",
+        LastDateService: "",
+        StartDate: "",
+        EndDate: "",
+        UnitNumberTo: "",
+        SmuDueTo: "",
+        WorkOrderTo: "",
+        PsTypeTo: "",
+        DateServiceTo: "",
+        LastWorkOrderTo: "",
+        LastPsTypeTo: "",
+        LastDateServiceTo: "",
+        StartDateTo: "",
+        EndDateTo: "",
+        Page: 1,
+        PageSize: 10,
+        Order: "",
+        ver: "v1",
+        Status: ""
+      } as FilterData;
+      this.stateDisplayData = [] as ListItem[];
+      this.statePagination = new PaginationType();
+      this.stateLoading = false;
+      this.statePaginationLoading = false;
+    },
+  },
+});

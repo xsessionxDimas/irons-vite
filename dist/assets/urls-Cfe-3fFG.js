@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/ehms/api/master_cbm_mapping",_=`${a}`,s=`${a}/cbm_mapping_bulk`,t=`${a}/validate_upload`,p=`${a}/export`,o=`${a}/cbm_mapping`,n=`${a}/cbm_mapping/update`,U=`${a}/lookup`,c=`${a}/lookup_transaction`;export{s as B,p as E,_ as G,o as I,U as L,n as U,t as a,c as b};

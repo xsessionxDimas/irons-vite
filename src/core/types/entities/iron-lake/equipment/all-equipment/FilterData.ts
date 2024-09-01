@@ -1,0 +1,40 @@
+export type FilterData = {
+  UnitNumber: string;
+  SmuDue: string;
+  WorkOrder: string;
+  PsType: string;
+  DateService: string;
+  Shift: string;
+  StartDate: string;
+  EndDate: string;
+  UnitNumberTo: string;
+  SmuDueTo: string;
+  WorkOrderTo: string;
+  PsTypeTo: string;
+  DateServiceTo: string;
+  ShiftTo: string;
+  StartDateTo: string;
+  EndDateTo: string;
+  Page: number;
+  PageSize: number;
+  Order: string;
+  ver: string;
+};
+
+export type reqFilterBody = {
+  siteId?: null | string;
+  ownershipId?: null | number | string; 
+  equipmentNoId?: null | number | string;
+  equipmentGroupId?: null | number | string; 
+  brandId?: null | number | string; 
+  equipmentModelId?: null | number | string; 
+  engineHourMeter?: null | number | string;
+  engineHourMeterOffset?: null | number | string;
+  component?: string;
+  componentTypeId?: null | number | string;
+  componentLifeHour?: null | number | string;
+  status?: null | boolean;
+  onlyEquipment: boolean;
+  page?: number;
+  pageSize: number;
+};

@@ -1,0 +1,11 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_component_risk_rating`
+export const GET_API_URL = `${CRUD_API_URL}/component_risk_rating`
+export const BULK_API_URL = `${CRUD_API_URL}/component_risk_rating_bulk`
+export const UPLOAD_API_URL = `${CRUD_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${CRUD_API_URL}/export`
+export const LOOKUP_API_URL = `${CRUD_API_URL}/lookup`
+export const RATING_LOOKUP_API_URL = `${CRUD_API_URL}/lookup_rating`
+export const INSERT_API_URL = `${CRUD_API_URL}/component_risk_rating`
+export const UPDATE_API_URL = `${CRUD_API_URL}/component_risk_rating/update`
+export const LOOKUP_TRANSACTION_API_URL = `${CRUD_API_URL}/lookup_transaction`
+export const LOOKUP_ADD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/component_risk_rating/lookup`

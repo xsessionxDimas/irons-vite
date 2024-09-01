@@ -1,0 +1,10 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_cycle`
+export const GET_API_URL = `${CRUD_API_URL}`
+export const BULK_API_URL = `${CRUD_API_URL}/cycle_bulk`
+export const UPLOAD_API_URL = `${CRUD_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${CRUD_API_URL}/export`
+export const LOOKUP_API_URL = `${CRUD_API_URL}/lookup`
+export const INSERT_API_URL = `${CRUD_API_URL}/cycle`
+export const UPDATE_API_URL = `${CRUD_API_URL}/cycle/update`
+export const MEASUREMENT_POS_EQUIPMENT_LOOKUP_TRANSACTION_API_TEMP = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_measurement_pos_equipment/lookup_transaction`
+export const COMPONENT_STRATEGY_LOOKUP_TRANSACTION_API_TEMP = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_component_strategy/lookup_transaction`

@@ -1,0 +1,10 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_component_status`
+export const GET_API_URL = `${CRUD_API_URL}`
+export const BULK_API_URL = `${CRUD_API_URL}/component_status_bulk`
+export const UPLOAD_API_URL = `${CRUD_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${CRUD_API_URL}/export`
+export const LOOKUP_API_URL = `${CRUD_API_URL}/lookup`
+export const DELETE_API_URL = `${CRUD_API_URL}/component_status/deleted`
+export const TRANSACTION_LOOKUP_API_URL = `${CRUD_API_URL}/lookup_transaction`
+export const INSERT_API_URL = `${CRUD_API_URL}/component_status`
+export const UPDATE_API_URL = `${CRUD_API_URL}/component_status/update`

@@ -1,0 +1,52 @@
+.custom-na-text-area {
+  font-size: 14px !important;
+}
+
+.custom-na-text-area-label {
+  font-size: 14px !important;
+  transform: scale(1) translateY(-0.5rem) translateX(0rem) !important;
+}
+
+$done-task-color: #AFE1AF;
+$selected-done-task-color: #18AF4A;
+
+.done-task {
+  .stepper-title {
+    background-color: $done-task-color !important;
+    color: white;
+  }
+
+  .stepper-button-info {
+    background-color: $done-task-color !important;
+    color: white;
+  }
+}
+
+.done-task-selected {
+  .stepper-title {
+    background-color: $selected-done-task-color !important;
+    color: white;
+  }
+
+  .stepper-button-info {
+    background-color: $selected-done-task-color !important;
+    color: white;
+  }
+}
+
+.el-defect-crack-form-custom, .defect-review-eform {
+  .asset-number-disabled-div {
+    .letter-space-hypen{
+      margin: 0 15px;
+    }
+    .ownership {
+      font-weight: 700;
+      &.red {
+        color: #FF4842;
+      }
+      &.green {
+        color: #18AF4A;
+      }
+    }
+  }
+}

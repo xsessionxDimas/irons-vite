@@ -1,0 +1,1 @@
+import{u as n}from"./vue-router-iNp9kJ0K.js";function s(){const r=n();return{redirectByLink:e=>e.substring(1)=="/shetech/outbreak-management/contact-tracing"?r.replace({path:e,query:{v:1}}):r.push({path:e}),redirectByName:e=>r.push({name:e}),redirectByNameWithId:(e,t)=>{r.push({name:e,query:{id:t}})}}}export{s as n};

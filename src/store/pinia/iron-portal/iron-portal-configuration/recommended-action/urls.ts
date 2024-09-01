@@ -1,0 +1,15 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_recommended_action`
+export const GET_API_URL = `${CRUD_API_URL}`
+export const BULK_API_URL = `${CRUD_API_URL}/recommended_action_bulk`
+export const UPLOAD_API_URL = `${CRUD_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${CRUD_API_URL}/export`
+export const LOOKUP_API_URL = `${CRUD_API_URL}/lookup`
+export const LOOKUP_TRANSACTION_API_URL = `${CRUD_API_URL}/lookup_transaction`
+export const INSERT_API_URL = `${CRUD_API_URL}/recommended_action`
+export const UPDATE_API_URL = `${CRUD_API_URL}/recommended_action/update`
+export const LOOKUP_INTERVENTION_CODE = `${CRUD_API_URL}/lookup_intervention_code`
+export const TYPE_TASK_LOOK_UP = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_type_task/lookup_transaction`
+export const TASK_GROUP_KEY_AND_TASK_GROUP = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_cbm/lookup`
+export const LOOKUP_UOM_TRANSACTION = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/uom/lookup_transaction`
+export const LOOKUP_PS_TYPE = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/maintenance_strategy/lookup`
+export const LOOKUP_REF_DOC_TRANSACTION = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_reference_document/lookup_transaction`

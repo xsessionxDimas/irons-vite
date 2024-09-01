@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/amadm/api/master_data/planner_group",t=`${a}/bulk`,_=`${a}/validate_upload`,s=`${a}/export`,o=`${a}/lookup`,U=`${a}/update`;export{t as B,a as C,s as E,o as L,U,_ as a};

@@ -1,0 +1,10 @@
+export const BASE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_user_group_menu`
+export const GET_GROUP_API_URL = `${BASE_API_URL}/user_group_menu`
+export const GET_GROUP_MENU_API_URL = `${BASE_API_URL}/data`
+export const INSERT_API_URL = `${BASE_API_URL}/usergroupmenu`
+export const UPDATE_API_URL = `${INSERT_API_URL}/update`
+export const BULK_API_URL = `${BASE_API_URL}/bulk`
+export const UPLOAD_API_URL = `${BASE_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${BASE_API_URL}/export`
+export const LOOKUP_API_URL = `${BASE_API_URL}/lookup`
+export const GET_ALL_MENU_API_URL = `${BASE_API_URL}/get_menu`

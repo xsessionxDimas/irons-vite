@@ -1,0 +1,37 @@
+export type UserInfo = {
+    employeeID: string;
+    adAccount: string;
+    empName: string;
+    email: string;
+    phone: string | undefined;
+    genderID: string;
+    genderName: string;
+    positionID: string;
+    positionName: string;
+    empLevelID: string;
+    empLevelName: string;
+    orgUnitID: string;
+    orgUnitName: string;
+    section: string;
+    department: string;
+    division: string;
+    function: string;
+    directorate: string;
+    locationID: string;
+    locationName: string;
+    pointOfHireID: string;
+    pointOfHireName: string;
+    empStatusID: string;
+    empStatusName: string;
+    startDate: Date;
+    endDate: Date;
+    addressDom: string;
+    addressKtp: string;
+    dateSpec: Date;
+    marital: string;
+    personalMail: string;
+    contractStatus: string;
+    residentNo: string;
+    companyName: string;
+    roles: string;
+}

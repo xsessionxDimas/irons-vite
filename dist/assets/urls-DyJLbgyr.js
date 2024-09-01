@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/amadm/api/master_data/object_type",t=`${a}/bulk`,_=`${a}/validate_upload`,s=`${a}/export`,o=`${a}/lookup`,U=`${a}/lookup_transaction`,L=`${a}/update`;export{t as B,a as C,s as E,o as L,L as U,_ as a,U as b};

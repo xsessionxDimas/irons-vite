@@ -1,0 +1,43 @@
+$columns: 100;
+
+// col-xl-1-percent
+@media only screen and (min-width: 1200px) {
+  @for $i from 1 through $columns {
+    .column-xl-#{$i}-percent {
+      width: #{$i}#{"%"} !important;
+    }
+  }
+}
+
+// col-lg-1-percent
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  @for $i from 1 through $columns {
+    .column-lg-#{$i}-percent {
+      width: #{$i}#{"%"} !important;
+    }
+  }
+}
+
+// col-md-1-percent
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  @for $i from 1 through $columns {
+    .column-md-#{$i}-percent {
+      width: #{$i}#{"%"} !important;
+    }
+  }
+}
+
+// col-sm-1-percent
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  @for $i from 1 through $columns {
+    .column-sm-#{$i}-percent {
+      width: #{$i}#{"%"} !important;
+    }
+  }
+}
+
+@for $i from 1 through $columns {
+  .column-#{$i}-percent {
+    width: #{$i}#{"%"} !important;
+  }
+}

@@ -1,0 +1,14 @@
+export const CRUD_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/parameter_ehms`
+export const GET_URL = `${CRUD_URL}/paging`
+export const UPDATE_API_URL = `${CRUD_URL}/update`
+export const EXPORT_API_URL = `${CRUD_URL}/export`
+export const LOOKUP_API_URL = `${CRUD_URL}/lookup`
+export const BULK_API_URL = `${CRUD_URL}/bulk`
+export const UPLOAD_API_URL = `${CRUD_URL}/validate_upload`
+export const LOOKUP_UOM_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/uom/lookup`
+export const LOOKUP_AREA_CBM_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/area_cbm/lookup`
+export const LOOKUP_STATUS_CONVERTER_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/status_converter/lookup`
+export const LOOKUP_CBM_PARAMETER_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/cbm_parameter/lookup`
+export const LOOKUP_CBM_GROUP_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/cbm_group/lookup`
+export const LOOKUP_PS_TYPE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/daily_schedule/lookup_pstype`
+export const LOOKUP_PARAMETER_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/type_parameter/lookup`

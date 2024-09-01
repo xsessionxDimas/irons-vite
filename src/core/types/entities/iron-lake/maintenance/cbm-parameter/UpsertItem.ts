@@ -1,0 +1,16 @@
+export type UpsertItem = {
+    cbmParameterId: number,
+    taskKey: string,
+    model: string,
+    serviceSize: string,
+    description: string,
+    uom: string |null,
+    typeParameter: string,
+    status: string,
+    minValue: string,
+    maxValue: string,
+    rating: string,
+    taskNo: string,
+    taskNoDetail: string,
+    isActive: boolean | null,
+}

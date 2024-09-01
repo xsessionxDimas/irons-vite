@@ -1,0 +1,5 @@
+.font-name-lg {
+  @extend .fw-700;
+  font-size: $base-text-large; 
+  line-height:30px;
+}

@@ -1,0 +1,48 @@
+import { Audit } from "@/core/types/intervention/Audit";
+
+export type Defect = {
+  id?: string,
+  category: string,
+  interventionId: string,
+  taskId: string,
+  taskNo: string,
+  taskDesc: string,
+  taskValue: string,
+  priority?: string,
+  defectType?: string
+  cbmMeasurement?: string,
+  cbmUom?: string,
+  sapWorkorder: string,
+  taskKey: string,
+  type: string,
+  defectHeaderId?: string,
+  defectDetailId?: string,
+  defectWorkorder?: string,
+  repairedStatus: string,
+  defectData: string,
+  cbmNAStatus: string,
+  status: string,
+  plannerStatus: string,
+  declineReason: string,
+  statusSync: string,
+  declineBy?: Audit,
+  declineDate?: string,
+  approvedBy?: Audit,
+  approvedDate?: string,
+  createdBy: Audit,
+  createdDate: string
+  commentValue?: string
+  updatedBy: Audit,
+  updatedDate: string,
+  downloadHistory?: string,
+  appPlannerBy?: Audit,
+  appPlannerDate?: string,
+  appSPVBy?: Audit,
+  appSPVDate?: string,
+  correctedValue?: string,
+  correctedMeasurement?: string,
+  correctedUom?: string
+  otherFitterUpdatedBy?: Audit,
+  approveReason?: string,
+  plannerApproveReason?: string,
+}

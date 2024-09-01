@@ -1,0 +1,13 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_employee/employee`
+export const BULK_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_employee/employee_bulk`
+export const UPLOAD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_employee/validate_upload`
+export const EXPORT_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_employee/export`
+export const LOOKUP_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_employee/lookup`
+export const LOOKUP_GENDER = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_gender/lookup`
+export const UPDATE_API_URL = `${CRUD_API_URL}/update`
+export const IRONLAKE_CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRONLAKE_MASTER}/api/ironlake/employee`
+export const IRONLAKE_EXPORT_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRONLAKE_MASTER}/api/ironlake/employee/export`
+export const IRONLAKE_LOOKUP_DIRECT_SPV = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRONLAKE_MASTER}/api/ironlake/employee/lookup/direct_supervisor?ver=v1`
+export const IRONLAKE_LOOKUP_VENDOR = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRONLAKE_MASTER}/api/ironlake/employee/lookup_vendor?ver=v1`
+export const IRONLAKE_UPLOAD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRONLAKE_MASTER}/api/upload`
+export const IRONLAKE_BULK_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRONLAKE_MASTER}/api/ironlake/employee/bulk?ver=v1`

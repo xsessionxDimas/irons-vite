@@ -1,0 +1,50 @@
+.multi-defect-list-dialog {
+  .add-button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #18AF4A;
+    color: #18AF4A;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+
+  .multi-defect-list-item {
+    .multi {
+      &-icon {
+        margin-right: 12px;
+
+        img {
+          width: 20px;
+
+          &.pdf {
+            width: 13px;
+          }
+        }
+      }
+
+      &-text {
+        font-size: 16px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .multiple-defect-badge {
+    display: flex;
+    padding: 2px 6px;
+    align-items: center;
+    gap: 2px;
+    border-radius: 6px;
+    background: #FF4842;
+    color: white;
+
+    img {
+      width: 17px;
+    }
+
+    span {
+      font-size: 12px;
+    }
+  }
+}

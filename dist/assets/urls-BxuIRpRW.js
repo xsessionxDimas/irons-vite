@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/amadm/api/master_data/maintenance_work_center",t=`${a}/update`,_=`${a}/bulk`,s=`${a}/validate_upload`,e=`${a}/export`,o=`${a}/lookup`;export{_ as B,a as C,e as E,o as L,t as U,s as a};

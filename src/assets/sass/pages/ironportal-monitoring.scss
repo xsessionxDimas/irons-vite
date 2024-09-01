@@ -1,0 +1,49 @@
+@media (min-width: 992px) {
+    .aside-enabled.aside-fixed .wrapper {
+        transition: padding-left 0.3s ease;
+        padding-left: 0;
+    }
+}
+.wrapper {
+    width: 100%;
+}
+.page-title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    margin: revert !important;
+}
+.little-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+}
+.red {
+    background:#FF4842;
+}
+.yellow {
+    background:#CC9A06;
+}
+.color-red {
+    color:#FF4842;
+}
+.color-yellow {
+    color:#CC9A06;
+}
+.legend-label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+}
+.label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+}
+.item {
+  background: #F4F6F8;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+}

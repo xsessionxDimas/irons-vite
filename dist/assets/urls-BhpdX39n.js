@@ -1,0 +1,1 @@
+const t="https://digital-bumaau-dev-apm-001.azure-api.net/ehms/api/master_component_status",s=`${t}`,_=`${t}/component_status_bulk`,a=`${t}/validate_upload`,o=`${t}/export`,n=`${t}/lookup`,e=`${t}/component_status/deleted`,U=`${t}/lookup_transaction`,c=`${t}/component_status`,L=`${t}/component_status/update`;export{_ as B,e as D,o as E,s as G,c as I,n as L,U as T,L as U,a};

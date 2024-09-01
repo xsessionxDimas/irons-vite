@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/ehms/api/master_area",_=`${a}`,s=`${a}/area_bulk`,t=`${a}/validate_upload`,U=`${a}/export`,e=`${a}/lookup`,o=`${a}/area`,L=`${a}/area/update`;export{s as B,U as E,_ as G,o as I,e as L,L as U,t as a};

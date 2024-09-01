@@ -1,0 +1,17 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention`
+export const LOOKUP_INTERVENTION_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/intervention_forms/lookup`
+export const LOOKUP_INTERVENTION_HEADER_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention_header/intervention_form_lookup`
+export const GET_FORM_INTERVENTION_API_URL = `${CRUD_API_URL}_header/intervention_forms`
+export const GET_INTERVENTION_CHECKS_API_URL = `${CRUD_API_URL}_header/recommended_action`
+export const GET_ADDITIONAL_TASK_API_URL = `${CRUD_API_URL}_header/additional_task`
+export const GET_COMPONENT_LIST_API_URL = `${CRUD_API_URL}_header/get_list_by_param`
+export const UPDATE_API_URL = `${CRUD_API_URL}_header/intervention_forms`
+export const GET_ESTIMATION_COMPLETION_DATE = `${CRUD_API_URL}_header/get_estimation_completion_date`
+export const GET_HEADER_LIST_ITEM = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention_header/list_intervention`
+export const GET_HEADER_LIST_ITEM_DECLINE = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention_header/list_intervention_declined`
+export const GET_TOTAL_LIST_HEADER = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention_header/total_list_intervention`
+export const LOOKUP_TYPE_TASK = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention_header/type_task_lookup`
+export const LOOKUP_CONDITION_TYPE_TASK = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention_header/type_condition_lookup`
+export const LOOKUP_UOM_TRANSACTION = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/uom/lookup_transaction`
+export const GET_ADDITIONAL_SENSOR_DATA_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention_header/get_list_sensor`
+export const POST_ADDITIONAL_SENSOR_DATA_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/intervention_header/revise_sensor`

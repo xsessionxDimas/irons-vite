@@ -1,0 +1,126 @@
+//
+// Aside Default
+//
+
+// General mode(all devices)
+.docs-aside {
+  display: flex;
+  flex-direction: column;
+  box-shadow: get($docs-aside-config, box-shadow);
+  background-color: get($docs-aside-config, bg-color);
+  padding: 0;
+}
+
+#no-layout #kt_aside {
+  max-height: 48px;
+}
+
+#kt_aside_logo {
+  background-color: $darkblue;
+  justify-content: center;
+}
+
+#kt_aside_toggle {
+  background-color: #fff;
+  box-shadow: 0px 2px 3px #0000003f !important;
+  position: fixed;
+  top: get($header-config, default, height, desktop) + 15;
+  left: get($aside-config, width)-20;
+  z-index: 200;
+  transition: left 0.3s ease;
+  visibility: hidden;
+}
+
+#kt_content {
+  background: #f2f3f7;
+}
+
+svg-icon svg [fill]:not(.permanent):not(g) {
+  transition: fill 0.3s ease;
+  fill: #a1a5b7;
+}
+
+@media (min-width: 992px) {
+  .menu-lg-rounded .menu-link {
+    border-radius: 0.475rem;
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+  }
+
+  #kt_aside_toggle {
+    visibility: hidden;
+  }
+
+  #kt_aside_toggle.active {
+    background-color: #fff;
+    display: block;
+  }
+
+  #kt_aside_toggle:hover {
+    background-color: #1976d2;
+    visibility: visible;
+  }
+
+  #kt_aside_toggle.hovered:hover {
+    background-color: #1976d2;
+  }
+
+  #aside-wrapper:hover #kt_aside_toggle {
+    visibility: visible;
+  }
+
+  #aside-wrapper #kt_aside_toggle.hovered,
+  #aside-wrapper:hover #kt_aside_toggle.hovered:hover {
+    left: 0 !important;
+  }
+  #aside-wrapper #kt_aside_toggle.active {
+    visibility: visible !important;
+  }
+
+  #aside-wrapper:hover #kt_aside_toggle.hovered {
+    left: get($aside-config, width)-20 !important;
+  }
+}
+
+.button-collapse {
+  position: relative;
+  // display: none;
+}
+
+// Desktop mode
+@include media-breakpoint-up(lg) {
+  .docs-aside {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: get($docs-aside-config, z-index);
+    overflow: hidden;
+    width: get($docs-aside-config, width);
+
+    // Logo
+    .docs-aside-logo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 get($docs-aside-config, padding-x);
+    }
+
+    // Aside menu
+    .docs-aside-menu {
+      width: get($docs-aside-config, width);
+    }
+  }
+}
+
+// Tablet & mobile modes
+@include media-breakpoint-down(lg) {
+  .docs-aside {
+    display: none;
+
+    // Logo
+    .docs-aside-logo {
+      display: none;
+    }
+  }
+}

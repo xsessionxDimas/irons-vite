@@ -1,0 +1,9 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_risk_management_type_task`
+export const GET_API_URL = `${CRUD_API_URL}/risk_management_type_task`
+export const BULK_API_URL = `${CRUD_API_URL}/risk_management_type_task_bulk`
+export const UPLOAD_API_URL = `${CRUD_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${CRUD_API_URL}/export`
+export const LOOKUP_API_URL = `${CRUD_API_URL}/lookup`
+export const INSERT_API_URL = `${CRUD_API_URL}/risk_management_type_task`
+export const UPDATE_API_URL = `${CRUD_API_URL}/risk_management_type_task/update`
+export const LOOKUP_TRANSACTION_API_URL = `${CRUD_API_URL}/lookup_transaction`

@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/ehms/api/master_operator",o=`${a}/operator`,t=`${a}/operator_bulk`,_=`${a}/validate_upload`,s=`${a}/export`,e=`${a}/lookup`,p=`${a}/operator`,r=`${a}/operator/update`;export{t as B,s as E,o as G,p as I,e as L,r as U,_ as a};

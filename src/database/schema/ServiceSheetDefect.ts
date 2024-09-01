@@ -1,0 +1,53 @@
+import { Employee } from "@/core/types/entities/dma/Payload"
+import { NADetails } from "@/core/types/entities/dma/defects/NADetail"
+import {
+  DefectDetailNo
+} from "@/core/types/entities/dma/e-form/defects/DefectDetailNo"
+import { Audit } from "@/core/types/intervention/Audit"
+
+export type ServiceSheetDefect = {
+  id?: number | string,
+  key: string,
+  form: string,
+  formDefect: string,
+  assetNumber: string,
+  imageAvailable: boolean,
+  defectType: string,
+  cbmUom: string,
+  cbmImageKey: string,
+  cbmImageProp: string,
+  isCbmAdjusment: string,
+  repairedStatus: string,
+  workorder?: string,
+  createdBy: Employee,
+  createdDate: string,
+  updatedBy: Employee,
+  updatedDate: string,
+  plannerCbmNAStatus?: string,
+  category: string,
+  serviceSheetDetailId: string,
+  taskId: string,
+  taskNo: string,
+  taskDesc: string,
+  taskValue: string,
+  priority?: string,
+  cbmMeasurement?: string,
+  defectHeaderId?: string,
+  defectDetailId?: string,
+  defectWorkorder?: string,
+  defectData: string | NADetails | DefectDetailNo,
+  cbmNAStatus: string,
+  status: string,
+  plannerStatus?: string,
+  declineReason?: string,
+  statusSync: string,
+  isActive?: string,
+  declineBy: Audit,
+  declineDate: string,
+  approvedBy: Audit,
+  approvedDate: string,
+  descriptionDefect?: string,
+  defectDetailKey?: string,
+  commentValue?: string,
+  otherFitterUpdatedBy?: Audit,
+}

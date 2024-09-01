@@ -1,0 +1,9 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_exclude_unit_by_equipment`
+export const GET_API_URL = `${CRUD_API_URL}`
+export const BULK_API_URL = `${CRUD_API_URL}/exclude_unit_by_equipment_bulk`
+export const UPLOAD_API_URL = `${CRUD_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${CRUD_API_URL}/export`
+export const INSERT_API_URL = `${CRUD_API_URL}/exclude_unit_by_equipment`
+export const UPDATE_API_URL = `${CRUD_API_URL}/exclude_unit_by_equipment/update`
+export const LOOKUP_API_URL = `${CRUD_API_URL}/lookup`
+export const LOOKUP_TRANSACTION_API_URL = `${CRUD_API_URL}/lookup_transaction`

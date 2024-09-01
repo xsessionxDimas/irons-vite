@@ -1,0 +1,82 @@
+import { ImageInfo } from '../entities/dma/ImageInfo'
+import {
+  ServicePersonnel
+} from '../entities/dma/e-form/general/ServicePersonnel'
+import { Audit } from './Audit'
+import { Component } from './Component'
+import { Detail } from './Detail'
+import { IRiskAssesmentTask } from './IRiskAssesmentTask'
+import { ISafetyPrecautionTask } from './ISafetyPrecautionTask'
+import { LogObject } from './LogObject'
+import { StatusHistory } from './StatusHistory'
+
+export type Intervention = {
+  id: string,
+  key: string,
+  siteId: string,
+  sitedesc: string,
+  defectStatus?: string,
+  trInterventionHeaderId:string,
+  interventionNumber: string,
+  equipment: string,
+  equipmentDesc: string,
+  equipmentModel: null | string,
+  equipmentBrand: null | string,
+  equipmentGroup: null | string,
+  componentId: number,
+  componentCode: string,
+  componentDescription: string,
+  sampleType: string,
+  interventionCode: string,
+  interventionReason: string,
+  sampleDate: string,
+  sampleStatus: string,
+  smu: string,
+  smuDue: string,
+  componentHm: string,
+  components?: Component[],
+  mdInterventionStatusId: string,
+  interventionStatus: string,
+  interventionStatusDesc: string,
+  interventionDiagnosis: string,
+  sapWorkOrder: string,
+  statusDatetime: string,
+  interventionExecutionId: string,
+  interventionExecution: string,
+  interventionExecutionBy: string,
+  cautionRatingDate: string,
+  followUpPriority: string,
+  followUpPriorityUomId: string,
+  followUpPriorityUom: string,
+  keyPbi: string,
+  estimationCompletionDate: null | string,
+  log: null | LogObject[],
+  serviceStart: string,
+  serviceEnd: string,
+  servicePersonnels: ServicePersonnel[],
+  supervisor: string | Audit,
+  statusHistory: StatusHistory[],
+  riskAssesment: IRiskAssesmentTask[],
+  safetyPrecaution: ISafetyPrecautionTask[],
+  imageEquipment: string | string[] | ImageInfo[],
+  interventionSMU: null | string,
+  details: Detail[],
+  additionalInformation: string,
+  reason?: string,
+  isActive: boolean,
+  isDeleted: boolean,
+  createdBy: Audit,
+  createdDate: string,
+  updatedBy: string | Audit,
+  updatedDate: string,
+  _rid: string,
+  _self: string,
+  _etag: string,
+  _attachments: string,
+  _ts: number,
+  version: string,
+  hmOffset?: string,
+  isApprovedSmu: boolean,
+  smuBy?: Audit,
+  smuDate?: string
+}

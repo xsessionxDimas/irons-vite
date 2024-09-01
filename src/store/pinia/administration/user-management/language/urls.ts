@@ -1,0 +1,9 @@
+export const BASE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_language`
+export const GETALL_API_URL = `${BASE_API_URL}/data`
+export const CRUD_API_URL = `${BASE_API_URL}/language`
+export const BULK_API_URL = `${BASE_API_URL}/language_bulk`
+export const UPLOAD_API_URL = `${BASE_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${BASE_API_URL}/export`
+export const EXPORT_TEMPLATE_API_URL = `${BASE_API_URL}/export_template`
+export const LOOKUP_API_URL = `${BASE_API_URL}/lookup`
+export const UPDATE_API_URL = `${CRUD_API_URL}/update`

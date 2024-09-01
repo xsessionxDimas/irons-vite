@@ -1,0 +1,58 @@
+.custom-swal-confirmation {
+    .swal2-modal {
+      padding: 0;
+    }
+    .custom-swal-header {
+      align-items: flex-start;
+      padding: 0;
+    }
+    .custom-swal-title {
+      border-bottom: 1px solid #eff2f5;
+      padding: var(--el-dialog-padding-primary);
+      padding-bottom: 10px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .custom-swal-content {
+      margin: 0;
+      color: #455a64;
+      text-align: left;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 21px;
+      border-bottom: 1px solid #eff2f5;
+      padding: 20px;
+  
+      .swal2-html-container {
+        margin: 0;
+        font-size: 12px;
+      }
+    }
+    .custom-swal-actions {
+      margin: 0;
+      justify-content: flex-end;
+      padding: 20px;
+  
+      button {
+        margin-top: 0 !important;
+        border-radius: 10px;
+  
+        &.swal2-cancel {
+          color: #90a4ae;
+          background: #eceff1;
+          &:hover {
+            opacity: .7!important;
+          }
+        }
+      }
+    }
+    .custom-swal-close-button {
+      top: 15px;
+      right: 15px;
+      background-color: #eee;
+      border-radius: 8px;
+      color: #90a4ae;
+      font-weight: 600;
+      font-size: 24px;
+    }
+  }

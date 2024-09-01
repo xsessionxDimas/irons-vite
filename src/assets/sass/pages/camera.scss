@@ -1,0 +1,340 @@
+
+.photo-button {
+  width: 105px;
+  height: 105px;
+  position: relative;
+  &.mb-3-rem {
+    margin-bottom: 3rem;
+  }
+  &.mb-60-percent {
+    margin-bottom: 60%;
+  }
+}
+.btn-custom-camera {
+    position: absolute;
+    top: 35%;
+    left: 32%;
+    bottom: 40%;
+    right: 40%;
+    width:32px;
+    height:32px;
+}
+.circle {
+    position: absolute;
+    top: 12%;
+    left: 12%;
+    bottom: 12%;
+    right: 12%;
+    border-radius: 100%;
+    background-color: red;
+    opacity: 0;
+
+    &.camera {
+      opacity: 1;
+    }
+
+    &.grey-color {
+      background-color: grey;
+    }
+    &.black-color {
+      background-color: black;
+    }
+
+    &.green-color {
+      background-color: green;
+    }
+}
+.circle-green {
+  background-color: rgb(3, 93, 3);
+  &.green-color {
+    background-color: green;
+  }
+}
+.circle-white {
+    position: absolute;
+    top: 12%;
+    left: 12%;
+    bottom: 12%;
+    right: 12%;
+    border-radius: 100%;
+    background-color: white;
+    opacity: 0;
+}
+.ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 100%;
+    border: 0.5em solid #ffffff;
+    opacity: 0.8;
+}
+.ring-dark {
+  border: 0.5em solid dimgray !important;
+}
+.ring-black {
+  border: 0.5em solid black !important;
+}
+.photo-button .circle, .photo-button .ring {
+    transition: all 0.25s;
+}
+.photo-button:hover .circle {
+    opacity: 1;
+}
+.photo-button:active .ring {
+    opacity: 1;
+}
+.photo-button:active .circle {
+    opacity: 0.5;
+}
+.first-desc {
+  left: 11%
+}
+.desc {
+  position: absolute;
+  top: 103%;
+}
+
+.imagePreview {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-color: grey;
+
+  img {
+    object-fit: inherit;
+  }
+  .object-fit-scale-none {
+    object-fit: none;
+  }
+  .object-fit-cover {
+    object-fit: cover;
+  }
+  .object-fit-scale-down {
+    object-fit: scale-down;
+  }
+  .object-fit-scale-contain {
+    object-fit: contain;
+  }
+
+  button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  .photo-button {
+    position: absolute;
+
+    &.button-back {
+      top: 80%;
+      left: 10%;
+    }
+    &.button-desc {
+      top: 80%;
+      left: 23%;
+    }
+
+    &.button-confirm {
+      top: 80%;
+      left: 85%;
+    }
+  }
+}
+
+.camera-tools-container {
+  gap: 16px;
+  min-width: 120px;
+  border-radius: 100px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.32);
+}
+
+.preview-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  .selected-container {
+    width: 100%;
+    height: 100%;
+    &__photo {
+      max-height: 100%;
+      max-width: 100%;
+      margin: auto;
+      object-fit: contain;
+    }
+  }
+  .button-container {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+  }
+}
+
+
+.button-ring {
+  border-radius: 100%;
+  border: 0.25em solid #ffffff;
+  width: 80px;
+  height: 80px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.small-button-ring {
+  border-radius: 100%;
+  border: 1px solid black;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.close-camera {
+  &:hover {
+    background: rgba(157, 154, 154, 0.9);
+  }
+}
+.tools-camera {
+  &:hover {
+    background: rgba(33, 43, 54, 1);
+  }
+}
+
+.preview-button-tools {
+  min-width: 680px;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.32);
+}
+
+#config-wrapper {
+  position: relative;
+  border-top: 4px solid gray;
+}
+
+.collapsible-button {
+  position: absolute;
+  background: #18AF4A;
+  top: -22px;
+  right: 50%;
+}
+
+.fas:hover {
+  color: white !important
+}
+
+.collapsed {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  transition: height 2s;
+  transition-timing-function: ease-in-out;
+}
+
+.expanded {
+  opacity: 1;
+  height: 226px;
+  padding: 20px;
+  transition: height 2s;
+  transition-timing-function: ease-in-out;
+}
+
+.draw-image-tools {
+  min-width: 680px;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 1);
+  transition: opacity 0.3s ease-in-out, height 0.6s ease-in-out, padding 0.7s ease-in-out;
+  .draw-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 1);
+  }
+  .tools-item {
+    cursor: pointer;
+    font-weight: 300;
+    color: rgba(145, 158, 171, 1);
+    svg {
+      fill: rgba(145, 158, 171, 1);
+    }
+    &:hover {
+      color: white;
+      svg {
+        fill: white;
+      }
+    }
+    &.tools-active {
+      color: white;
+      svg {
+        fill: white;
+      }
+    }
+  }
+  :deep(.el-slider) {
+    .el-slider__runway {
+      .el-slider__bar {
+        background-color: rgba(24, 175, 74, 1);
+      }
+    }
+  }
+  .tools-color {
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border: 1px solid white;
+    border-radius: 8px;
+  }
+  :deep(.el-color-picker) {
+    height: 36px;
+    width: 36px;
+    .el-color-picker__trigger {
+      height: 36px;
+      width: 36px;
+      padding: 0;
+      border-radius: 8px;
+      .el-color-picker__color {
+        border-radius: 8px;
+        .el-color-picker__color-inner {
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+}
+
+.btn-outline-btech-default {
+  &:not(:hover){
+    color: white
+  }
+}
+
+.camera-container {
+  position: relative;
+  .timer-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    .timer-label {
+      color: white;
+      opacity: 0.5;
+      font-size: 5rem;
+    }
+  }
+}
+
+.timer-option-container {
+  border-radius: 100px;
+  padding: 20px;
+  background-color: transparent;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.timer-label {
+  font-size: 32px;
+}

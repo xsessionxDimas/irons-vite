@@ -1,0 +1,37 @@
+// Font Sizes
+
+$base-text-small: 10px;
+$base-text-normal: 12px;
+$base-text-medium: 14px;
+$base-text-large: 16px;
+$base-text-xl: 24px;
+$base-text-xxl: 34px;
+
+// Colors
+
+$blue-50: #e3f2fd;
+$blue-700: #1976d2;
+$blue-800: #1565c0;
+$blue-900: #0d47a1;
+$blue-gray-50: #eceff1;
+$blue-gray-200: #b0bec5;
+$blue-gray-300: #90a4ae;
+$blue-gray-400: #78909c;
+$blue-gray-600: #546e7a;
+$blue-gray-700: #455a64;
+$blue-gray-800: #37474f;
+$blue-gray-900: #3f4254;
+$gray-800: #424242;
+$neutral-500: #919EAB;
+$white: #ffffff;
+
+$colors: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+
+// Font Weights
+$font-weights: 400, 500, 600, 700;
+
+@each $weight in $font-weights {
+  .fw-#{$weight} {
+    font-weight: $weight !important;
+  }
+}

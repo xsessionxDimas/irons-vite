@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/amadm/api/master_data/wbs_element",t=`${a}/update`,s=`${a}/bulk`,_=`${a}/validate_upload`,U=`${a}/export`,e=`${a}/lookup`;export{s as B,a as C,U as E,e as L,t as U,_ as a};

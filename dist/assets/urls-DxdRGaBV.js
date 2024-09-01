@@ -1,0 +1,1 @@
+const _="https://digital-bumaau-dev-apm-001.azure-api.net/ehms/api/master_code_group",o=`${_}`,a=`${_}/code_group_bulk`,s=`${_}/validate_upload`,t=`${_}/export`,U=`${_}/lookup`,e=`${_}/code_group`,p=`${_}/code_group/update`;export{a as B,t as E,o as G,e as I,U as L,p as U,s as a};

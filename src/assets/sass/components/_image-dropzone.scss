@@ -1,0 +1,85 @@
+.card .card-body,
+.el-dialog .el-dialog__body, .page-upload__body {
+  .dropzone {
+    background-color: #fff;
+    border: 0;
+    text-align: left;
+    cursor: default;
+
+    &-upload {
+      display: flex;
+      margin-bottom: 5px;
+
+      label {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        box-sizing: border-box;
+        width: 600px;
+
+        &:after {
+          content: '*';
+          color: var(--el-color-danger);
+          margin-left: 4px;
+        }
+      }
+
+      &-area {
+        width: 100%;
+        background: $light-blue;
+        border: 1px dashed #009ef7;
+        box-sizing: border-box;
+        border-radius: 8px;
+        padding: 15px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        display: flex;
+
+        &-icon {
+          align-items: center;
+          margin-right: 10px;
+
+          img {
+            max-height: 37px;
+          }
+        }
+
+        &-text {
+          line-height: normal;
+          font-size: inherit;
+
+          p {
+            margin-bottom: 0;
+            font-size: 12px;
+            font-weight: 500;
+            color: #37474F;;
+          }
+
+          span {
+            font-size: 12px;
+            font-weight: 500;
+            color: #009ef7;
+          }
+        }
+      }
+
+      &-file-name {
+        line-height: normal;
+        font-style: italic;
+        margin-bottom: 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &-preview {
+        width: 250px;
+        height: auto;
+        display: block;
+        margin: 1rem 0 .5rem 0;
+      }
+    }
+  }
+}

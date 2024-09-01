@@ -1,0 +1,44 @@
+.el-overlay {
+  .el-dialog {
+    border-radius: 8px;
+    .el-dialog__header {
+      border-bottom: 1px solid #eff2f5;
+      .el-dialog__headerbtn{
+        background-color: #EEEEEE;
+        padding: 0 6px;
+        border-radius: 8px;
+        .el-dialog__close {
+          color: #B5B5C3;
+          font-weight: bolder;
+        }
+      }
+    }
+    
+    .el-dialog__footer {
+      .el-button {
+        border-radius: 12px;
+        &.el-button--info {
+          border-color: #EEEEEE;
+          background-color: #EEEEEE;
+          color: #9E9E9E;
+          &:hover {
+            opacity: 0.7 !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.el-dialog__title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.el-dialog {
+  &.dialog-header-noborder {
+    .el-dialog__header {
+      border-bottom: none !important;
+    }
+  }
+}

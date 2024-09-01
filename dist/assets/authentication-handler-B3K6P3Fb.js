@@ -1,0 +1,1 @@
+import{u as o}from"./index-BCnwA6yE.js";const u=t=>{var e;try{(e=t==null?void 0:t.message)!=null&&e.includes("Request failed with status code 401")&&o().setLoggedIn(!1)}catch(s){console.log(s)}};export{u};

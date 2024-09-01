@@ -1,0 +1,23 @@
+export type Token = {
+  acr: string,
+  aio: string,
+  amr: string[],
+  appid: string,
+  appidacr: string,
+  aud: string,
+  exp: number,
+  iat: number,
+  ipaddr: string,
+  iss: string,
+  name: string,
+  nbf: number,
+  oid: string,
+  rh: string,
+  scp: string,
+  sub: string,
+  tid: string,
+  unique_name: string,
+  upn: string,
+  uti: string,
+  ver: string
+}

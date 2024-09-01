@@ -1,0 +1,41 @@
+.el-pagination.is-background {
+  button {
+    background-color: #FFFFFF !important;
+    border-radius: 10px !important;
+    margin: 0px 1px !important;
+    &:hover {
+      background-color: #1976D2 !important;
+      .el-icon {
+        color: #fff !important;
+      }
+    }
+    &[aria-disabled="true"] {
+      background-color: #F5F5F5 !important;
+      .el-icon {
+        color: #E0E0E0 !important;
+      }
+    }
+    i.el-icon {
+      display: initial;
+    }
+  }
+  .el-pager {
+    li {
+      background: transparent;
+      color: #90A4AE;
+      margin: 0 2.5px;
+      border-radius: 10px !important;
+      &.active:hover { 
+        color: #fff !important;
+      }
+    }
+    li:not(.disabled).active {
+      background-color: #1976D2;
+      color: var(--el-color-white);
+    }
+
+    li:not(.disabled):hover {
+      color: #1976D2;
+    }
+  }
+}

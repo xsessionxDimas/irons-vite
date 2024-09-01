@@ -1,0 +1,222 @@
+$base_grid_font_size: 12px;
+
+.card {
+  .card-body{
+    &.grid-padding {
+      padding: 11px 20px 11px 12px;
+    }
+  }
+}
+
+.el-table {
+  td {
+    border-bottom: 1px solid #F5F5F5;
+  }
+
+  th.is-leaf {
+    border: none;
+  }
+
+  .el-table__header-wrapper,
+  .el-table__fixed-header-wrapper {
+    margin-bottom: 2px;
+    thead {
+      th:first-of-type
+      {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+        padding-left: 10px;
+      }
+      th:last-of-type
+      {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+      th {
+        background-color: #F3F6F9;
+      }
+    }
+    .cell {
+      text-transform: capitalize;
+      font-size: $base_grid_font_size;
+    }
+  }
+
+  .el-table__body-wrapper,
+  .el-table__fixed-body-wrapper {
+    &::-webkit-scrollbar {
+      height: 1rem;
+    }
+    tbody {
+      font-size: $base_grid_font_size;
+      color: #37474F;
+      tr:hover {
+        td {
+          background-color: #f2f6fa;
+        }
+        td:first-of-type
+        {
+          border-top-left-radius: 12px;
+          border-bottom-left-radius: 12px;
+        }
+        td:last-of-type
+        {
+          border-top-right-radius: 12px;
+          border-bottom-right-radius: 12px;
+        }
+      }
+
+      .el-table__row {
+        td {
+          &.email {
+            .cell {
+              white-space: nowrap;
+              color: $blue-700;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.email-popper {
+  font-size: 10px;
+}
+
+.el-table__fixed-right {
+  background-color: #fff;
+  height: calc(100% - 0.8rem) !important;
+
+  .el-table__fixed-header-wrapper {
+    thead {
+      tr {
+        th:last-of-type {
+          border-top-right-radius: 12px !important;
+          border-bottom-right-radius: 12px !important;
+        }
+        th {
+          background-color: #F3F6F9;
+        }
+      }
+    }
+    .cell {
+      text-transform: capitalize;
+      font-size: $base_grid_font_size;
+    }
+  }
+
+  .el-table__fixed-body-wrapper {
+    height: calc(348px - 1rem) !important;
+    margin-top: 2px;
+    tbody {
+      font-size: $base_grid_font_size;
+      color: #37474F;
+      tr:hover {
+        td {
+          background-color: #f2f6fa;
+        }
+        td:last-of-type
+        {
+          border-top-right-radius: 12px;
+          border-bottom-right-radius: 12px;
+        }
+      }
+
+      .hover-row {
+        td {
+          background-color: #f2f6fa;
+        }
+        td:last-of-type
+        {
+          border-top-right-radius: 12px;
+          border-bottom-right-radius: 12px;
+        }
+      }
+    }
+  }
+}
+
+.el-table__fixed {
+  background-color: #fff;
+  height: calc(100% - 0.8rem) !important;
+
+  &-header-wrapper {
+    thead {
+      tr {
+        th:first-of-type
+        {
+          border-top-left-radius: 12px;
+          border-bottom-left-radius: 12px;
+        }  
+        th {
+          background-color: #F3F6F9;
+        }
+      }
+    }
+    .cell {
+      text-transform: capitalize;
+      font-size: $base_grid_font_size;
+    }
+  }
+
+  &-body-wrapper {
+    height: calc(348px - 1rem) !important;
+    margin-top: 2px;
+    tbody {
+      font-size: $base_grid_font_size;
+      color: #37474F;
+      tr:hover {
+        td {
+          background-color: #f2f6fa;
+        }
+        td:first-of-type
+        {
+          border-top-left-radius: 12px;
+          border-bottom-left-radius: 12px;
+        }  
+      }
+
+      .hover-row {
+        td {
+          background-color: #f2f6fa;
+        }
+        td:first-of-type
+        {
+          border-top-left-radius: 12px;
+          border-bottom-left-radius: 12px;
+        } 
+      }
+    }
+  }
+}
+
+.table_dark-header {
+  background-color: transparent !important;
+}
+.table_dark-row {
+  background-color: transparent !important;
+  border: none;
+}
+.table_dark-row::before {
+  content: none;
+  height: 0px;
+}
+
+.table-dark.el-table .el-table__header-wrapper thead th, .table-dark.el-table .el-table__fixed-header-wrapper thead th {
+  background-color: #3d3d4b !important;
+}
+
+.table-dark.el-table tr td {
+  border: none;
+}
+.table-dark.el-table .el-table__body-wrapper tbody tr:hover td, .table-dark.el-table .el-table__fixed-body-wrapper tbody tr:hover td {
+  background-color: #3d3d4b !important;
+  border: none;
+}
+
+.table-number{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+

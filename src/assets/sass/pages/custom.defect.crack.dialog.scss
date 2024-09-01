@@ -1,0 +1,119 @@
+.btn-add-new, .btn-success {
+  font-size: 14px !important;
+}
+.el-defect-crack-form-custom {
+  .el-dialog__title {
+    font-size: 16px !important;
+    display: flex;
+    justify-content: flex-start;
+
+    &.task-title {
+      font-weight: 400 !important;
+    }
+  }
+  
+  .date {
+    min-width: 220px;
+  }
+
+  .form-floating {
+    label {
+      transform: scale(1) translateY(-0.5rem) translateX(0rem);
+    }
+    textarea {
+      padding-top: 2rem;
+      padding-bottom: 1.625rem;
+    }
+    input {
+      padding-top: 2.625rem;
+      padding-bottom: 1.625rem;
+    }
+  }
+}
+
+div {
+  &.form-control {
+      &.asset-number-disabled-div {
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+          background-color: #EFF2F5;
+      }
+  }
+}
+
+.status-badge-dialog-header {
+  border-radius: 6px;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  font-family: "Public sans";
+}
+
+.status-description-text-box-timestamp {
+  color: #919EAB;
+  /* Paragraph/Small/Regular */
+  font-family: Public Sans;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */ 
+}
+
+$approved-styles: (
+  'badge-background': #DDF7D5,
+  'badge-color': #43AB23,
+  'textbox-background': #EEFBEA,
+  'textbox-color': #225612,
+  'textbox-border-color': #54D62C
+);
+
+$declined-styles: (
+  'badge-background': #FFDAD9,
+  'badge-color': #CC3A35,
+  'textbox-background': #FFEDEC,
+  'textbox-color': #661D1A,
+  'textbox-border-color': #FF4842
+);
+
+// Function to generate styles for a given state
+@mixin generate-styles($status) {
+  $badge-background: #{map-get($status, 'badge-background')};
+  $badge-color: #{map-get($status, 'badge-color')};
+  $textbox-background: #{map-get($status, 'textbox-background')};
+  $textbox-color: #{map-get($status, 'textbox-color')};
+  $textbox-border-color: #{map-get($status, 'textbox-border-color')};
+
+  &-text-box {
+    .form-control {
+      height: auto !important;
+      padding-top: 1.9rem;
+      background-color: $textbox-background;
+      border-radius: 6px;
+      font-size: 14px !important;
+      color: $textbox-color;
+      font-family: "Public sans";
+      border: 1px solid $textbox-border-color;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 14px !important;
+      color: $textbox-color;
+      font-family: "Public sans";
+    }
+  }
+
+  &-badge {
+    background-color: $badge-background;
+    color: $badge-color;
+  }
+}
+
+// Apply the mixin for the declined state
+.declined {
+  @include generate-styles($declined-styles);
+}
+
+// Apply the mixin for the approved state
+.approved {
+  @include generate-styles($approved-styles);
+}

@@ -1,0 +1,33 @@
+@for $i from 1 through 100 {
+  .w-#{$i} {
+    width: ($i * 1%) !important;
+  }
+
+  .h-#{$i} {
+    width: ($i * 1%);
+  }
+}
+
+@for $i from 1 through 9999 {
+  .w-#{$i}-px {
+    width: ($i * 1px) !important;
+  }
+  .max-w-#{$i}-px {
+    max-width: ($i * 1px) !important;
+  }
+
+  .min-w-#{$i}-px {
+    min-width: ($i * 1px) !important;
+  }
+
+  .h-#{$i}-px {
+    height: ($i * 1px) !important;
+  }
+  .max-w-#{$i}-px {
+    max-height: ($i * 1px) !important;
+  }
+
+  .min-w-#{$i}-px {
+    min-height: ($i * 1px) !important;
+  }
+}

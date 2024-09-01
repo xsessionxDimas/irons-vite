@@ -1,0 +1,20 @@
+export type UpsertItem = {
+  equipmentAssignmentId: number;
+  equipment: string;
+  objectType: string;
+  plannerGroup: string;
+  costCenter: string;
+  wbsElement: string;
+  level: string;
+  equipmentType: string;
+  equipmentGroup: string;
+  equipmentModel: string;
+  equipmentStatus: string;
+  site: string;
+  planningPlant: string;
+  maintenancePlant: string;
+  maintenanceWorkCenter: string;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+};

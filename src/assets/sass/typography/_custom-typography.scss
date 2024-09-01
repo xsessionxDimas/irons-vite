@@ -1,0 +1,282 @@
+// Global
+html,
+body {
+  font-size: $base-text-normal !important;
+}
+
+// sign in
+.sign-in-title {
+  color: $gray-800;
+  font-size: $base-text-xxl;
+  @extend .fw-700;
+  color: $blue-gray-800;
+}
+
+.label,
+.card-subtitle,
+.text-normal,
+.text-dark {
+  @extend .fw-400;
+  font-size: $base-text-normal;
+}
+
+.el-input__inner,
+.form-control {
+  font-size: $base-text-normal !important;
+}
+
+.el-input__inner, .el-textarea__inner {
+  font-size: $base-text-medium !important;
+}
+
+.label {
+  color: $blue-gray-600;
+}
+
+.card-subtitle {
+  color: $blue-gray-400;
+}
+
+.text-color-dark {
+  color: $blue-gray-800 !important;
+}
+
+// dashboard
+.page-title {
+  @extend .fw-700;
+  font-size: $base-text-large;
+  color: $blue-gray-800 !important;
+
+  &-dashboard {
+    @extend .fw-700;
+    font-size: $base-text-xl;
+    color: $blue-gray-800;
+  }
+}
+
+.page-subtitle {
+  @extend .fw-500;
+  font-size: $base-text-medium;
+  color: $blue-gray-600;
+}
+
+.card-title {
+  @extend .fw-600;
+  font-size: $base-text-large !important;
+  color: $blue-gray-800 !important;
+
+  &-dashboard,
+  .modal-title {
+    @extend .fw-600;
+    font-size: $base-text-medium !important;
+  }
+}
+
+.card-subheader {
+  @extend .fw-700;
+  font-size: $base-text-medium !important;
+}
+
+.card-title-dashboard {
+  color: $blue-gray-700;
+}
+
+.card-subheader,
+.modal-title {
+  color: $blue-gray-800;
+}
+
+.btn-label {
+  @extend .fw-600;
+  font-size: $base-text-normal !important;
+
+  &-thin {
+    @extend .fw-500;
+    font-size: $base-text-normal;
+  }
+}
+
+.breacrumb-inactive {
+  @extend .fw-500;
+  font-size: $base-text-normal;
+  color: $blue-gray-300;
+}
+
+.breacrumb-active {
+  @extend .fw-500;
+  font-size: $base-text-normal;
+  color: $blue-900;
+}
+
+.search-placeholder-label {
+  @extend .fw-500;
+  font-size: $base-text-normal !important;
+}
+
+.sidebar-menu-item,
+.modal-body-text {
+  @extend .fw-400;
+  font-size: $base-text-normal;
+}
+
+.modal-body-text {
+  color: $blue-gray-700;
+}
+
+.label-heading {
+  @extend .fw-700;
+  font-size: $base-text-medium;
+  color: $blue-gray-800;
+}
+
+// size
+
+.text-small {
+  font-size: $base-text-small;
+}
+
+.text-normal {
+  font-size: $base-text-normal;
+}
+
+.text-medium {
+  font-size: $base-text-medium;
+}
+
+.text-large {
+  font-size: $base-text-large;
+}
+
+.text-xl {
+  font-size: $base-text-xl;
+}
+
+.text-xxl {
+  font-size: $base-text-xxl;
+}
+
+// color
+.text-white {
+  color: $white;
+}
+.text-critical {
+  color: $critical;
+}
+.text-caution {
+  color: $caution;
+}
+.text-normal-inv {
+  color: $normal-inv;
+}
+.text-disabled {
+  color: $gray-800;
+}
+
+.text-blue-gray-50 {
+  color: $blue-gray-50;
+}
+
+.text-blue-gray-200 {
+  color: $blue-gray-200;
+}
+
+.text-blue-gray-300 {
+  color: $blue-gray-300;
+}
+
+.text-blue-gray-800 {
+  color: $blue-gray-800;
+}
+
+.text-blue-gray-400 {
+  color: $blue-gray-400;
+}
+
+.text-blue-gray-500 {
+  color: $blue-gray-600;
+}
+
+.text-blue-gray-600 {
+  color: $blue-gray-600;
+}
+
+.text-gray-800 {
+  color: $gray-800;
+}
+
+.text-blue-50 {
+  color: $blue-50;
+}
+
+.text-blue-700 {
+  color: $blue-700;
+}
+
+.text-blue-800 {
+  color: $blue-800;
+}
+
+.text-blue-900 {
+  color: $blue-900;
+}
+
+.text-green {
+  color: $green;
+}
+
+.text-neutral-500 {
+  color: $neutral-500;
+}
+
+// background color
+.bgc-white {
+  background-color: $white;
+}
+
+.bgc-blue-gray-50 {
+  background-color: $blue-gray-50;
+}
+
+.bgc-blue-gray-200 {
+  background-color: $blue-gray-200;
+}
+
+.bgc-blue-gray-300 {
+  background-color: $blue-gray-300;
+}
+
+.bgc-blue-gray-800 {
+  background-color: $blue-gray-800;
+}
+
+.bgc-blue-gray-400 {
+  background-color: $blue-gray-400;
+}
+
+.bgc-blue-gray-500 {
+  background-color: $blue-gray-600;
+}
+
+.bgc-blue-gray-600 {
+  background-color: $blue-gray-600;
+}
+
+.bgc-gray-800 {
+  background-color: $gray-800;
+}
+
+.bgc-blue-50 {
+  background-color: $blue-50;
+}
+
+.bgc-blue-700 {
+  background-color: $blue-700;
+}
+
+.bgc-blue-800 {
+  background-color: $blue-800;
+}
+
+.bgc-blue-900 {
+  background-color: $blue-900;
+}

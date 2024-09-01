@@ -1,0 +1,9 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_menu`
+export const DEFAULT_API_URL = `${CRUD_API_URL}/user_menu`
+export const GET_API_URL = `${DEFAULT_API_URL}/paging`
+export const UPDATE_API_URL = `${DEFAULT_API_URL}/update`
+export const BULK_API_URL = `${CRUD_API_URL}/bulk`
+export const UPLOAD_API_URL = `${CRUD_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${CRUD_API_URL}/export`
+export const LOOKUP_API_URL = `${CRUD_API_URL}/lookup`
+export const LOOKUP_MENU_API_URL = `${CRUD_API_URL}/lookup_menu`

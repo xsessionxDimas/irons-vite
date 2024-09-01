@@ -1,0 +1,73 @@
+// 
+// BTech Typography
+// 
+
+@mixin paragraph-lg {
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    &-semi {
+        @include paragraph-lg();
+        font-weight: 600;
+    }
+    &-bold {
+        @include paragraph-lg();
+        font-weight: 700;
+    }
+}
+
+@mixin paragraph-md {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    &-semi {
+        @include paragraph-md();
+        font-weight: 600;
+    }
+    &-bold {
+        @include paragraph-md();
+        font-weight: 700;
+    }
+}
+
+@mixin paragraph-sm {
+    font-weight: 400;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    &-semi {
+        @include paragraph-sm();
+        font-weight: 600;
+    }
+    &-bold {
+        @include paragraph-sm();
+        font-weight: 700;
+    }
+}
+
+@mixin paragraph-xs {
+    font-weight: 400;
+    font-size: .75rem;
+    line-height: 1.125rem;
+    &-semi {
+        @include paragraph-xs();
+        font-weight: 600;
+    }
+    &-bold {
+        @include paragraph-xs();
+        font-weight: 700;
+    }
+}
+
+@mixin paragraph-micro {
+    font-weight: 400;
+    font-size: .625rem;
+    line-height: 1rem;
+    &-semi {
+        @include paragraph-micro();
+        font-weight: 600;
+    }
+    &-bold {
+        @include paragraph-micro();
+        font-weight: 700;
+    }
+}

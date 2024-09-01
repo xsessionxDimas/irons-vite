@@ -1,0 +1,1 @@
+import{a as t,u as n}from"./@vueuse-MfruhCTE.js";import{o as r,l as i}from"./index-BCnwA6yE.js";import{I as s}from"./@azure-DwL0pga8.js";const{effectiveType:a}=t(),u=n(),p=()=>{let e=!1;return(a.value=="2g"||!u.value)&&(e=!0),e},m=e=>{e.acquireTokenSilent(r).catch(o=>{if(o instanceof s)return e.acquireTokenPopup(i)})};export{p as i,m as r};

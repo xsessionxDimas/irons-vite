@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/ehms/api/master_damage_category",_=`${a}`,t=`${a}/damage_category_bulk`,o=`${a}/validate_upload`,s=`${a}/export`,e=`${a}/lookup`,U=`${a}/lookup_transaction`,c=`${a}/damage_category`,L=`${a}/damage_category/update`;export{t as B,s as E,_ as G,c as I,e as L,L as U,o as a,U as b};

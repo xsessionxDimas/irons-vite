@@ -1,0 +1,21 @@
+export type ListItem = {
+    componentStatusId: number,
+    componentId: number,
+    componentStatus: string,
+    component: string,
+    componentDesc: string,
+    sensorData: string,
+    oilDataS1: string,
+    oilDataS2: string,
+    filterCutS1: string,
+    filterCutS2: string,
+    magPlug: string,
+    ironFormsCbm: string,
+    startDate: string,
+    endDate: string,
+    isActive: boolean,
+    createdOn: string,
+    createdBy: string,
+    changedOn: string,
+    changedBy: string
+}

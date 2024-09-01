@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/ehms/api/component_replacement",e=`${a}/get_mapping`,t=`${a}/component_replacement`,_=`${a}/component_replacement`,n="https://digital-bumaau-dev-apm-001.azure-api.net/amadm/api/master_data/frame_hours";export{e as G,_ as P,t as a,n as b};

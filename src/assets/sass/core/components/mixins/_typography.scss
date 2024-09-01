@@ -1,0 +1,69 @@
+// 
+// BTech Typography
+// 
+
+@mixin heading-h1 {
+    font-weight: 400;
+    font-size: 2.5rem !important;
+    line-height: 3rem;
+}
+
+@mixin heading-h2 {
+    font-weight: 400;
+    font-size: 2.25rem !important;
+    line-height: 2.75rem;
+}
+
+@mixin heading-h3 {
+    font-weight: 400;
+    font-size: 2rem !important;
+    line-height: 2.5rem;
+}
+
+@mixin heading-h4 {
+    font-weight: 400;
+    font-size: 1.75rem !important;
+    line-height: 2.25rem;
+}
+
+@mixin heading-h5 {
+    font-weight: 400;
+    font-size: 1.5rem !important;
+    line-height: 2rem;
+}
+
+@mixin heading-h6 {
+    font-weight: 400;
+    font-size: 1.25rem !important;
+    line-height: 1.75rem;
+}
+
+@mixin paragraph-lg {
+    font-weight: 400;
+    font-size: 1.125rem !important;
+    line-height: 1.75rem;
+}
+
+@mixin paragraph-md {
+    font-weight: 400;
+    font-size: 1rem !important;
+    line-height: 1.5rem;
+}
+
+@mixin paragraph-sm {
+    font-weight: 400;
+    font-size: .875rem !important;
+    line-height: 1.25rem;
+}
+
+@mixin paragraph-xs {
+    font-weight: 400;
+    font-size: .75rem !important;
+    line-height: 1.125rem;
+}
+
+@mixin paragraph-micro {
+    font-weight: 400;
+    font-size: .625rem !important;
+    line-height: 1rem;
+}

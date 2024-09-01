@@ -1,0 +1,1 @@
+import{f as s,A as a}from"./index-BCnwA6yE.js";const c=(t,e)=>{s.dispatch(a.SET_BREADCRUMB_ACTION,{title:t,pageBreadcrumbPath:e})},o=t=>{s.dispatch(a.SET_BREADCRUMB_ACTION,{title:t})};export{c as a,o as s};

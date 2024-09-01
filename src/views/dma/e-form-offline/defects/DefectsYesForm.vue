@@ -1,0 +1,1389 @@
+<template>
+  <el-dialog v-model="dialogVisible" width="90%" center
+    @closed="onFormClosed"
+    @opened="onFormOpened"
+    :close-on-click-modal="false"
+    :close-on-press-escape="false"
+    :before-close="handleBeforeClose"
+    :custom-class="`el-defect-crack-form-custom form-defect-yes-eform ${customClass}`"
+    :destroy-on-close="true">
+    <template #title>
+      <span class="el-dialog__title">Detailed Information for Defect Identification</span>
+      <span class="el-dialog__title task-title" v-html="title" ref="defectDetailRef" ></span>
+    </template>
+    <div>
+      <div class="d-flex flex-column justify-content-between" v-if="generic">
+        <div class="py-2 d-flex flex-row flex-grow-1">
+          <div class="flex-fill">
+              <div class="form-floating">
+                <input type="text" class="form-control" v-model="taskDescription" @handleChange="handleTaskDescription">
+                <label for="floatingInput">Task Description</label>
+              </div>
+          </div>
+        </div>
+        <div class="mt-1" v-if="!taskDescriptionValidation.isValid">
+          <Label class="error-label">{{ taskDescriptionValidation.errorMessage }}</Label>
+        </div>
+      </div>
+      <div class="d-flex flex-row justify-content-between">
+        <div class="py-2 d-flex flex-row flex-grow-1">
+          <div class="flex-fill">
+              <div class="form-floating">
+                <div type="text" class="form-control asset-number-disabled-div" v-html="assetNumber"></div>
+                <label for="floatingInput">Asset Number</label>
+              </div>
+            </div>
+            <div class="flex-fill ps-3">
+              <div class="form-floating">
+                <div type="text" class="form-control asset-number-disabled-div" v-html="serialNumber"></div>
+                <label for="floatingInput">Serial Number</label>
+              </div>
+            </div>
+            <div class="flex-fill ps-3">
+              <div class="form-floating">
+                <div type="text" class="form-control asset-number-disabled-div" v-html="formatOwnershipHTML"></div>
+                <label for="floatingInput">Ownership</label>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="d-flex flex-row justify-content-between">
+        <large-camera
+        :id="'defect'"
+        :disabled="false"
+        :allow-delete="true"
+        :is-monitoring="false"
+        :is-mandatory="isDefectMajor"
+        :has-submitted="showCameraValidation"
+        />
+      </div>
+      <template v-if="showCameraValidation">
+        <Label class="error-label">Required</Label>
+      </template>
+      <div class="mt-1 py-2">
+        <div class="d-flex flex-column">
+          <Textarea
+            class="form-control h-100px"
+            :value="data?.Description?.value"
+            :label="defectPlaceholder"
+            name="defectPlaceholder"
+            :errorMessage="data?.Description?.errorMessage"
+            :is-valid="data?.Description?.isValid"
+            @handleChange="onDescriptionChange"
+          ></Textarea>
+        </div>
+      </div>
+      <div class="mt-1 py-2">
+        <div class="row">
+          <div class="col pe-0">
+            <div class="form-floating">
+              <input type="text" class="form-control" disabled :value="formStore.selectedFitter.name">
+              <label>Raised By</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-1 py-2">
+        <div class="row">
+          <div class="col-4 pe-0 date">
+                <div class="form-floating">
+                  <input type="text" class="form-control" disabled :value="current()" />
+                  <label>Date Raised</label>
+                </div>
+              </div>
+              <div class="col pe-0 d-flex">
+                  <div class="d-flex flex-column flex-fill">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                        class="form-control"
+                        @input.prevent="onPlannedHoursChange"
+                        @focusout="onPlannedHoursChange"
+                        v-model="formatPlannedDuration"
+                        @keypress="onlyNumber"
+                      />
+                      <label class="text-nowrap">How long will this defect repair take?</label>
+                    </div>
+                    <div class="mt-2" v-if="!data?.PlannedDuration?.isValid">
+                      <Label class="error-label">{{ data?.PlannedDuration?.errorMessage }}</Label>
+                    </div>
+                  </div>
+                  <div class="ms-2 d-flex align-items-center">
+                    <Label>Hours</Label>
+                  </div>
+              </div>
+        </div>
+      </div>
+      <div class="mt-1 py-2">
+        <Textarea
+          class="form-control h-100px"
+          :value="data?.Instruction?.value"
+          :label="instructionPlaceholder"
+          name="instructionPlaceholder"
+          :errorMessage="data?.Instruction?.errorMessage"
+          :is-valid="data?.Instruction?.isValid"
+          @handleChange="onInstructionChange"
+        ></Textarea>
+      </div>
+      <div class="mt-2"></div>
+      <el-collapse class="task-group general-accordion py-1 px-5" v-model="priorityCollapse">
+          <el-collapse-item title="Priority" name="Priority">
+            <div class="row p-3 m-1 priority-container" style="background: #F4F6F8; border-radius: 8px;">
+              <div class="col-3">Priority</div>
+              <div class="col-6">Action</div>
+              <div class="col-3 text-break">Person Responsible</div>
+            </div>
+            <div class="row p-3 m-1 priority-container">
+              <div class="col-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" v-model="defectPriority" value="P1">
+                  <label class="form-check-label">
+                    (P1) Immediate
+                  </label>
+                </div>
+              </div>
+              <div class="col-6 word-breaker">Shall shut machine down and undertake repairs.</div>
+              <div class="col-3 text-break">Maintenance Supervisor</div>
+            </div>
+              <div class="row p-3 m-1 priority-container">
+                <div class="col-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" v-model="defectPriority" value="P2">
+                    <label class="form-check-label">
+                      (P2) Urgent
+                    </label>
+                  </div>
+                </div>
+                <div class="col-6 word-breaker">Shall complete within 7 days.</div>
+                <div class="col-3 text-break">Maintenance Supervisor</div>
+              </div>
+              <div class="row p-3 m-1 priority-container">
+                <div class="col-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" v-model="defectPriority" value="P3">
+                    <label class="form-check-label">
+                      (P3) Routine
+                    </label>
+                  </div>
+                </div>
+                <div class="col-6 word-breaker">Shall complete within 60 days.</div>
+                <div class="col-3 text-break">Maintenance Planner</div>
+              </div>
+              <div class="row p-3 m-1 priority-container">
+                <div class="col-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" v-model="defectPriority" value="P4">
+                    <label class="form-check-label">
+                      (P4) Monitor
+                    </label>
+                  </div>
+                </div>
+                <div class="col-6 word-breaker">Shall continue to inspect and monitor for 90 days.</div>
+                <div class="col-3 text-break">Maintenance Planner</div>
+              </div>
+          </el-collapse-item>
+        </el-collapse>
+      <div class="mt-2"></div>
+      <el-collapse class="task-group general-accordion py-1 px-5 parts-collapse" v-model="partsRequiredCollapse">
+        <el-collapse-item title="Parts Required" name="Parts Required">
+          <parts-warning v-if="showPartsWarning" />
+          <div class="row p-3 m-1 priority-container" style="background: #F4F6F8; border-radius: 8px;">
+              <div class="col-3">Part Number</div>
+              <div class="col-5">Part Description</div>
+              <div class="col-1">Qty</div>
+              <div class="col"></div>
+              <div class="col"></div>
+            </div>
+            <div class="row p-3 m-1 priority-container px-0" v-for="(item, index) in data?.Parts" :key="item.partNumber">
+              <div class="col-3 px-0">
+                <div class="d-flex flex-column">
+                  <input type="text" class="form-control" :value="data.Parts[index].partNumber" @change="onPartNumberChange($event, index)" />
+                  <div class="mt-2" v-if="!item.partNumberValidation.isValid">
+                      <Label class="error-label">{{ item.partNumberValidation.message }}</Label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="d-flex flex-column">
+                  <input type="text" class="form-control" :value="item.partDescription" @change="onPartDescriptionChange($event, index)" />
+                  <div class="mt-2" v-if="!item.descriptionValidation.isValid">
+                      <Label class="error-label">{{ item.descriptionValidation.message }}</Label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-1 px-1 mb-0 d-flex flex-column justify-content-start">
+                <div class="row p-0 m-0 h-50 w-100">
+                  <div class="p-0 col-12 d-flex">
+                    <input pattern="[0-9]*" inputmode="numeric" class="form-control" v-model="item.qty" @input.prevent="onPartQtyChange($event, index)" @keypress="onlyNumber" @focusout="onPartQtyChange($event, index)" />
+                  </div>
+                </div>
+                <div class="mt-2 flex-fill" v-if="!item.qtyValidation.isValid">
+                    <Label class="error-label">{{ item.qtyValidation.message }}</Label>
+                </div>
+              </div>
+              <div class="col px-1 d-flex flex-column justify-content-start">
+                <div class="row p-0 m-0 h-100 w-100 align-items-center">
+                  <SmallCamera :index="index" :item-value="item.images || []" @handle-change-image="onPartImageChange"/>
+                </div>
+              </div>
+              <div class="col px-1 d-flex flex-column justify-content-start position-relative">
+                <div class="row p-0 m-0 h-100 w-100 align-items-center">
+                  <UploadAttachment :index="index" :item-value="item.attachment || []" @handle-change-attachment="onPartAttachmentChange"/>
+                </div>
+                <div class="position-absolute" style="top:10px; right: 0px;">
+                    <em class="fa fa-times" style="color:gray; cursor: pointer;" @click.prevent="onRemoveParts(index)"></em>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center flex-row-reverse">
+              <div class="fw-bolder">
+                Check Partbook
+                <a :href="onlineDefectFormStore.statePartReference.linkAddress" target="_blank" class="fw-bolder" style="color: #18AF4A;">
+                  <img src="/media/icons/bumaau/open_in_new.svg"/>
+                  {{ onlineDefectFormStore.statePartReference.brand }}
+                </a>
+              </div>
+              <button class="my-3 btn-add-new" @click="onAddNewParts">
+                <em class="fa fa-plus me-2"></em>
+                Add more parts
+              </button>
+            </div>
+        </el-collapse-item>
+      </el-collapse>
+      <div class="mt-2"></div>
+      <el-collapse class="task-group general-accordion py-1 px-5" v-model="labourRequired">
+        <el-collapse-item title="Labour Required" name="Labour Required">
+          <div class="row p-3 m-1 priority-container" style="background: #F4F6F8; border-radius: 8px;">
+            <div class="col-6">Labour Activity</div>
+            <div class="col-2">Qty</div>
+            <div class="col-2 word-breaker">Hours Each</div>
+            <div class="col-2 word-breaker">Total Hours</div>
+          </div>
+          <template v-for="(item, index) in data.Labours" :key="item">
+            <div class="row p-3 m-1 priority-container ps-0">
+                <div class="col-6 px-0">
+                  <div class="d-flex flex-column">
+                    <el-select
+                      v-model="labours[index]"
+                      filterable
+                      placeholder="Choose Labour"
+                      @change="onLabourChange(index)"
+                      class="w-100">
+                      <template v-for="opt in positionStore.positionOption" :key="opt.value">
+                        <el-option :label="opt.label" :value="opt.label" />
+                      </template>
+                    </el-select>
+                    <div class="mt-2" v-if="!item.positionValidation.isValid">
+                        <Label class="error-label">{{ item.positionValidation.message }}</Label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2  d-flex justify-content-start">
+                  <div class="d-flex flex-column">
+                    <input pattern="[0-9]*" inputmode="numeric" class="form-control" v-model="item.qty" @keypress="onlyIntegerInput"
+                    @input.prevent="onLabourQtyChange($event, index)" @focusout="onLabourQtyChange($event, index)"/>
+                    <div class="mt-2" v-if="!item.qtyValidation.isValid">
+                        <Label class="error-label">{{ item.qtyValidation.message }}</Label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2 d-flex justify-content-start">
+                  <div class="d-flex flex-column">
+                    <input pattern="[0-9]*" inputmode="numeric" class="form-control" v-model="item.hireEach" @keypress="onlyNumber"
+                    @input.prevent="onLabourHireEachChange($event, index)" @focusout="onLabourHireEachChange($event, index)"/>
+                    <div class="mt-2" v-if="!item.hireEachValidation.isValid">
+                        <Label class="error-label">{{ item.hireEachValidation.message }}</Label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2 d-flex flex-column justify-content-start">
+                  <div class="row p-0 m-0 h-50 w-100">
+                    <div class="p-0 col-12 d-flex">
+                      <input class="form-control d-flex" :value="item.totalHours" disabled />
+                      <div class="ms-4 d-flex align-items-center" :class="index === 0 ? 'hidden' : ''">
+                          <em class="fa fa-times" style="color:gray; cursor: pointer;" @click.prevent="onRemoveLabour(index)"></em>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-2 flex-fill" v-if="!item.totalHoursValidation.isValid">
+                    <Label class="error-label">{{ item.totalHoursValidation.message }}</Label>
+                  </div>
+                </div>
+            </div>
+          </template>
+          <button class="my-3 btn-add-new" @click="onAddNewLabour">
+            <em class="fa fa-plus me-2"></em>
+            Add more labour
+          </button>
+        </el-collapse-item>
+      </el-collapse>
+      <div class="mt-2"></div>
+      <el-collapse class="task-group general-accordion py-1 px-5" v-model="otherResourceCollapse">
+        <el-collapse-item title="Other Resources Required (optional)" name="Other Resources Required (optional)">
+          <div class="p-2 d-flex" v-for="(item, index) in data.Resources" :key="item.value">
+            <div class="d-flex flex-fill flex-column">
+              <div class="d-flex flex-row">
+                <input type="text" class="form-control" :value="item.value" :placeholder="`Resource ${Number(index) + 1}`"
+                @change="onResourcesChange($event, index)" />
+                <div class="ms-4 d-flex align-items-center" :class="index === 0 ? 'hidden' : ''">
+                  <em class="fa fa-times" style="color:gray; cursor: pointer;" @click.prevent="onRemoveResource(index)"></em>
+                </div>
+              </div>
+              <div class="mt-2" v-if="!item.isValid">
+                  <Label class="error-label">{{ item.errorMessage }}</Label>
+              </div>
+            </div>
+          </div>
+          <button class="my-3 btn-add-new" @click="onAddNewResource">
+            <em class="fa fa-plus me-2"></em>
+            Add new resource
+          </button>
+        </el-collapse-item>
+      </el-collapse>
+      <div class="mt-2"></div>
+      <el-collapse class="task-group general-accordion py-1 px-5" v-model="defectSysmptompCollapse">
+        <el-collapse-item title="Defect Symptom" name="Defect Symptom">
+          <div class="p-2 d-flex flex-column" v-for="(item, index) in data.Symptoms" :key="item.value">
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-fill flex-column">
+                <el-select
+                    v-model="symptoms[index]"
+                    placeholder="Select Symptom"
+                    filterable
+                    @change="onSymptomChange(index)"
+                    class="w-100">
+                    <template v-for="opt in masterStore.Symptoms" :key="opt.id">
+                      <el-option :label="opt.symptom" :value="opt.symptom" />
+                    </template>
+                </el-select>
+                <div class="mt-2" v-if="symptoms[index] === 'Other'">
+                  <Textarea
+                    class="form-control h-100px"
+                    :value="symptomDesc[index]"
+                    label="Description"
+                    name="Description"
+                    errorMessage="Required"
+                    :is-valid="symptomDescValid[index]"
+                    :index="index"
+                    @handleChange="onSymptomDescChange"
+                  ></Textarea>
+                </div>
+              </div>
+              <div class="ms-4 d-flex align-items-center" :class="index === 0 ? 'hidden' : ''">
+                <em class="fa fa-times" style="color:gray; cursor: pointer;" @click.prevent="onRemoveSymptom(index)"></em>
+              </div>
+            </div>
+            <div class="mt-2" v-if="!item.isValid">
+                <Label class="error-label">{{ item.errorMessage }}</Label>
+            </div>
+          </div>
+          <button class="my-3 btn-add-new" @click.prevent="onAddNewSymptom">
+            <em class="fa fa-plus me-2"></em>
+            Add another symptom
+          </button>
+        </el-collapse-item>
+      </el-collapse>
+      <div class="mt-2"></div>
+      <el-collapse class="task-group general-accordion py-1 px-5" v-model="defectCausesCollapse">
+        <el-collapse-item title="Defect Cause" name="Defect Cause">
+          <div class="p-2 d-flex flex-column" v-for="(item, index) in data.Causes" :key="item.value">
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-fill flex-column">
+                <el-select
+                    v-model="causes[index]"
+                    placeholder="Select Cause"
+                    filterable
+                    @change="onCauseChange(index)"
+                    class="w-100">
+                    <template v-for="opt in masterStore.Causes" :key="opt.id">
+                      <el-option :label="opt.causes" :value="opt.causes" />
+                    </template>
+                </el-select>
+                <div class="mt-2" v-if="causes[index] === 'Other'">
+                  <Textarea
+                    class="form-control h-100px"
+                    :value="causesDesc[index]"
+                    label="Description"
+                    name="Description"
+                    errorMessage="Required"
+                    :is-valid="causesDescValid[index]"
+                    :index="index"
+                    @handleChange="onCauseDescChange"
+                  ></Textarea>
+                </div>
+              </div>
+              <div class="ms-4 d-flex align-items-center" :class="index === 0 ? 'hidden' : ''">
+                <em class="fa fa-times" style="color:gray; cursor: pointer;" @click.prevent="onRemoveCause(index)"></em>
+              </div>
+            </div>
+            <div class="mt-2" v-if="!item.isValid">
+                <Label class="error-label">{{ item.errorMessage }}</Label>
+            </div>
+          </div>
+          <button class="my-3 btn-add-new" @click="onAddNewCause">
+            <em class="fa fa-plus me-2"></em>
+            Add another cause
+          </button>
+        </el-collapse-item>
+      </el-collapse>
+      <div class="my-5 w-100">
+        <button class="btn btn-success w-100" @click.prevent="onSubmitDefects"
+        style="background:#18AF4A; box-shadow: 0px 8px 16px rgba(0, 171, 85, 0.24); color: white">Submit</button>
+      </div>
+    </div>
+    <CompleteOrLaterDialog
+    :show="confirmVisible"
+    :parts-warning="partsWarningVisible"
+    @add-parts="onAddParts"
+    @close="onCancel"
+    @submit="onSave"/>
+    <Confirmation :visibility="showConfirmExit"
+          caption="Are you sure want to close the defect form? <br /> Note: By closing the defect form, you will lose your defect data that you have already inputted."
+          @on-no-confirm="onCancelExit"
+          @on-yes-confirm="onSaveExit" />
+    <MessageBox
+      :show="messageBoxVisible"
+      message="Defect Information Successfully Submitted"
+      :show-left-button="true"
+      left-button-label="+ Add Another Defect"
+      @left-button-action="onAddAnotherDefect"
+      backgroundLeftButton="#18AF4A"
+      colorLeftButton="#FFF"
+      borderColorLeftButton="#18AF4A"
+      backgroundRightButton="#FFF"
+      colorRightButton="#18AF4A"
+      borderColorRightButton="#18AF4A"
+      @close="onFormClosed"
+    />
+  </el-dialog>
+</template>
+
+<script lang="ts" setup>
+import {
+  defineProps,
+  defineEmits,
+  toRef,
+  PropType,
+  ref,
+  computed,
+  watch
+} from "vue";
+import DefectYesClass from "@/core/classes/DefectYesClass";
+import {
+  getUTCOffsetDate
+} from "@/core/helpers/date-format";
+import {
+  useOfflineCameraStore
+} from "@/store/pinia/application/useOfflineCameraStore";
+import {
+  useDefectsFormStore
+} from "@/store/pinia/dma/e-form-offline/defects/useDefectsFormStore";
+import {
+  useDefectsFormStore as onlineUseDefectsFormStore
+} from "@/store/pinia/dma/e-form/defects/useDefectsFormStore";
+import { useEFormStore } from "@/store/pinia/dma/e-form-offline/useEFormStore";
+import {
+  UpdateParam
+} from "@/core/types/entities/dma/e-form/update-data/updateParam";
+import {
+  usePositionListStore
+} from "@/store/pinia/administration/organization-unit/position/usePositionListStore";
+import { useMasterStore } from "@/store/pinia/dma/masters/useMasterStore";
+import Confirmation from "@/components/dialog/Confirmation.vue";
+import LargeCamera from '@/components/camera/OfflineLargeCamera.vue';
+import CompleteOrLaterDialog from "../sub-group/task-group/task/item/dialog/CompleteOrLaterDialog.vue";
+import MessageBox from "@/components/dialog/OfflineMessageBox.vue";
+import { ElLoading } from "element-plus";
+import {
+  useGeneralFormStore
+} from "@/store/pinia/dma/e-form-offline/useGeneralFormStore";
+import { displayDesc } from "@/core/helpers/manipulate-html-string";
+import { isUndefined, cloneDeep } from 'lodash'
+import {
+  handleScrollToError,
+  handleScrollToErrorModal,
+  handleScrollToTopOfDialog
+} from "@/core/helpers/ironforms/defects-form/defect-form"
+import Textarea from "@/components/inputs/dma/Textarea.vue";
+import { TextareaParam } from "@/core/types/misc/TextareaParam";
+import { v4 as uuidv4 } from 'uuid';
+import {
+  setDefectIsActiveByTaskId
+} from "@/core/helpers/ironforms/offline/defect-form";
+import {
+  formatOwnership,
+  getTitle,
+  disabledHyperlink,
+  onlyNumberResult,
+  onlyIntegerInput,
+  hasDefectDataChanged
+} from "@/store/pinia/dma/e-form/helpers";
+import SmallCamera from "@/components/dma/defect/offline-parts-component/SmallCamera.vue"
+import UploadAttachment from "@/components/dma/defect/offline-parts-component/UploadAttachment.vue"
+import { db } from "@/database/schema/DexieSchema";
+import { last } from "lodash";
+import {
+  isOfflineOrSlowInternetConnection
+} from "@/core/helpers/internet-connection"
+import { CompleteEmitParam } from "../types/CompleteEmitParam";
+import PartsWarning from '@/views/dma/e-form-offline/sub-group/task-group/task/item/dialog/PartsWarning.vue';
+import {
+  ILoadingInstance
+} from "element-plus/lib/el-loading/src/loading.type";
+import {
+  useDefectsStore
+} from "@/store/pinia/dma/e-form-offline/defects/useDefectsStore";
+
+const props = defineProps({
+  visibility: {
+    required: true,
+    type: Boolean
+  },
+  predefinedPriority: {
+    required: true,
+    type: String,
+    default: 'P1'
+  },
+  assetNumber: {
+    required: true,
+    type: String
+  },
+  defectData: {
+    required: true,
+    type: Object as PropType<DefectYesClass>
+  },
+  generic: {
+    required: false,
+    type: Boolean,
+    default: false
+  },
+  workorder: {
+    required: false,
+    type: String,
+    default: ''
+  },
+  form: {
+    required: false,
+    type: String,
+    default: ''
+  }
+});
+
+const emits = defineEmits(["addAnotherDefect"]);
+
+const camstore = useOfflineCameraStore();
+const formStore = useDefectsFormStore();
+const onlineDefectFormStore = onlineUseDefectsFormStore();
+const store = useEFormStore();
+const positionStore = usePositionListStore();
+const masterStore = useMasterStore();
+const defectsStore = useDefectsStore();
+
+/* refs */
+const loader = ref<ILoadingInstance>()
+const messageBoxVisible = ref(false);
+const confirmVisible = ref(false);
+const isCancelled = ref(true);
+const loading = ref(false);
+const dialogVisible = toRef(props, "visibility");
+const data = toRef(props, "defectData");
+const defectPriority = ref("");
+const labours = ref<Array<string>>([""]);
+const symptoms = ref<Array<string>>([""]);
+const causes = ref<Array<string>>([""]);
+const symptomDesc = ref<Array<string>>([""]);
+const symptomDescValid = ref<Array<boolean>>([true]);
+const causesDesc = ref<Array<string>>([""]);
+const causesDescValid = ref<Array<boolean>>([true]);
+const showConfirmExit = ref(false)
+const showPartsWarning = ref(false)
+const customClass = ref(uuidv4())
+
+let savedFilesOnLocal = [] as string[]
+
+const priorityCollapse = ref('Priority')
+const partsRequiredCollapse = ref('Parts Required')
+const labourRequired = ref('Labour Required')
+const otherResourceCollapse = ref('Other Resources Required (optional)')
+const defectSysmptompCollapse = ref('Defect Symptom')
+const defectCausesCollapse = ref('Defect Cause')
+const taskDescription = ref("")
+const clonedDefectData = ref()
+const images = computed(() => {
+  if (isUndefined(formStore.images)) {
+    return []
+  } else {
+    return formStore.images.ImageInfos
+  }
+})
+
+const partsWarningVisible = computed(() => {
+  return props.defectData.DefectRequirement != 'Less than 30 minutes labour and less than $250 in parts' && data.value?.Parts?.length == 0
+})
+
+const comparedData = computed(() => {
+  return {
+    images: images.value,
+    description: props.defectData.Description.value,
+    priority: props.defectData.Priority,
+    instruction: props.defectData.Instruction.value,
+    plannedDuration: props.defectData.PlannedDuration.value,
+    parts: props.defectData.Parts,
+    labours: props.defectData.Labours,
+    resources: props.defectData.Resources,
+    symptoms: props.defectData.Symptoms,
+    causes: props.defectData.Causes,
+  }
+})
+
+const handleTaskDescription = (val) => {
+  if (val == '') {
+    taskDescriptionValidation.value.isValid = false
+    taskDescriptionValidation.value.errorMessage = "Required"
+  } else {
+    taskDescriptionValidation.value.isValid = true
+    taskDescriptionValidation.value.errorMessage = ""
+  }
+  taskDescription.value = val
+}
+const taskDescriptionValidation = ref({
+  isValid: true,
+  errorMessage: ""
+})
+
+// ---------- format ----------
+const plannedDurationInput = ref('')
+// ---------- format ----------
+
+// ---------- format (computed) ---------
+const formatPlannedDuration = computed({
+  get: () => {
+    let formatted = plannedDurationInput.value
+    formatted = plannedDurationInput.value
+    // if (!plannedDurationInput.value || formatted == '0') formatted = ''
+    return formatted
+  },
+  set: (val) => {
+    plannedDurationInput.value = val
+  }
+})
+const serialNumber = computed(() => {
+  return formStore.SerialNumber
+})
+
+const formatOwnershipHTML = computed(() => {
+  const ownership = formStore.Ownership
+  return formatOwnership(ownership)
+})
+
+
+/* computes */
+const taskUpdate = computed(() => {
+  return formStore.DefectUpdate;
+});
+const isFormAlreadySubmitted = computed(() => {
+  return store.formAlreadySubmitted
+});
+const defectPlaceholder = computed(() => {
+  return "Defect Identified Description"
+});
+const instructionPlaceholder = computed(() => {
+  return "Defect Repair Instructions / Actions"
+});
+const isTaskAlreadyUpdated = computed(() => {
+  return store.taskAlreadyUpdated
+});
+const title = computed(() => {
+  if (props.generic) {
+    return data.value.Title
+  } else {
+    return displayDesc(getTitle(formStore.stateTask))
+  }
+});
+
+const isDefectMajor = computed(() => {
+  return props.defectData.DefectRequirement != "Less than 30 minutes labour and less than $250 in parts"
+});
+
+const watchedFields = [
+  "images",
+  "description",
+  "instruction",
+  "defectPriority",
+  "plannedDuration",
+  "parts",
+  "labours",
+  "resources",
+  "symptoms",
+  "causes",
+];
+
+const editedForm = computed(() => {
+  return hasDefectDataChanged(watchedFields, clonedDefectData.value, comparedData.value)
+})
+
+/* watchers */
+watch(() => {
+  return props.predefinedPriority
+}, (newValue) => {
+  defectPriority.value = newValue
+});
+
+watch(messageBoxVisible, (newValue) => {
+  if (!newValue) {
+    setTimeout(() => {
+      const form = document.getElementsByClassName(customClass.value)[0]
+      form?.scrollIntoView(true)
+    }, 500);
+  }
+});
+
+watch(isFormAlreadySubmitted, (newValue) => {
+  if (newValue) {
+    formStore.toggleYesVisible(false);
+    store.resetTaskUpdated();
+    messageBoxVisible.value = false;
+    isCancelled.value = false;
+    loading.value = false;
+    formStore.setCancelledState(true)
+    camstore.clearCurrent();
+  }
+});
+watch(isTaskAlreadyUpdated, (newValue) => {
+  if (newValue) {
+    formStore.toggleYesVisible(false);
+    store.resetTaskUpdated();
+    messageBoxVisible.value = false;
+    isCancelled.value = false;
+    loading.value = false;
+    formStore.setCancelledState(true)
+    camstore.clearCurrent();
+  }
+});
+watch(taskUpdate, (newValue) => {
+  if (formStore.DefectYesVisible != true) return;
+  if (newValue === false) {
+    loading.value = true;
+  }
+  if (newValue === true) {
+    messageBoxVisible.value = true;
+  }
+});
+
+const defaultLabour = computed(() => {
+  const defaultLabourHardcode = "Diesel Fitter"
+  if (positionStore.positionOption) {
+    if (positionStore.positionOption.find((val) => {
+      return val.label == defaultLabourHardcode
+    })) {
+      return defaultLabourHardcode
+    }
+  }
+  return ""
+})
+
+/* methods */
+const current = () => {
+  const generalStore = useGeneralFormStore()
+  const date = getUTCOffsetDate(generalStore.stateTimeZone)
+  return (`${date} (${generalStore.stateTimeZoneDesc})`)
+}
+
+/* event handlers */
+const onAddAnotherDefect = () => {
+  formStore.setOpenDialogConfirmSubmitDefect(true)
+  taskDescription.value = ""
+  plannedDurationInput.value = ""
+  resetData()
+  isCancelled.value = true;
+  loading.value = false;
+  emits("addAnotherDefect")
+}
+
+const onDescriptionChange = (event) => {
+  data.value.setDescription(event.value);
+  data.value.validateDescription();
+}
+const onPlannedHoursChange = (event) => {
+  event.preventDefault();
+  event.target.value = onlyNumberResult(event.target.value)
+  if (isNaN(Number(event.target.value))) {
+    data.value.setPlannedDuration(event.target.value);
+    data.value.validatePlannedDuration();
+  }
+  data.value.setPlannedDuration(event.target.value);
+  data.value.validatePlannedDuration();
+}
+
+const onlyNumber = ($event) => {
+  let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+  if ((keyCode < 48 || keyCode > 57) && keyCode != 46) {
+    $event.preventDefault();
+  }
+}
+
+const onInstructionChange = (event) => {
+  data.value.setInstruction(event.value);
+  data.value.validateInstruction();
+}
+
+/* parts */
+const onPartDescriptionChange = (event, index: number) => {
+  event.preventDefault();
+  data.value.setPartDescription(index, event.target.value);
+  data.value.validatePartDescription(data.value.Parts[index]);
+}
+const onPartNumberChange = (event, index: number) => {
+  event.preventDefault();
+  data.value.setPartNumber(index, event.target.value);
+}
+const onPartQtyChange = (event, index: number) => {
+  event.preventDefault();
+  event.target.value = onlyNumberResult(event.target.value)
+  if (isNaN(Number(event.target.value))) {
+    data.value.setPartQty(index, event.target.value);
+    data.value.validatePartQty(data.value.Parts[index]);
+  }
+  data.value.setPartQty(index, event.target.value);
+  data.value.validatePartQty(data.value.Parts[index]);
+}
+const onPartImageChange = (params) => {
+  const { value, index } = params
+  data.value.setPartImage(index, value);
+  savedFilesOnLocal.push(last(value as any[]).filename)
+}
+const onPartAttachmentChange = (params) => {
+  const { value, index } = params
+  data.value.setPartAttachment(index, value);
+  savedFilesOnLocal.push(last(value as any[]).url)
+}
+const onAddNewParts = () => {
+/* validate first */
+  const isValid = data.value.Parts.every((e) => {
+    return e.partDescription !== "" && e.qty !== "";
+  });
+  if (!isValid) {
+    data.value.validateParts();
+    return;
+  } else {
+    for (const partIndex in data.value.Parts) {
+      if (Object.prototype.hasOwnProperty.call(data.value.Parts, partIndex)) {
+        const element = data.value.Parts[partIndex];
+        if (!element.partNumberValidation.isValid || !element.descriptionValidation.isValid || !element.qtyValidation.isValid) {
+          return
+        }
+      }
+    }
+  }
+  data.value.addPart({
+    partNumber: "",
+    partDescription: "",
+    qty: ""
+  });
+}
+const onRemoveParts = (index: number) => {
+  data.value.removeParts(index);
+}
+/* labours */
+const onLabourChange = (index: number) => {
+  data.value.setLabourActivity(index, labours.value[index]);
+  data.value.validateLaboursActivity(data.value.Labours[index]);
+}
+const onLabourQtyChange = (event, index: number) => {
+  event.preventDefault();
+  event.target.value = onlyNumberResult(event.target.value)
+  if (isNaN(Number(event.target.value))) {
+    data.value.setLabourQty(index, event.target.value);
+    data.value.validateLaboursQty(data.value.Labours[index]);
+    if (!data.value.Labours[index].position) {
+      onLabourChange(index)
+    }
+    calculateTotalHours(index);
+  }
+  data.value.setLabourQty(index, event.target.value);
+  data.value.validateLaboursQty(data.value.Labours[index]);
+  if (!data.value.Labours[index].position) {
+    onLabourChange(index)
+  }
+  calculateTotalHours(index);
+}
+const onLabourHireEachChange = (event, index: number) => {
+  event.preventDefault();
+  event.target.value = onlyNumberResult(event.target.value)
+  if (isNaN(Number(event.target.value))) {
+    data.value.setLabourHireEach(index, event.target.value);
+    data.value.validateLaboursHireEach(data.value.Labours[index]);
+    if (!data.value.Labours[index].position) {
+      onLabourChange(index)
+    }
+    calculateTotalHours(index);
+  }
+  data.value.setLabourHireEach(index, event.target.value);
+  data.value.validateLaboursHireEach(data.value.Labours[index]);
+  if (!data.value.Labours[index].position) {
+    onLabourChange(index)
+  }
+  calculateTotalHours(index);
+}
+const calculateTotalHours = (index: number) => {
+  if (!data.value.Labours[index].qty || !data.value.Labours[index].hireEach) return;
+  data.value.Labours[index].totalHoursValidation.message = ""
+  data.value.Labours[index].totalHoursValidation.isValid = true
+  const qty = +data.value.Labours[index].qty;
+  const each = +data.value.Labours[index].hireEach;
+  let total = qty * each;
+  if (!Number.isInteger(total)) {
+    total = Number((Math.round(total * 100) / 100).toFixed(2))
+  }
+  data.value.setLabourTotalHours(index, total.toString());
+}
+const onAddNewLabour = () => {
+/* validate first */
+  const isValid = data.value.Labours.every((e) => {
+    return e.position !== "" && e.qty !== "" && e.hireEach !== "" && e.totalHours !== "";
+  });
+  if (!isValid) {
+    data.value.validateLabours();
+    return;
+  } else {
+    for (const labourIndex in data.value.Labours) {
+      if (Object.prototype.hasOwnProperty.call(data.value.Labours, labourIndex)) {
+        const element = data.value.Labours[labourIndex];
+        if (!element.positionValidation.isValid || !element.qtyValidation.isValid || !element.hireEachValidation.isValid) {
+          return
+        }
+      }
+    }
+    if (data.value.validateLabours()) {
+      data.value.addLabour({
+        position: "",
+        qty: "",
+        hireEach: "",
+        totalHours: ""
+      });
+      labours.value.push(defaultLabour.value);
+      onLabourChange(data.value.Labours.length - 1);
+    }
+  }
+}
+const onRemoveLabour = (index: number) => {
+  labours.value.splice(index, 1);
+  data.value.removeLabours(index);
+}
+/* resources */
+const onResourcesChange = (event, index: number) => {
+  event.preventDefault();
+  data.value.setResources(index, event.target.value);
+  if (index == 0 && data.value.Resources[index].value == '') return
+  data.value.validateResource(data.value.Resources[index]);
+}
+const onAddNewResource = () => {
+/* validate first */
+  const isValid = data.value.Resources.every((e) => {
+    return e.value !== "";
+  });
+  if (!isValid) {
+    data.value.validateResourcesAdd();
+    return;
+  }
+  data.value.addResource("");
+}
+const onRemoveResource = (index: number) => {
+  data.value.removeResource(index);
+  data.value.validateResourcesRemove();
+}
+/* causes */
+const onCauseChange = (index: number) => {
+  causesDesc.value[index] = "";
+  causesDescValid.value[index] = true;
+  data.value.setCauses(index, causes.value[index]);
+  data.value.validateCause(data.value.Causes[index]);
+}
+const onCauseDescChange = (param: TextareaParam) => {
+  causesDesc.value[param.index as number] = param.value;
+  causesDescValid.value[param.index as number] = causesDesc.value[param.index as number] != "";
+}
+const onAddParts = () => {
+  confirmVisible.value = false;
+  showPartsWarning.value = true;
+  handleScrollToErrorModal('form-defect-yes-eform  ', 'parts-collapse')
+}
+const onAddNewCause = () => {
+  for (const causeIndex in data.value.Causes) {
+    if (Object.prototype.hasOwnProperty.call(data.value.Causes, causeIndex)) {
+      const element = data.value.Causes[causeIndex];
+      if (!element.isValid) {
+        return
+      }
+    }
+  }
+  /* validate first */
+  const isValid = data.value.Causes.every((e) => {
+    return e.value !== "";
+  });
+  if (!isValid) {
+    data.value.validateCauses();
+    return;
+  }
+  const lastIndex = causes.value.length - 1;
+  if (causes.value[lastIndex] === "Other") {
+    if (!causesDesc.value[lastIndex]) {
+      causesDescValid.value[lastIndex] = false;
+      return;
+    } else {
+      causesDescValid.value[lastIndex] = true;
+    }
+  }
+  data.value.addCauses("");
+  causes.value.push("");
+  causesDesc.value.push("");
+  causesDescValid.value.push(true);
+}
+const onRemoveCause = (index: number) => {
+  causes.value.splice(index, 1);
+  causesDesc.value.splice(index, 1);
+  causesDescValid.value.splice(index, 1);
+  data.value.removeCauses(index);
+}
+/* symptom */
+const onSymptomChange = (index: number) => {
+  symptomDesc.value[index] = "";
+  symptomDescValid.value[index] = true;
+  data.value.setSymptom(index, symptoms.value[index]);
+  data.value.validateSymptom(data.value.Symptoms[index]);
+}
+const onSymptomDescChange = (param: TextareaParam) => {
+  symptomDesc.value[param.index as number] = param.value;
+  symptomDescValid.value[param.index as number] = symptomDesc.value[param.index as number] != "";
+}
+const onAddNewSymptom = () => {
+  for (const causeIndex in data.value.Symptoms) {
+    if (Object.prototype.hasOwnProperty.call(data.value.Symptoms, causeIndex)) {
+      const element = data.value.Symptoms[causeIndex];
+      if (!element.isValid) {
+        return
+      }
+    }
+  }
+  /* validate first */
+  const isValid = data.value.Symptoms.every((e) => {
+    return e.value !== "";
+  });
+  if (!isValid) {
+    data.value.validateSymptoms();
+    return;
+  }
+  const lastIndex = symptoms.value.length - 1;
+  if (symptoms.value[lastIndex] === "Other") {
+    if (!symptomDesc.value[lastIndex]) {
+      symptomDescValid.value[lastIndex] = false;
+      return;
+    } else {
+      symptomDescValid.value[lastIndex] = true;
+    }
+  }
+  data.value.addSymptom("");
+  symptoms.value.push("");
+  symptomDesc.value.push("");
+  symptomDescValid.value.push(true);
+}
+const onRemoveSymptom = (index: number) => {
+  symptoms.value.splice(index, 1);
+  symptomDesc.value.splice(index, 1);
+  symptomDescValid.value.splice(index, 1);
+  data.value.removeSymptom(index);
+}
+const updateTask = async () => {
+  formStore.resetTaskUpdated()
+  setTimeout(() => {
+    formStore.SetTaskUpdated()
+  }, 50);
+  if (!isOfflineOrSlowInternetConnection()) {
+    store.getTaskProgress()
+    store.updateGroupByParam(store.stateSelectedGroup!.groupName)
+  }
+  store.updateAllItems(formStore.ItemKey, "2")
+}
+const validateSymptoms = (): boolean => {
+  for (const causeIndex in data.value.Symptoms) {
+    if (Object.prototype.hasOwnProperty.call(data.value.Symptoms, causeIndex)) {
+      const element = data.value.Symptoms[causeIndex];
+      if (!element.isValid) {
+        return false
+      }
+    }
+  }
+  const lastIndex = symptoms.value.length - 1;
+  if (symptoms.value[lastIndex] === "Other") {
+    if (!symptomDesc.value[lastIndex]) {
+      symptomDescValid.value[lastIndex] = false;
+    } else {
+      symptomDescValid.value[lastIndex] = true;
+    }
+  } else {
+    symptomDescValid.value[lastIndex] = true;
+  }
+  return symptomDescValid.value[lastIndex];
+}
+const validateCauses = (): boolean => {
+  for (const causeIndex in data.value.Causes) {
+    if (Object.prototype.hasOwnProperty.call(data.value.Causes, causeIndex)) {
+      const element = data.value.Causes[causeIndex];
+      if (!element.isValid) {
+        return false
+      }
+    }
+  }
+  const lastIndex = causes.value.length - 1;
+  if (causes.value[lastIndex] === "Other") {
+    if (!causesDesc.value[lastIndex]) {
+      causesDescValid.value[lastIndex] = false;
+    } else {
+      causesDescValid.value[lastIndex] = true;
+    }
+  } else {
+    causesDescValid.value[lastIndex] = true;
+  }
+  return causesDescValid.value[lastIndex];
+}
+
+const showCameraValidation = ref(false)
+
+watch(images, (newValue) => {
+  if (newValue.length > 0) showCameraValidation.value = false
+}, { deep: true })
+
+const onSubmitDefects = async () => {
+  data.value.validateDefectForm();
+  if (props.generic) {
+    // check task desc
+    if (taskDescription.value == "") {
+      taskDescriptionValidation.value.isValid = false
+      taskDescriptionValidation.value.errorMessage = "Required"
+    } else {
+      taskDescriptionValidation.value.isValid = true
+      taskDescriptionValidation.value.errorMessage = ""
+    }
+  }
+  if (isDefectMajor.value) {
+    if (isUndefined(formStore.images) || formStore.images.ImageInfos.length < 1) {
+      showCameraValidation.value = true
+    }
+  }
+  if (data.value?.IsValid && validateSymptoms() && validateCauses() && taskDescriptionValidation.value.isValid && !showCameraValidation.value) {
+    confirmVisible.value = true;
+  } else {
+    expandAllPanel()
+    handleScrollToError()
+  }
+}
+const reAssignSymptoms = () => {
+  data.value.Symptoms.forEach((a, index) => {
+    a.value = a.value === "Other" ? `Other:${symptomDesc.value[index]}` : a.value;
+  });
+}
+const reAssignCauses = () => {
+  data.value.Causes.forEach((a, index) => {
+    a.value = a.value === "Other" ? `Other:${causesDesc.value[index]}` : a.value;
+  });
+}
+const onSave = async (param: CompleteEmitParam) => {
+  confirmVisible.value = false;
+  loader.value = ElLoading.service({
+    lock: true,
+    text: 'Processing...',
+    background: 'rgba(0, 0, 0, 0.7)',
+  });
+  data.value.setAssetNumber(props.assetNumber);
+  reAssignSymptoms();
+  reAssignCauses();
+  data.value.setPriority(defectPriority.value);
+  data.value.setIsComplete(param.isComplete);
+  if (props.generic) {
+    await formStore.createDefectGeneric({
+      form: props.form,
+      workorder: props.workorder,
+      taskDesc: taskDescription.value,
+    });
+    formStore.SetTaskUpdated()
+    defectsStore.getDefectsDataAll(props.workorder)
+  } else {
+    // 3 -> NA
+    let deleteDefectNA = false
+    if (formStore.stateTask.taskValue == "3") {
+      const payload: UpdateParam[] = [
+        {
+          keyValue: "",
+          propertyParams: [
+            {
+              propertyName: "isActive",
+              propertyValue: "false"
+            },
+          ]
+        },
+      ]
+      await store.updateDefectHeaderWithTaskKey(formStore.stateTask.key, payload, formStore.ItemKey);
+      if (isOfflineOrSlowInternetConnection()) {
+        await setDefectIsActiveByTaskId(store.stateWorkOrder, formStore.stateTask.key, "false")
+      }
+      formStore.stateTask.taskValue = '2'
+      deleteDefectNA = true
+    } else if (formStore.stateTask.taskValue == "1") {
+      deleteDefectNA = true
+    }
+    let updateDefectSuccess
+    if (!isOfflineOrSlowInternetConnection()) {
+      updateDefectSuccess = await formStore.createDefect(deleteDefectNA);
+    } else {
+      updateDefectSuccess = await formStore.updateDefectToLocalDB(deleteDefectNA)
+    }
+    if (updateDefectSuccess) await updateTask();
+    else if (store.taskErrorDialog) {
+      onFormClosed()
+    }
+    if (isOfflineOrSlowInternetConnection()) {
+      store.getMultiDefectList()
+    } else {
+      defectsStore.getDefectsDataAll(props.workorder)
+    }
+  }
+  formStore.setOpenDialogConfirmSubmitDefect(false)
+  loader.value.close()
+}
+const onCancel = () => {
+  confirmVisible.value = false;
+}
+
+const resetData = () => {
+  messageBoxVisible.value = false;
+  isCancelled.value = true;
+  loading.value = false;
+  showPartsWarning.value = false
+  showCameraValidation.value = false
+  store.resetTaskUpdated();
+  formStore.resetTaskUpdated();
+  camstore.clearCurrent()
+  resetDataForm()
+}
+
+const resetDataForm = () => {
+  defectPriority.value = props.predefinedPriority;
+  labours.value = [defaultLabour.value];
+  symptoms.value = [""];
+  causes.value = [""];
+  symptomDesc.value = [""];
+  symptomDescValid.value = [true];
+  causesDesc.value = [""];
+  causesDescValid.value = [true];
+  formatPlannedDuration.value = "";
+  taskDescriptionValidation.value = {
+    isValid: true,
+    errorMessage: ""
+  }
+}
+
+
+const onFormClosed = async () => {
+  resetData();
+  formStore.setUpdateTaskDefect("")
+  if (formStore.OpenDialogConfirmSubmitDefect == false) {
+    formStore.resetInstance();
+  }
+  camstore.clearCurrent();
+  camstore.setShowCloseButton(false)
+  camstore.reset()
+  /* hide form */
+  formStore.toggleYesVisible(false);
+  if (isCancelled.value === true) {
+    formStore.setCancelledState(true);
+  }
+}
+
+const defectDetailRef = ref(null) as any
+
+const onFormOpened = () => {
+  formStore.setCancelledState(false);
+  defectPriority.value = props.predefinedPriority
+  taskDescription.value = ""
+  data.value.setIsNeed30Minutes(formStore.stateIsNeed30Minutes)
+  resetDataForm()
+  savedFilesOnLocal = []
+  camstore.setShowCloseButton(true)
+  formStore.setOpenDialogConfirmSubmitDefect(false)
+  handleScrollToTopOfDialog(customClass.value)
+  isCancelled.value = true;
+
+  clonedDefectData.value = {
+    images: cloneDeep(images.value),
+    description: cloneDeep(props.defectData.Description.value),
+    priority: cloneDeep(props.defectData.Priority),
+    instruction: cloneDeep(props.defectData.Instruction.value),
+    plannedDuration: cloneDeep(props.defectData.PlannedDuration.value),
+    parts: cloneDeep(props.defectData.Parts),
+    labours: cloneDeep(props.defectData.Labours),
+    resources: cloneDeep(props.defectData.Resources),
+    symptoms: cloneDeep(props.defectData.Symptoms),
+    causes: cloneDeep(props.defectData.Causes),
+  }
+  clonedDefectData.value.labours[0].position = defaultLabour.value
+  disabledHyperlink(defectDetailRef.value)
+  showPartsWarning.value = false
+}
+const expandAllPanel = () => {
+  priorityCollapse.value = 'Priority'
+  partsRequiredCollapse.value = 'Parts Required'
+  labourRequired.value = 'Labour Required'
+  otherResourceCollapse.value = 'Other Resources Required (optional)'
+  defectSysmptompCollapse.value = 'Defect Symptom'
+  defectCausesCollapse.value = 'Defect Cause'
+}
+
+const handleBeforeClose = () => {
+  if (editedForm.value) {
+    showConfirmExit.value = true
+  } else {
+    formStore.toggleYesVisible(false)
+  }
+}
+
+const onCancelExit = () => {
+  showConfirmExit.value = false
+}
+
+const onSaveExit = () => {
+  showConfirmExit.value = false
+  formStore.toggleYesVisible(false)
+  if (savedFilesOnLocal.length == 0) {
+    return
+  }
+  const localFiles = db.pendingTaskFile.where("filename").anyOf(savedFilesOnLocal)
+  if (localFiles) {
+    localFiles.delete()
+  }
+}
+</script>
+<style lang="scss">
+.el-select__popper {
+  z-index: 90000 !important;
+}
+.el-dialog__title {
+  text-align: start;
+}
+
+.vcp {
+    background: white;
+    border: 1px solid rgba(145, 158, 171, 0.24);
+    border-radius: 12px;
+}
+.vcp__body {
+    overflow:inherit !important;
+    font-size: 14px;
+}
+</style>
+<style lang="scss" scoped>
+   @import "@/assets/sass/pages/defect.form.scss";
+   @import "@/assets/sass/pages/custom.defect.crack.dialog.scss";
+</style>
+

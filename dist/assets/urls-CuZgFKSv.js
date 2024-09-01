@@ -1,0 +1,1 @@
+const a="https://digital-bumaau-dev-apm-001.azure-api.net/ehms/api/master_rating",t=`${a}`,_=`${a}/rating_bulk`,s=`${a}/validate_upload`,o=`${a}/export`,n=`${a}/lookup`,U=`${a}/rating`,L=`${a}/rating/update`,P=`${a}/lookup_transaction`;export{_ as B,o as E,t as G,U as I,n as L,L as U,s as a,P as b};

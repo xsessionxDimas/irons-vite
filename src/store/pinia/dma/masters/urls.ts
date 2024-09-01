@@ -1,0 +1,9 @@
+export const ACTIVE_SYMPTOM_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/symptom?ver=v1`
+export const ACTIVE_CAUSES_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/causes?ver=v1`
+export const ACTIVE_ACTION_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/action?ver=v1`
+export const ACTIVE_NA_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/na_condition?ver=v1`
+export const ACTIVE_SMU_TOLERANCE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/smu_tolerance_setting`
+export const ACTIVE_CBM_MAPPING_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/parameter_ehms/rating/get_all/?ver=v1`
+export const DIRECT_MEMBER_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_employee/direct_member`
+export const LOOKUP_DMA_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_position/lookup_dma`
+export const LOOKUP_OWNERSHIP_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/equipment_number`

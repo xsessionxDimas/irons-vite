@@ -1,0 +1,298 @@
+.dropdown-eform-status {
+  .el-input__inner {
+    padding-left: 15px !important;
+  }
+
+  .is-disabled {
+    .el-input__prefix {
+      background-color: #f5f7fa !important;
+    }
+  }
+  
+  .red {
+    .el-input__inner {
+      border: 1px solid #ff4842;
+      background-color: white !important;
+      color: transparent;
+    }
+    .el-input__prefix {
+      background-color: transparent !important;
+    }
+
+    .el-input__custom-option {
+      color: #ff4842;
+    }
+
+    input:disabled {
+      border: 1px solid #ff4842 !important;
+      // color: #FF4842 !important;
+      color: transparent !important;
+      background-color: transparent !important;
+    }
+  }
+  .green {
+    .el-input__inner {
+      border: 1px solid #18af4a;
+      // color: #18AF4A;
+      color: transparent;
+    }
+
+    .el-input__prefix {
+      background-color: transparent !important;
+    }
+
+    .el-input__custom-option {
+      color: #18af4a;
+    }
+
+    input:disabled {
+      border: 1px solid #18af4a !important;
+      // color: #18AF4A !important;
+      color: transparent !important;
+      background-color: transparent !important;
+    }
+  }
+  .yellow {
+    &.el-input__inner {
+      border: 1px solid #ffc107;
+      color: #ffc107;
+      background-color: white !important;
+    }
+
+    .el-input__custom-option {
+      color: #ffc107;
+    }
+
+    .el-input__prefix {
+      background-color: transparent !important;
+    }
+
+    input {
+      border: 1px solid #ffc107 !important;
+      // color: #FFC107 !important;
+      color: transparent !important;
+      background-color: transparent !important;
+    }
+  }
+  .a {
+    .el-input__inner {
+      border: 1px solid #18af4a;
+      color: #18af4a;
+      background-color: rgba(24, 175, 74, 0.08);
+    }
+
+    .el-input__prefix {
+      background-color: transparent !important;
+      opacity: 0;
+    }
+
+    .is-disabled {
+      .el-input__prefix {
+        background-color: transparent !important;
+        opacity: 1;
+      } 
+    }
+
+    .el-input__custom-option {
+      color: #18af4a;
+    }
+
+    input:disabled {
+      border: 1px solid #18af4a !important;
+      // color: #18AF4A !important;
+      color: transparent !important;
+      background-color: rgba(24, 175, 74, 0.08) !important;
+    }
+
+    .el-input__prefix {
+      background-color: rgba(237, 249, 241, 1);
+    }
+  }
+  .b {
+    .el-input__inner {
+      border: 1px solid rgba(51, 102, 255, 0.48);
+      color: #01a3ff;
+      background-color: rgba(51, 102, 255, 0.08);
+    }
+
+    .el-input__prefix {
+      background-color: transparent !important;
+      opacity: 0;
+    }
+
+    .is-disabled {
+      .el-input__prefix {
+        background-color: transparent !important;
+        opacity: 1;
+      } 
+    }
+
+    .el-input__custom-option {
+      color: #01a3ff;
+    }
+
+    input:disabled {
+      border: 1px solid rgba(51, 102, 255, 0.48) !important;
+      // color: #01A3FF !important;
+      color: transparent !important;
+      background-color: rgba(51, 102, 255, 0.08) !important;
+    }
+
+    .el-input__prefix {
+      background-color: rgba(239, 243, 255, 1);
+    }
+  }
+  .c {
+    .el-input__inner {
+      border: 1px solid #ffc107;
+      color: #ffc107;
+      background-color: rgba(255, 193, 7, 0.08);
+    }
+
+    .el-input__prefix {
+      background-color: transparent !important;
+      opacity: 0;
+    }
+
+    .is-disabled {
+      .el-input__prefix {
+        background-color: transparent !important;
+        opacity: 1;
+      } 
+    }
+
+    .el-input__custom-option {
+      color: #ffc107;
+    }
+
+    input:disabled {
+      border: 1px solid #ffc107 !important;
+      // color: #FFC107 !important;
+      color: transparent !important;
+      background-color: rgba(255, 193, 7, 0.08) !important;
+    }
+
+    .el-input__prefix {
+      background-color: rgba(255, 250, 236, 1);
+    }
+  }
+  .x {
+    .el-input__inner {
+      border: 1px solid #ff4842;
+      color: #ff4842;
+      background-color: rgba(255, 72, 66, 0.08);
+    }
+
+    .el-input__prefix {
+      background-color: transparent !important;
+      opacity: 0;
+    }
+
+    .is-disabled {
+      .el-input__prefix {
+        background-color: transparent !important;
+        opacity: 1;
+      } 
+    }
+
+    .el-input__custom-option {
+      color: #ff4842;
+    }
+
+    input:disabled {
+      border: 1px solid #ff4842 !important;
+      // color: #FF4842 !important;
+      color: transparent !important;
+      background-color: rgba(255, 72, 66, 0.08) !important;
+    }
+    .el-input__prefix {
+      background-color: rgba(255, 241, 240, 1);
+    }
+  }
+  .basic {
+    .el-input__inner {
+      color: #606266;
+      background-color: #fff;
+    }
+
+    .el-input__custom-option {
+      color: #606266;
+    }
+
+    input:disabled {
+      // color: #606266 !important;
+      color: transparent !important;
+      background-color: #fff !important;
+    }
+
+    .el-input__prefix {
+      background-color: #fff;
+    }
+  }
+
+  .el-input__prefix {
+    white-space: nowrap;
+    width: calc(100% - 15px - 30px);
+    overflow: hidden;
+    left: 15px;
+    background-color: white;
+    top: 0px;
+    height: calc(100% - 5px);
+    font-size: 12px;
+    & > div {
+      display: block !important;
+      text-align: left;
+    }
+  }
+}
+
+.breaktype {
+  .el-input__prefix {
+   top: 3px;
+  }
+}
+
+.suspensionCylinder {
+  .el-input__prefix {
+    top: 1px;
+   } 
+}
+
+.input-eform-status {
+  .el-input__inner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .el-input__inner {
+    -moz-appearance: textfield;
+  }
+  .a {
+    .el-input__inner {
+      border: 1px solid rgba(24, 175, 74, 0.48);
+      color: #18af4a;
+      background-color: rgba(24, 175, 74, 0.08);
+    }
+  }
+  .b {
+    .el-input__inner {
+      border: 1px solid rgba(51, 102, 255, 0.48);
+      color: #01a3ff;
+      background-color: rgba(51, 102, 255, 0.08);
+    }
+  }
+  .c {
+    .el-input__inner {
+      border: 1px solid #ffc107;
+      color: #ffc107;
+      background-color: rgba(255, 193, 7, 0.08);
+    }
+  }
+  .x {
+    .el-input__inner {
+      border: 1px solid rgba(255, 72, 66, 0.48);
+      color: #ff4842;
+      background-color: rgba(255, 72, 66, 0.08);
+    }
+  }
+}

@@ -1,0 +1,11 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_counter_reading`
+export const GET_API_URL = `${CRUD_API_URL}`
+export const BULK_API_URL = `${CRUD_API_URL}/counter_reading_bulk`
+export const UPLOAD_API_URL = `${CRUD_API_URL}/validate_upload`
+export const EXPORT_API_URL = `${CRUD_API_URL}/export`
+export const LOOKUP_API_URL = `${CRUD_API_URL}/lookup`
+export const INSERT_API_URL = `${CRUD_API_URL}/counter_reading`
+export const UPDATE_API_URL = `${CRUD_API_URL}/counter_reading/update`
+export const LOOKUP_ADD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}/api/master_data/counter_reading/lookup_data`
+export const LOOKUP_TRANSACTION_API = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_counter_reading/lookup_transaction`
+export const EQUIPMENT_POINT_LOOKUP_TRANSACTION_API_TEMP = `${CRUD_API_URL}/lookup_counter_cycle`

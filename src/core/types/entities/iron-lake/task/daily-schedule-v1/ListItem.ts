@@ -1,0 +1,16 @@
+export type ListItem = {
+  dailyScheduleId: number,
+  unitNumber: string,
+  smuDue: string,
+  workOrder: string,
+  psType: string,
+  dateService: string,
+  shift: string,
+  startDate: string,
+  endDate: string,
+  isActive: boolean,
+  createdBy: string,
+  createdOn: Date,
+  changedBy: string,
+  changedOn: Date,
+}

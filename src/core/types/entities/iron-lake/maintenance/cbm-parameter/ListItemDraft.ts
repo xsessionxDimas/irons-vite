@@ -1,0 +1,20 @@
+export type ListItemDraft = {
+  cbmParameterDraftId: number;
+  taskKey: string;
+  equipmentModel: string;
+  serviceSize: string;
+  rating: string;
+  taskNo: string;
+  taskNoDetail: string;
+  taskDescription: string;
+  uom: string;
+  typeParameter: string;
+  status: string;
+  minValue: string;
+  maxValue: string;
+  component: string;
+  cbmGroup: string;
+  modifiedOn: string;
+  modifiedBy: string;
+  validationReason: string;
+};

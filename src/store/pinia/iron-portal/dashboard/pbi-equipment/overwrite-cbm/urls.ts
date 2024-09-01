@@ -1,0 +1,16 @@
+export const CRUD_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_DMA}/api`
+export const CRUD_API_IP_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api`
+export const GET_DETAIL_CBM_API_URL = `${CRUD_API_URL}/service_sheet_detail/get_data_detail_cbm`
+export const GET_DETAIL_CBM_INTERIM_API_URL = `${CRUD_API_URL}/interim_engine_detail/get_data_detail_cbm`
+export const GET_DETAIL_INTERVENTION_API_URL = `${CRUD_API_URL}/intervention/get_intervention_revise`
+export const GET_MAPPING_CBM_API_URL = `${CRUD_API_URL}/master_data/parameter_ehms/rating`
+export const UPDATE_TASK_REVISE_API_URL = `${CRUD_API_URL}/service_sheet_detail/update_task_revise`
+export const UPDATE_TASK_REVISE_INTERIM_API_URL = `${CRUD_API_URL}/interim_engine_detail/update_task_revise`
+export const UPDATE_TASK_INTERVENTION_REVISE_API_URL = `${CRUD_API_IP_URL}/intervention_header/update_task_revise`
+export const UPDATE_TASK_REVISE_DEFECT_API_URL = `${CRUD_API_URL}/service_sheet_detail/update_task_with_defect_revise`
+export const UPDATE_TASK_INTERVENTION_REVISE_DEFECT_API_URL = `${CRUD_API_IP_URL}/intervention_header/update_task_with_defect_revise`
+export const UPDATE_TASK_REVISE_INTERIM_DEFECT_API_URL = `${CRUD_API_URL}/interim_engine_detail/update_task_with_defect_revise`
+export const GET_IMAGE_API_URL = `${CRUD_API_URL}/attachment/download_by_url`
+export const UPDATE_IMAGE_API_URL = `${CRUD_API_URL}/attachment/upload`
+export const CHECK_REVISE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/master_revise_user/check_user_revise`
+export const CHANGE_HISTORY_CBM_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_IRON_PORTAL}/api/history_cbm_change/cbm_change`
