@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 /* eslint-disable no-undef*/
 /* imports here */
-import { useStore } from "vuex";
+import { useMenuStore } from "../../../../store/templates/useMenuStore";
 import {
   ref,
   onBeforeMount,
@@ -71,25 +71,25 @@ import {
   computed
 } from "vue";
 import { useRoute } from "vue-router";
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { setCurrentPageBreadcrumbs } from "../../../../core/helpers/breadcrumb";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 import {
   useCbmThresholdListStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/cbm-threshold/useCbmThresholdListStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/cbm-threshold/useCbmThresholdListStore";
 import {
   useCbmThresholdBulkStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/cbm-threshold/useCbmThresholdBulkStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/cbm-threshold/useCbmThresholdBulkStore";
 import {
   useCbmThresholdFormStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/cbm-threshold/useCbmThresholdFormStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/cbm-threshold/useCbmThresholdFormStore";
 import { saveAs } from "file-saver";
 
-import Filter from "@/components/buttons/FilterIconButton.vue";
-import Add from "@/components/buttons/AddIconButton.vue";
-import Upload from "@/components/buttons/UploadIconButton.vue";
-import Download from "@/components/buttons/DownloadIconButton.vue";
+import Filter from "../../../../components/buttons/FilterIconButton.vue";
+import Add from "../../../../components/buttons/AddIconButton.vue";
+import Upload from "../../../../components/buttons/UploadIconButton.vue";
+import Download from "../../../../components/buttons/DownloadIconButton.vue";
 
 import GridGeneral from "./components/general/Grid.vue";
 import FormAdd from "./components/general/FormAddDialog.vue";
@@ -103,7 +103,7 @@ import FormEditSpecific from "./components/specific/FormEditDialog.vue";
 import UploadBulkSpecific from "./components/specific/UploadBulkDialog.vue";
 import FilterDialogSpecific from "./components/specific/FilterDialog.vue";
 
-const store = useStore();
+const store = useMenuStore();
 const listStore = useCbmThresholdListStore();
 const formStore = useCbmThresholdFormStore();
 const bulkStore = useCbmThresholdBulkStore();
@@ -151,7 +151,7 @@ const handleClickTab = async (tab) => {
 
 /* life cycle hooks */
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, useRoute().meta.parentMenu);
+  store[StoreActions.ACTIVE_PAGE](useRoute().meta.parentMenu as string);
   setCurrentPageBreadcrumbs("CBM Parameter Threshold", [
     {
       pageName: useRoute().meta.parentMenu as string,

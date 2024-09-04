@@ -3,67 +3,32 @@ import {
   AppContext,
   getCurrentInstance,
   toRefs
-} from 'vue';
+} from "vue";
 import {
   AnalyticApiAbstract
-} from '@btech/analytics-wrapper/lib/esm/contract/analyticApiAbstract';
-import {
-  AnalyticApiOptions
-} from '@btech/analytics-wrapper/lib/esm/contract/analyticApiOptions';
-import DefaultCredential from '@btech/analytics-wrapper/lib/esm/contract/defaultCredential';
+} from "btech-analytics-wrapper/lib/esm/contract/analyticApiAbstract";
+import store from "../../store"
 
-import store from '../../store'
-
-type AnalyticProvider = {
-  type: string;
-  provider: AnalyticApiAbstract<AnalyticApiOptions, DefaultCredential, unknown>;
-};
-
-type ProductType = AnalyticApiOptions extends {productCode: infer Y} ? Y : never
-type AnalyticProductType = `$analytic_${ProductType}`;
-
-function getDynamicAnalyticProductApi(
-  instance: App | AppContext,
-  dynamicAnalyticProduct: AnalyticProductType,
-) {
-  let typeRef;
-  let providerRef;
-
-  if (dynamicAnalyticProduct in instance.config.globalProperties) {
-    const { type, provider } = toRefs(
-      instance.config.globalProperties[dynamicAnalyticProduct],
-    );
-    typeRef = type.value;
-    providerRef = provider.value;
-  } else {
-    throw `${dynamicAnalyticProduct} is not registered in globalProperties`;
-  }
-
-  return { typeRef, providerRef };
+type analyticProvider = {
+  type: string,
+  provider: AnalyticApiAbstract
 }
 
 export function useAnalyticApi(
-  productAnalyticCode: ProductType = 'IRONS',
+  instance: App | AppContext | undefined = undefined
 ) {
-  let appInstance = store.getters?.getApp;
-
-  if (!appInstance) {
-    appInstance = getCurrentInstance()?.appContext;
-    if (!appInstance) {
+  if (!instance) {
+    instance = store.getters.getApp;
+    if (!instance) {
       throw "useAnalyticApi() cannot be called outside the setup() function of a component";
     }
   }
+  const { type, provider } = toRefs(instance.config.globalProperties.$analytic);
 
-  const dynamicAnalyticProduct: AnalyticProductType = `$analytic_${productAnalyticCode}` as AnalyticProductType;
-  const { typeRef, providerRef } = getDynamicAnalyticProductApi(
-    appInstance,
-    dynamicAnalyticProduct,
-  );
+  const api: analyticProvider = {
+    type: type.value,
+    provider: provider.value
+  }
 
-  const api: AnalyticProvider = {
-    type: typeRef,
-    provider: providerRef,
-  };
-
-  return api;
+  return api
 }

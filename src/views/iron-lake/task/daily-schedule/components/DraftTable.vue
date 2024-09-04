@@ -147,17 +147,17 @@
 /* import componenets here */
 import {
   ValidatedDraftItem
-} from "@entities/iron-lake/task/daily-schedule/ValidatedItem";
+} from "../../../../../core/types/entities/iron-lake/task/daily-schedule/ValidatedItem";
 import {
   useDailyScheduleBulkStore
-} from "@/store/pinia/iron-lake/task/daily-schedule/useDailyScheduleBulkStore";
+} from "../../../../..//store/pinia/iron-lake/task/daily-schedule/useDailyScheduleBulkStore";
 import {
   useDailyScheduleFormStore
-} from "@/store/pinia/iron-lake/task/daily-schedule/useDailyScheduleFormStore";
+} from "../../../../..//store/pinia/iron-lake/task/daily-schedule/useDailyScheduleFormStore";
 import {
   useDailyScheduleListStore
-} from "@/store/pinia/iron-lake/task/daily-schedule/useDailyScheduleListStore";
-import { formatDateOnlyAU } from "@/core/helpers/date-format";
+} from "../../../../..//store/pinia/iron-lake/task/daily-schedule/useDailyScheduleListStore";
+import { formatDateOnlyAU } from "../../../../..//core/helpers/date-format";
 
 import {
   defineProps,
@@ -168,7 +168,7 @@ import {
 import {
   swalAlertConfirmation,
   swalAlertSuccess,
-} from "@/core/helpers/sweet-alert";
+} from "../../../../..//core/helpers/sweet-alert";
 
 const props = defineProps({
   listData: {

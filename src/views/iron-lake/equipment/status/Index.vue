@@ -32,22 +32,22 @@
 
 <script lang="ts" setup>
 /* imports here */
-import { useStore } from "vuex";
+import { useMenuStore } from "../../../../store/templates/useMenuStore";
 import {
   ref,
   onBeforeMount,
   onUnmounted,
   computed
 } from "vue";
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { setCurrentPageBreadcrumbs } from "../../../../core/helpers/breadcrumb";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 /* import components here */
-import Filter from "@/components/buttons/FilterIconButton.vue";
-import Add from "@/components/buttons/AddIconButton.vue";
-import Upload from "@/components/buttons/UploadIconButton.vue";
-import Download from "@/components/buttons/DownloadIconButton.vue";
+import Filter from "../../../../components/buttons/FilterIconButton.vue";
+import Add from "../../../../components/buttons/AddIconButton.vue";
+import Upload from "../../../../components/buttons/UploadIconButton.vue";
+import Download from "../../../../components/buttons/DownloadIconButton.vue";
 import Grid from "./components/Grid.vue";
 import FormAddDialog from "./components/FormAddDialog.vue";
 import FormEditDialog from "./components/FormEditDialog.vue";
@@ -55,16 +55,16 @@ import UploadBulkDialog from "./components/UploadBulkDialog.vue";
 import FilterDialog from "./components/FilterDialog.vue";
 import {
   useStatusListStore
-} from "@/store/pinia/iron-lake/equipment/status/useStatusListStore";
+} from "../../../../store/pinia/iron-lake/equipment/status/useStatusListStore";
 import {
   useStatusBulkStore
-} from "@/store/pinia/iron-lake/equipment/status/useStatusBulkStore";
+} from "../../../../store/pinia/iron-lake/equipment/status/useStatusBulkStore";
 import {
   useStatusFormStore
-} from "@/store/pinia/iron-lake/equipment/status/useStatusFormStore";
+} from "../../../../store/pinia/iron-lake/equipment/status/useStatusFormStore";
 import { saveAs } from "file-saver";
 
-const store = useStore();
+const store = useMenuStore();
 const listStore = useStatusListStore();
 const formStore = useStatusFormStore();
 const bulkStore = useStatusBulkStore();
@@ -90,7 +90,7 @@ const handlePaginationChange = (newPage: number) => {
 
 /* life cycle hooks */
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, "ADM");
+  store[StoreActions.ACTIVE_PAGE]("ADM");
   setCurrentPageBreadcrumbs("Status", [
     {
       pageName: "ADM",

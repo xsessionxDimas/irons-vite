@@ -38,7 +38,7 @@
 
 <script lang="ts" setup>
 /* imports here */
-import { useStore } from "vuex";
+import { useMenuStore } from "../../../../store/templates/useMenuStore";
 import {
   ref,
   onBeforeMount,
@@ -46,16 +46,16 @@ import {
   computed
 } from "vue";
 import { useRoute } from "vue-router";
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { setCurrentPageBreadcrumbs } from "../../../../core/helpers/breadcrumb";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 /* import components here */
-import Filter from "@/components/buttons/FilterIconButton.vue";
-import Add from "@/components/buttons/AddIconButton.vue";
-import Upload from "@/components/buttons/UploadIconButton.vue";
-import Download from "@/components/buttons/DownloadIconButton.vue";
-import Delete from "@/components/buttons/DeleteIconButton.vue";
+import Filter from "../../../../components/buttons/FilterIconButton.vue";
+import Add from "../../../../components/buttons/AddIconButton.vue";
+import Upload from "../../../../components/buttons/UploadIconButton.vue";
+import Download from "../../../../components/buttons/DownloadIconButton.vue";
+import Delete from "../../../../components/buttons/DeleteIconButton.vue";
 import Grid from "./components/Grid.vue";
 import FormAddDialog from "./components/FormAddDialog.vue";
 import FormEditDialog from "./components/FormEditDialog.vue";
@@ -64,16 +64,16 @@ import FormDeleteDialog from "./components/FormDeleteDialog.vue";
 import FilterDialog from "./components/FilterDialog.vue";
 import {
   useComponentStatusListStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/component-status/useComponentStatusListStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/component-status/useComponentStatusListStore";
 import {
   useComponentStatusBulkStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/component-status/useComponentStatusBulkStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/component-status/useComponentStatusBulkStore";
 import {
   useComponentStatusFormStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/component-status/useComponentStatusFormStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/component-status/useComponentStatusFormStore";
 import { saveAs } from "file-saver";
 
-const store = useStore();
+const store = useMenuStore();
 const listStore = useComponentStatusListStore();
 const formStore = useComponentStatusFormStore();
 const bulkStore = useComponentStatusBulkStore();
@@ -100,7 +100,7 @@ const handlePaginationChange = (newPage: number) => {
 
 /* life cycle hooks */
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, useRoute().meta.parentMenu);
+  store[StoreActions.ACTIVE_PAGE](useRoute().meta.parentMenu as string);
   setCurrentPageBreadcrumbs("Component Status", [
     {
       pageName: useRoute().meta.parentMenu as string,

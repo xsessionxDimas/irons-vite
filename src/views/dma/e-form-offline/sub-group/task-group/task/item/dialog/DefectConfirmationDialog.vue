@@ -47,7 +47,7 @@
 import { computed, ref } from '@vue/reactivity';
 import { defineProps, defineEmits } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
-import { TypeEmitParam } from '@/views/dma/e-form-offline/types/TypeEmitParam';
+import { TypeEmitParam } from '../../../../../../../../views/dma/e-form-offline/types/TypeEmitParam';
 
 const props = defineProps(['show']);
 
@@ -84,12 +84,8 @@ const onFormClosed = () => {
   type.value = 'Less than 30 minutes labour and less than $250 in parts';
 };
 </script>
-
-<stlye lang="scss" scoped>
-@import "@/assets/sass/pages/defect.form.scss";
-</stlye>
-
 <style lang="scss">
+@import "@/assets/sass/pages/defect.form.scss";
 .defect-requires-dialog {
   span {
         font-size: 1.2rem;

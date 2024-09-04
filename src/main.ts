@@ -14,9 +14,14 @@ import { decodeToken } from "./core/helpers/token-decoder"
 import { db } from "./database/schema/DexieSchema"
 import { addRecord, clearRecords } from "./database/schema/DatabaseWrapper"
 import { msalPlugin } from "./msal/plugins/msalPlugin"
+import { analyticsPlugin } from "./analytics/plugins/analyticPlugin"
 import { i18n } from "./localization/index"
 import NwImg from 'nw-img-vue'
 import store from "./store"
+
+
+import "./core/plugins/keenthemes"
+import "./core/plugins/prismjs"
 
 const clickPluginInstance = new ClickAnalyticsPlugin();
 // Click Analytics configuration
@@ -74,8 +79,9 @@ app.use(createPinia());
 app.use(store);
 app.use(router);
 app.use(msalPlugin, msalInstance);
+app.use(analyticsPlugin);
 app.use(ElementPlus, {});
-app.use(NwImg)
+app.use(NwImg);
 ApiService.init(app);
 initInlineSvg(app);
 initVeeValidate();

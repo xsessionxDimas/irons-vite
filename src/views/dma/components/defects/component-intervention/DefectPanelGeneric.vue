@@ -105,7 +105,7 @@
                 v-if="viewIsDownload">
                 <img v-if="viewIconDownload(plannerApprove ? item.plannerStatus : item.status)"
                   @click="handleConfirmationPrintPDF(item.id)" class="ms-4 me-2 download-icon"
-                  src="media/svg/dma/document_download.svg"
+                  src="/media/svg/dma/document_download.svg"
                   :class="!isDownloaded(item.downloadHistory) ? 'icon-red' : 'icon-green'" style="height: 18px" alt="">
               </div>
             </div>

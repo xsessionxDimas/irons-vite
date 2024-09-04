@@ -68,7 +68,7 @@
                         </template>
                       </div>
                       <div class="col-1 column-sm-10-percent column-md-6-percent column-lg-6-percent column-xl-6-percent justify-content-center align-items-center d-flex" v-if="viewIsDownload">
-                        <img v-if="viewIconDownload(item.status)" @click="handleConfirmationPrintPDF(item!.id as string)" class="ms-4 me-2 download-icon" src="media/svg/dma/document_download.svg" :class="!isDownloaded(item.downloadHistory) ? 'icon-red':'icon-green'" style="height: 18px" alt="">
+                        <img v-if="viewIconDownload(item.status)" @click="handleConfirmationPrintPDF(item!.id as string)" class="ms-4 me-2 download-icon" src="/media/svg/dma/document_download.svg" :class="!isDownloaded(item.downloadHistory) ? 'icon-red':'icon-green'" style="height: 18px" alt="">
                       </div>
                     </div>
                     <div class="row flex-nowrap w-100 flex-row-reverse create-by" style="font-size: 13px !important">

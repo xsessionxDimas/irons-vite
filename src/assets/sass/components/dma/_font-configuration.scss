@@ -4,12 +4,12 @@
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
-  src: url('/fonts/Poppins/poppins-v20-devanagari-regular.eot'); /* IE9 Compat Modes */
-  src: url('/fonts/Poppins/poppins-v20-devanagari-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/Poppins/poppins-v20-devanagari-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/fonts/Poppins/poppins-v20-devanagari-regular.woff') format('woff'), /* Modern Browsers */
-       url('/fonts/Poppins/poppins-v20-devanagari-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('/fonts/Poppins/poppins-v20-devanagari-regular.svg#Poppins') format('svg'); /* Legacy iOS */
+  src: url('./fonts/Poppins/poppins-v20-devanagari-regular.eot'); /* IE9 Compat Modes */
+  src: url('./fonts/Poppins/poppins-v20-devanagari-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./fonts/Poppins/poppins-v20-devanagari-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./fonts/Poppins/poppins-v20-devanagari-regular.woff') format('woff'), /* Modern Browsers */
+       url('./fonts/Poppins/poppins-v20-devanagari-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('./fonts/Poppins/poppins-v20-devanagari-regular.svg#Poppins') format('svg'); /* Legacy iOS */
 }
 
 $dark-text-primary:#212B36;

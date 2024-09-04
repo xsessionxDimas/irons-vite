@@ -59,7 +59,7 @@
         <div class="ps-5 my-3 pe-0">
           <div class="row w-100">
             <div class="text-center d-flex align-items-center justify-content-start light-green color-dark-green rounded py-4 px-2">
-              <img class="mx-2" src="media/svg/dma/ic_check.png" alt="">
+              <img class="mx-2" src="/media/svg/dma/ic_check.png" alt="">
               Payload Calibrated Successfully
             </div>
           </div>

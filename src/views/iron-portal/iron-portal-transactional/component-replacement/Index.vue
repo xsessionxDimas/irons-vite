@@ -30,38 +30,38 @@
 
 <script lang="ts" setup>
 /* imports here */
-import { useStore } from "vuex";
+import { useMenuStore } from "../../../../store/templates/useMenuStore";
 import {
   ref,
   onBeforeMount,
   onUnmounted,
   computed
 } from "vue";
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { setCurrentPageBreadcrumbs } from "../../../../core/helpers/breadcrumb";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 /* import components here */
-import Filter from "@/components/buttons/FilterIconButton.vue";
-import Add from "@/components/buttons/AddIconButton.vue";
-import Upload from "@/components/buttons/UploadIconButton.vue";
-import Download from "@/components/buttons/DownloadIconButton.vue";
+import Filter from "../../../../components/buttons/FilterIconButton.vue";
+import Add from "../../../../components/buttons/AddIconButton.vue";
+import Upload from "../../../../components/buttons/UploadIconButton.vue";
+import Download from "../../../../components/buttons/DownloadIconButton.vue";
 import Grid from "./components/Grid.vue";
 import FormAddDialog from "./components/FormAddDialog.vue";
 import UploadBulkDialog from "./components/UploadBulkDialog.vue";
 import FilterDialog from "./components/FilterDialog.vue";
 import {
   useComponentReplacementListStore
-} from "@/store/pinia/iron-portal/iron-portal-transactional/component-replacement/useComponentReplacementListStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-transactional/component-replacement/useComponentReplacementListStore";
 import {
   useComponentReplacementBulkStore
-} from "@/store/pinia/iron-portal/iron-portal-transactional/component-replacement/useComponentReplacementBulkStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-transactional/component-replacement/useComponentReplacementBulkStore";
 import {
   useComponentReplacementFormStore
-} from "@/store/pinia/iron-portal/iron-portal-transactional/component-replacement/useComponentReplacementFormStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-transactional/component-replacement/useComponentReplacementFormStore";
 import { saveAs } from "file-saver";
 
-const store = useStore();
+const store = useMenuStore();
 const listStore = useComponentReplacementListStore();
 const formStore = useComponentReplacementFormStore();
 const bulkStore = useComponentReplacementBulkStore();
@@ -86,7 +86,7 @@ const handlePaginationChange = (newPage: number) => {
 
 /* life cycle hooks */
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, "IronPortal");
+  store[StoreActions.ACTIVE_PAGE]("IronPortal");
   setCurrentPageBreadcrumbs("Component Replacement", [
     {
       pageName: "IronPortal",

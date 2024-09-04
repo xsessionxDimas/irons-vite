@@ -282,7 +282,7 @@ const getImageFromBlobServer = async (filename: string, index: number) => {
     ver: 'v1',
   }
   try {
-    const GET_IMAGE_API_URL = `${process.env.VUE_APP_BASE_URL_DIGITAL}/${process.env.VUE_APP_API_AM_DMA}/api/attachment/download_by_url?${new URLSearchParams(params).toString()}`
+    const GET_IMAGE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_DMA}/api/attachment/download_by_url?${new URLSearchParams(params).toString()}`
     const response: AxiosResponse<Blob> = await ApiService.getBlob(GET_IMAGE_API_URL)
     if (props.isMonitoring) {
       const blob = new Blob([response.data])

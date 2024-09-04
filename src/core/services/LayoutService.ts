@@ -36,28 +36,16 @@ class LayoutService {
    * @description init header
    */
   public static initHeader(): void {
-    if (objectPath.get(config.value, "header.fixed.desktop")) {
-      store[Actions.ADD_BODY_CLASSNAME]("header-fixed");
-    }
-
-    if (objectPath.get(config.value, "header.fixed.tabletAndMobile")) {
-      store[Actions.ADD_BODY_CLASSNAME]("header-tablet-and-mobile-fixed");
-    }
+    store[Actions.ADD_BODY_CLASSNAME]("header-fixed");
+    store[Actions.ADD_BODY_CLASSNAME]("header-tablet-and-mobile-fixed");
   }
 
   /**
    * @description init toolbar
    */
   public static initToolbar(): void {
-    if (!objectPath.get(config.value, "toolbar.display")) {
-      return;
-    }
-
     store[Actions.ADD_BODY_CLASSNAME]("toolbar-enabled");
-
-    if (objectPath.get(config.value, "toolbar.fixed")) {
-      store[Actions.ADD_BODY_CLASSNAME]("toolbar-fixed");
-    }
+    store[Actions.ADD_BODY_CLASSNAME]("toolbar-fixed");
     store[Actions.ADD_BODY_CLASSNAME]("toolbar-tablet-and-mobile-fixed");
   }
 
@@ -65,10 +53,6 @@ class LayoutService {
    * @description init aside
    */
   public static initAside(): void {
-    if (!objectPath.get(config.value, "aside.display")) {
-      return;
-    }
-
     // Enable Aside
     store[Actions.ADD_BODY_CLASSNAME]("aside-enabled");
 
@@ -83,10 +67,7 @@ class LayoutService {
       });
     }
 
-    if (objectPath.get(config.value, "aside.fixed")) {
-      // Fixed Aside
-      store[Actions.ADD_BODY_CLASSNAME]("aside-fixed");
-    }
+    store[Actions.ADD_BODY_CLASSNAME]("aside-fixed");
 
     // Default minimized
     if (objectPath.get(config.value, "aside.minimized")) {

@@ -463,7 +463,7 @@
       @on-no-confirm="onCancelExit"
       @on-yes-confirm="onSaveExit" />
     <MessageBox :show="messageBoxVisible" @close="onOk" :message="messageCaption"/>
-    <MessageBox :show="errorMessageBoxVisible" @close="onOk" :message="errorMessage" icon="media/svg/dma/alert.svg"/>
+    <MessageBox :show="errorMessageBoxVisible" @close="onOk" :message="errorMessage" icon="/media/svg/dma/alert.svg"/>
     <DefectDecline
       :visibility="showDeclineReason"
       formTitle="Are you sure want to decline this defect information?"

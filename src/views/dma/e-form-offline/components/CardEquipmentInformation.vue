@@ -69,7 +69,7 @@
                     <button class="btn p-4 justify-items-center rounded cursor-pointer svg-icon svg-icon-btech-primary-500" @click="handleEditClick">
                       <!-- <inline-svg
                       /> -->
-                      <img src="media/icons/bumaau/icon-edit.png" style="width: 1.25rem; height: 1.25rem" />
+                      <img src="/media/icons/bumaau/icon-edit.png" style="width: 1.25rem; height: 1.25rem" />
                     </button>
                   </div>
                   <label for="floatingInput2" class="text-nowrap">Machine SMU</label>

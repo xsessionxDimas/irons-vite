@@ -8,7 +8,7 @@
       <p class="mb-0 ms-2 me-auto">{{ message }}</p>
       <img
         v-if="closable"
-        src="media/svg/dma/close.svg"
+        src="/media/svg/dma/close.svg"
         class="ms-4 pointer"
         style="height: 11px"
         alt="icon"
@@ -69,11 +69,11 @@ const borderColor = computed(() => {
 const iconAlert = computed(() => {
   switch (props.type) {
     case 'error':
-      return 'media/svg/dma/error.svg';
+      return '/media/svg/dma/error.svg';
     case 'warning':
-      return 'media/svg/dma/warning.svg';
+      return '/media/svg/dma/warning.svg';
     default:
-      return 'media/svg/dma/green-checklist.svg';
+      return '/media/svg/dma/green-checklist.svg';
   }
 })
 const alertStyle = computed(() => {

@@ -35,7 +35,7 @@
 
 <script lang="ts" setup>
 /* imports here */
-import { useStore } from "vuex";
+import { useMenuStore } from "../../../../store/templates/useMenuStore";
 import {
   ref,
   onBeforeMount,
@@ -43,31 +43,31 @@ import {
   computed
 } from "vue";
 import { useRoute } from "vue-router";
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { setCurrentPageBreadcrumbs } from "../../../../core/helpers/breadcrumb";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 /* import components here */
-import Filter from "@/components/buttons/FilterIconButton.vue";
-import Add from "@/components/buttons/AddIconButton.vue";
-import Upload from "@/components/buttons/UploadIconButton.vue";
-import Download from "@/components/buttons/DownloadIconButton.vue";
+import Filter from "../../../../components/buttons/FilterIconButton.vue";
+import Add from "../../../../components/buttons/AddIconButton.vue";
+import Upload from "../../../../components/buttons/UploadIconButton.vue";
+import Download from "../../../../components/buttons/DownloadIconButton.vue";
 import Grid from "./components/Grid.vue";
 import FormAddDialog from "./components/FormAddDialog.vue";
 import UploadBulkDialog from "./components/UploadBulkDialog.vue";
 import FilterDialog from "./components/FilterDialog.vue";
 import {
   useMappingSosListStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/mapping-sos/useMappingSosListStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/mapping-sos/useMappingSosListStore";
 import {
   useMappingSosBulkStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/mapping-sos/useMappingSosBulkStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/mapping-sos/useMappingSosBulkStore";
 import {
   useMappingSosFormStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/mapping-sos/useMappingSosFormStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/mapping-sos/useMappingSosFormStore";
 import { saveAs } from "file-saver";
 
-const store = useStore();
+const store = useMenuStore();
 const listStore = useMappingSosListStore();
 const formStore = useMappingSosFormStore();
 const bulkStore = useMappingSosBulkStore();
@@ -92,7 +92,7 @@ const handlePaginationChange = (newPage: number) => {
 
 /* life cycle hooks */
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, useRoute().meta.parentMenu);
+  store[StoreActions.ACTIVE_PAGE](useRoute().meta.parentMenu as string);
   setCurrentPageBreadcrumbs("Source Oil Data to BUMA Component", [
     {
       pageName: useRoute().meta.parentMenu as string,

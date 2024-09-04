@@ -59,25 +59,27 @@ import {
   onBeforeMount,
   onMounted
 } from "vue";
-import { useStore } from "vuex";
-import { Actions } from "@/store/enums/StoreEnums";
-import { setCurrentPageTitle } from "@/core/helpers/breadcrumb";
-import { translate } from "@/core/helpers/language";
+import { useMenuStore as useAppMenuStore } from "../../store/templates/useMenuStore";
+import { useBreadcrumbsStore } from "../../store/templates/useBreadcrumbStore";
+import { Actions } from "../../store/enums/StoreEnums";
+import { setCurrentPageTitle } from "../../core/helpers/breadcrumb";
+import { translate } from "../../core/helpers/language";
 import { useI18n } from "vue-i18n";
-import MenuCard from "@/components/cards/MenuCard.vue";
-import MenuCardNoDesc from "@/components/cards/MenuCardNoDesc.vue";
+import MenuCard from "../../components/cards/MenuCard.vue";
+import MenuCardNoDesc from "../../components/cards/MenuCardNoDesc.vue";
 import {
   useAuthenticationStore
-} from "@/store/pinia/application/useAuthenticationStore";
-import { useMenuStore } from "@/store/pinia/application/useMenuStore";
+} from "../../store/pinia/application/useAuthenticationStore";
+import { useMenuStore } from "../../store/pinia/application/useMenuStore";
 import _ from "lodash"
-import { swalAlertInfo } from "@/core/helpers/sweet-alert";
+import { swalAlertInfo } from "../../core/helpers/sweet-alert";
 
-const store = useStore();
+const store = useAppMenuStore();
+const breadcrumbStore = useBreadcrumbsStore();
 const authStore = useAuthenticationStore();
 
 const { t, te } = useI18n();
-store.dispatch(Actions.ACTIVE_PAGE, "IronPortal");
+store[Actions.ACTIVE_PAGE]("IronPortal");
 const menuStore = useMenuStore();
 
 const ironPortalMenus = [
@@ -165,7 +167,7 @@ onBeforeMount(() => {
     title: "IronPortal",
     pageBreadcrumbPath: ["Home"]
   };
-  store.dispatch(Actions.SET_BREADCRUMB_ACTION, payload);
+  breadcrumbStore[Actions.SET_BREADCRUMB_ACTION](payload);
 });
 onMounted(() => {
   setCurrentPageTitle("IronPortal");

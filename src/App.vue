@@ -3,33 +3,33 @@
 </template>
 
 <style lang="scss">
+@import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~sweetalert2/dist/sweetalert2.css";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~dropzone/dist/dropzone.css";
 @import "~element-plus/lib/theme-chalk/index.css";
-@import '~bootstrap/scss/bootstrap.scss';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/utilities';
+
 
 // Main demo style scss
-@import "assets/sass/plugins";
-@import "assets/sass/style";
+@import "./assets/sass/plugins";
+@import "./assets/sass/style";
 
-// Dark mode demo style scss
-//@import "assets/sass/plugins.dark";
-//@import "assets/sass/style.dark";
-
-// RTL version styles
-//@import "assets/css/style.rtl.css";
 </style>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
+import { useConfigStore } from "./store/templates/useConfigStore"
+import { Mutations } from "./store/enums/StoreEnums";
 
 
 export default defineComponent({
   name: "app",
+  setup() {
+    const store = useConfigStore();
+
+    onMounted(() => {
+      store[Mutations.OVERRIDE_LAYOUT_CONFIG]();
+    });
+  }
 });
 </script>

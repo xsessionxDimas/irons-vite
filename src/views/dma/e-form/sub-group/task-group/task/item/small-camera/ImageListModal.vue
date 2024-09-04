@@ -17,7 +17,7 @@
           <div class="bg-secondary">
             <img :src='img.url' class='w-100 rounded' style='height: 200px; object-fit: contain' @click="handleShowFullScreen(img.imgBlob)"/>
             <template v-if='showDeleteButton'>
-              <inline-svg  @click='confirmDeleteButton(index)' class='delete-image-button' src='media/svg/dma/image-close-button-red.svg' />
+              <inline-svg  @click='confirmDeleteButton(index)' class='delete-image-button' src='/media/svg/dma/image-close-button-red.svg' />
             </template>
           </div>
         </div>
@@ -125,7 +125,7 @@ const getUrl = async () => {
         ver: 'v1',
       }
       try {
-        const GET_IMAGE_API_URL = `${process.env.VUE_APP_BASE_URL_DIGITAL}/${process.env.VUE_APP_API_AM_DMA}/api/attachment/download_by_url?${new URLSearchParams(params).toString()}`
+        const GET_IMAGE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_DMA}/api/attachment/download_by_url?${new URLSearchParams(params).toString()}`
         const response: AxiosResponse<Blob> = await ApiService.getBlob(GET_IMAGE_API_URL)
         const buffer = response.data;
         const blob = new Blob([buffer]);
@@ -173,7 +173,7 @@ const deleteImage = async () => {
     fileUrl: selectedImage.value
   }
   const body = { }
-  const DELETE_IMAGE_API_URL = `${process.env.VUE_APP_BASE_URL_DIGITAL}/${process.env.VUE_APP_API_AM_DMA}/api/attachment/delete_by_url?${new URLSearchParams(params).toString()}`
+  const DELETE_IMAGE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_DMA}/api/attachment/delete_by_url?${new URLSearchParams(params).toString()}`
   try {
     isLoading.value = true
     isDeleteImage.value = true

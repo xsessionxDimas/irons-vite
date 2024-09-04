@@ -22,18 +22,18 @@ import {
 } from "vue";
 import {
   useAuthenticationStore
-} from "@/store/pinia/application/useAuthenticationStore";
-import ApiService from "@/core/services/ApiService";
-import { GET_PROFILE } from "@/store/pinia/application/newUrls";
+} from "../../../../store/pinia/application/useAuthenticationStore";
+import ApiService from "../../../../core/services/ApiService";
+import { GET_PROFILE } from "../../../../store/pinia/application/newUrls";
 
-import { useStore } from 'vuex';
-import { generateId as generateIdHelper } from '@/core/helpers/generate-id';
-import PbiReport from '@/components/pbi/PbiReport.vue';
+import { usePbiEmbeddedStore } from '../../../../store/templates/usePbiEmbeddedStore';
+import { generateId as generateIdHelper } from '../../../../core/helpers/generate-id';
+import PbiReport from '../../../../components/pbi/PbiReport.vue';
 import {
   Mutations
-} from "@/store/enums/PbiEmbeddedEnums";
+} from "../../../../store/enums/PbiEmbeddedEnums";
 
-const store = useStore();
+const store = usePbiEmbeddedStore();
 const authStore = useAuthenticationStore();
 
 const reportId = "a9befe6f-7bc4-4d4a-91c1-8715b01416c5";
@@ -77,7 +77,7 @@ const getUserInfo = async () => {
 // end: METHODS ===============================================
 
 onBeforeMount(() => {
-  store.commit(Mutations.SET_PBI_URL, `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
+  store[Mutations.SET_PBI_URL](`${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
 })
 
 onMounted(async () => {

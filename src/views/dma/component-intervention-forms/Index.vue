@@ -510,7 +510,7 @@
   <ToastWithIcon
     :show="cannotModifyDefect"
     :message="errorApprovedOrDeclined"
-    icon="media/svg/dma/alert.svg"
+    icon="/media/svg/dma/alert.svg"
   />
   <GeneralDialog
     modal-type="alreadyFilled"

@@ -92,6 +92,7 @@ export default defineComponent({
     const router = useRouter();
 
     const isSideOpened = computed(() => {
+      console.log(store.getIsSideActive, 'aaa')
       return store.getIsSideActive;
     });
 
@@ -123,9 +124,9 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .button-collapse-icon::before {
-  content: url('../../../public/media/icons/duotune/arrows/arr080.svg');
+  content: url('../../../media/icons/duotune/arrows/arr080.svg');
 }
 #kt_aside_toggle.active .button-collapse-icon::before {
   display: inline-block;
@@ -133,6 +134,6 @@ export default defineComponent({
 }
 // HOVER WHITE
 #kt_aside_toggle:hover .button-collapse-icon::before {
-  content: url('../../../public/media/icons/duotune/arrows/arr080-white.svg') !important;
+  content: url('../../../media/icons/duotune/arrows/arr080-white.svg') !important;
 }
 </style>

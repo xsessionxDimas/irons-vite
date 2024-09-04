@@ -24,7 +24,7 @@
               @click="showDatePicker"
             >
             <label for="floatingInput">Sample Date<span class="text-danger">*</span></label>
-            <img src="media/svg/dma/calendar.svg" class="me-2 input-icon" style="height: 18px" alt="icon">
+            <img src="/media/svg/dma/calendar.svg" class="me-2 input-icon" style="height: 18px" alt="icon">
           </div>
           <el-date-picker
             v-model="selectedDate"

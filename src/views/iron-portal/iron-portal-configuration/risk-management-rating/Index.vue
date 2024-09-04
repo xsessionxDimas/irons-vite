@@ -31,7 +31,7 @@
 
 <script lang="ts" setup>
 /* imports here */
-import { useStore } from "vuex";
+import { useMenuStore } from "../../../../store/templates/useMenuStore";
 import {
   ref,
   onBeforeMount,
@@ -39,31 +39,31 @@ import {
   computed
 } from "vue";
 import { useRoute } from "vue-router";
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { setCurrentPageBreadcrumbs } from "../../../../core/helpers/breadcrumb";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 /* import components here */
-import Filter from "@/components/buttons/FilterIconButton.vue";
-import Add from "@/components/buttons/AddIconButton.vue";
-import Upload from "@/components/buttons/UploadIconButton.vue";
-import Download from "@/components/buttons/DownloadIconButton.vue";
+import Filter from "../../../../components/buttons/FilterIconButton.vue";
+import Add from "../../../../components/buttons/AddIconButton.vue";
+import Upload from "../../../../components/buttons/UploadIconButton.vue";
+import Download from "../../../../components/buttons/DownloadIconButton.vue";
 import Grid from "./components/Grid.vue";
 import FormAddDialog from "./components/FormAddDialog.vue";
 import UploadBulkDialog from "./components/UploadBulkDialog.vue";
 import FilterDialog from "./components/FilterDialog.vue";
 import {
   useRiskManagementRatingListStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/risk-management-rating/useRiskManagementRatingListStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/risk-management-rating/useRiskManagementRatingListStore";
 import {
   useRiskManagementRatingBulkStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/risk-management-rating/useRiskManagementRatingBulkStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/risk-management-rating/useRiskManagementRatingBulkStore";
 import {
   useRiskManagementRatingFormStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/risk-management-rating/useRiskManagementRatingFormStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/risk-management-rating/useRiskManagementRatingFormStore";
 import { saveAs } from "file-saver";
 
-const store = useStore();
+const store = useMenuStore();
 const listStore = useRiskManagementRatingListStore();
 const formStore = useRiskManagementRatingFormStore();
 const bulkStore = useRiskManagementRatingBulkStore();
@@ -89,7 +89,7 @@ const handlePaginationChange = (newPage: number) => {
 /* life cycle hooks */
 
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, useRoute().meta.parentMenu);
+  store[StoreActions.ACTIVE_PAGE](useRoute().meta.parentMenu as string);
   setCurrentPageBreadcrumbs("Component Risk Rating Description", [
     {
       pageName: useRoute().meta.parentMenu as string,

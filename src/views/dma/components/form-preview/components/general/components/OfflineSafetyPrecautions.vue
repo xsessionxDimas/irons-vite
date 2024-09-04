@@ -62,7 +62,7 @@ const closePDF = () => {
 }
 
 const contentHTML = (string) => {
-  return addSpanOnHyphen(string).replaceAll('{BLOB_URL}', process.env.VUE_APP_BASE_URL_VERSIONING_DIGITAL)
+  return addSpanOnHyphen(string).replaceAll('{BLOB_URL}', import.meta.env.VITE_APP_BASE_URL_VERSIONING_DIGITAL)
 }
 
 onMounted(() => {

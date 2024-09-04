@@ -168,17 +168,17 @@ import {
   computed,
   watch
 } from "vue";
-import { useStore } from "vuex";
 import { useRoute } from "vue-router";
-import { ScrollComponent } from "@/assets/ts/components/_ScrollComponent";
-import { MenuComponent } from "@/assets/ts/components/MenuComponent";
-import navigator from "@/core/mixins/navigator";
-import { useMenuStore } from "@/store/pinia/application/useMenuStore";
-import { Menu } from "@/core/types/entities/Menu";
+import { ScrollComponent } from "../../assets/ts/components/_ScrollComponent";
+import { MenuComponent } from "../../assets/ts/components/MenuComponent";
+import navigator from "../../core/mixins/navigator";
+import { useMenuStore as useAppMenuStore } from "../../store/templates/useMenuStore";
+import { useMenuStore } from "../../store/pinia/application/useMenuStore";
+import { Menu } from "../../core/types/entities/Menu";
 
-const store = useStore();
 const route = useRoute();
 const menuStore = useMenuStore();
+const appMenuStore = useAppMenuStore();
 const scrollElRef = ref<null | HTMLElement>(null);
 let search = ref<string>('');
 
@@ -199,7 +199,7 @@ const hasActiveChildren = (match: string) => {
 };
 
 const activePage = computed(() => {
-  return 'Test'
+  return appMenuStore.getPage
 });
 
 const basicMenu = computed(() => {
@@ -263,7 +263,7 @@ watch(basicMenu, async (newValue) => {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/sass/core/components/_variables.scss";
+@import "@/assets/sass/core/components/_variables.scss";
 
 .fas {
   color: #4D4D4D;

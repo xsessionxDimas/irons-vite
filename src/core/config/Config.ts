@@ -1,4 +1,4 @@
-import LayoutConfigTypes from "@/core/config/LayoutConfigTypes";
+import LayoutConfigTypes from "../../core/config/LayoutConfigTypes";
 
 const Config: LayoutConfigTypes = {
   themeName: "Metronic",

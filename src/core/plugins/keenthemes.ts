@@ -4,7 +4,7 @@ import {
   StickyComponent,
   ToggleComponent,
   SwapperComponent,
-} from "@/assets/ts/components";
+} from "../../assets/ts/components";
 
 /**
  * Initialize KeenThemes custom components

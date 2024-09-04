@@ -39,7 +39,7 @@ onBeforeMount(async () => {
       ver: 'v1',
     }
     try {
-      const GET_IMAGE_API_URL = `${process.env.VUE_APP_BASE_URL_DIGITAL}/utility/api/master_attachment/download_by_id`
+      const GET_IMAGE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/utility/api/master_attachment/download_by_id`
       const response: AxiosResponse<Blob> = await ApiService.getBlob(GET_IMAGE_API_URL, "", new URLSearchParams(params).toString())
       const buffer = response.data;
       const blob = new Blob([buffer]);

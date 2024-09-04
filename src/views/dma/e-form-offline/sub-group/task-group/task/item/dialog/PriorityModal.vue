@@ -119,11 +119,8 @@ const onFormClosed = () => {
 };
 </script>
 
-<stlye lang="scss" scoped>
-@import "@/assets/sass/pages/defect.form.scss";
-</stlye>
-
 <style lang="scss">
+@import "@/assets/sass/pages/defect.form.scss";
 .defect-priority-dialog {
     span {
         font-size: 1.2rem;

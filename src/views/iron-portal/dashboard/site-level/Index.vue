@@ -20,16 +20,16 @@ import {
 } from "vue";
 import {
   useAuthenticationStore
-} from "@/store/pinia/application/useAuthenticationStore";
-import ApiService from "@/core/services/ApiService";
-import { GET_PROFILE } from "@/store/pinia/application/newUrls";
-import PbiReport from '@/components/pbi/PbiReportSiteLevel.vue';
-import { useStore } from 'vuex';
+} from "../../../../store/pinia/application/useAuthenticationStore";
+import ApiService from "../../../../core/services/ApiService";
+import { GET_PROFILE } from "../../../../store/pinia/application/newUrls";
+import PbiReport from '../../../../components/pbi/PbiReportSiteLevel.vue';
+import { usePbiEmbeddedStore } from '../../../../store/templates/usePbiEmbeddedStore';
 import {
   Mutations
-} from "@/store/enums/PbiEmbeddedEnums";
+} from "../../../../store/enums/PbiEmbeddedEnums";
 
-const store = useStore();
+const store = usePbiEmbeddedStore();
 const authStore = useAuthenticationStore();
 
 const reportName = "AM-EHM-Site-Level";
@@ -67,7 +67,7 @@ const getUserInfo = async () => {
 // end: METHODS ===============================================
 
 onBeforeMount(() => {
-  store.commit(Mutations.SET_PBI_URL, `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
+  store[Mutations.SET_PBI_URL](`${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
 })
 
 onMounted(() => {

@@ -48,21 +48,24 @@
 import {
   onBeforeMount,
   onMounted} from "vue";
-import { useStore } from "vuex";
-import { Actions } from "@/store/enums/StoreEnums";
-import { setCurrentPageTitle } from "@/core/helpers/breadcrumb";
-import navigator from "@/core/mixins/navigator";
-import { translate } from "@/core/helpers/language";
+import { useMenuStore } from "../../store/templates/useMenuStore";
+import { useBreadcrumbsStore } from "../../store/templates/useBreadcrumbStore";
+import { Actions } from "../../store/enums/StoreEnums";
+import { setCurrentPageTitle } from "../../core/helpers/breadcrumb";
+import navigator from "../../core/mixins/navigator";
+import { translate } from "../../core/helpers/language";
 import { useI18n } from "vue-i18n";
-import MenuCard from "@/components/cards/MenuCard.vue";
+import MenuCard from "../../components/cards/MenuCard.vue";
 import {
   useAuthenticationStore
-} from "@/store/pinia/application/useAuthenticationStore";
+} from "../../store/pinia/application/useAuthenticationStore";
 
-const store = useStore();
+const store = useMenuStore();
 const authStore = useAuthenticationStore();
+const breadcrumbStore = useBreadcrumbsStore()
+
 const { t, te } = useI18n();
-store.dispatch(Actions.ACTIVE_PAGE, "Report");
+store[Actions.ACTIVE_PAGE]("Report");
 const { redirectByLink } = navigator();
 
 
@@ -71,7 +74,7 @@ onBeforeMount(() => {
     title: "Report",
     pageBreadcrumbPath: ["Home"]
   };
-  store.dispatch(Actions.SET_BREADCRUMB_ACTION, payload);
+  breadcrumbStore[Actions.SET_BREADCRUMB_ACTION](payload);
 });
 onMounted(() => {
   setCurrentPageTitle("Report");

@@ -14,6 +14,7 @@ import EquipmentRoutes from "./iron-lake/EquipmentRoutes";
 import TaskRoutes from "./iron-lake/TaskRoutes";
 import MaintenanceRoutes from "./iron-lake/MaintenanceRoutes";
 import ParameterRoutes from "./iron-lake/ParameterRoutes";
+import DmaRoutes from "./dma/dmaRoutes";
 import CrackAssignmentRoutes from "./iron-lake/CrackAssignmentRoutes";
 import ReportRoutes from "./iron-lake/ReportRoutes";
 import EmployeeRoutes from "./iron-lake/EmployeeRoutes";
@@ -77,7 +78,7 @@ const routes: Array<RouteRecordRaw> = [
           }
         },
         component: () => {
-          return import(/* webpackChunkName: "ironforms" */ "../views/Dashboard.vue");
+          return import("../views/Dashboard.vue");
         },
       },
       {
@@ -115,6 +116,315 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/",
+    component: () => {
+      return import("../layout/DMAFormLayout.vue");
+    },
+    children: DmaRoutes(staticTitle)
+  },
+  {
+    path: "/",
+    component: () => {
+      return import("../layout/DMALayout.vue");
+    },
+    children: [
+      {
+        path: "/ironforms",
+        name: "ironforms",
+        meta: {
+          title: `${staticTitle} - IronForms`,
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'dashboard',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/Home.vue")
+        },
+      },
+    ]
+  },
+  {
+    path: "/",
+    component: () => {
+      return import("../views/dma/layout/SidebarLayout.vue");
+    },
+    children: [
+      {
+        path: "/ironforms/pending-task-monitor",
+        name: "pendingtaskmonitor",
+        meta: {
+          title: `${staticTitle} - IronForms`,
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'pending task monitor',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/pending-task-monitor/Index.vue");
+        },
+      },
+      {
+        path: "/ironforms/identified-defects",
+        name: "identifieddefects",
+        meta: {
+          title: `${staticTitle} - IronForms`,
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'identified defect',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/identified-defects/List.vue");
+        },
+      },
+      {
+        path: "/ironforms/defects",
+        name: "defects",
+        meta: {
+          title: `${staticTitle} - IronForms`,
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'defects approval',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/defects/List.vue");
+        },
+      },
+      {
+        path: "/ironforms/defects-planner",
+        name: "defectsplanner",
+        meta: {
+          title: `${staticTitle} - IronForms`,
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'plannner defects approval',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/defects-planner/List.vue");
+        },
+      },
+      {
+        path: "/ironforms/monitoring-status",
+        name: "monitoringstatus",
+        meta: {
+          title: `${staticTitle} - IronForms`,
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'monitoring status',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/monitoring-status/Index.vue")
+        },
+      },
+      {
+        path: "/ironforms/approval",
+        name: "approval",
+        meta: {
+          title: `${staticTitle} - IronForms`
+        },
+        component: () => {
+          return import("../views/dma/approval/Index.vue")
+        },
+      },
+      {
+        path: "/ironforms/sos-print-label",
+        name: "sosprintlabel",
+        meta: {
+          title: `${staticTitle} - IronForms`,
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'sos print label',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/sos-print-label/Index.vue");
+        },
+      },
+    ]
+  },
+  {
+    path: "/",
+    component: () => {
+      return import("../views/dma/layout/NoSidebarLayout.vue");
+    },
+    children: [
+      {
+        path: "/ironforms/defects/detail",
+        name: "defectsdetail",
+        meta: {
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'defect detail',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/defects/Detail.vue");
+        },
+      },
+      {
+        path: "/ironforms/defects/detail-planner",
+        name: "defectsdetailplanner",
+        meta: {
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'planner defect detail',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/defects-planner/Detail.vue");
+        },
+      },
+      {
+        path: "/ironforms/identified-defects/service-form-detail",
+        name: "identifieddefectsserviceformdetail",
+        meta: {
+          title: `${staticTitle} - IronForms`,
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'identified defect Service Form Detail',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/identified-defects/service-form/DefectDetail.vue");
+        },
+      },
+      {
+        path: "/ironforms/defects/interim",
+        name: "defectsinterimdetail",
+        meta: {
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'interim defect detail',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/defects/components/interim-engine-service/Detail.vue");
+        },
+      },
+      {
+        path: "/ironforms/defects/interim-planner",
+        name: "defectsinterimdetailplanner",
+        meta: {
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'interim planner defect detail',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/defects-planner/interim-engine-service/Detail.vue");
+        },
+      },
+      {
+        path: "/ironforms/defects/intervention",
+        name: "defectsinterventiondetail",
+        meta: {
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'intervention defect detail',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/defects/components/component-intervention/Detail.vue");
+        },
+      },
+      {
+        path: "/ironforms/defects/intervention-planner",
+        name: "defectsinterventiondetailplanner",
+        meta: {
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'intervention planner defect detail',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/defects-planner/component-intervention/Detail.vue");
+        },
+      },
+      {
+        path: "/ironforms/sos-print-label/preview",
+        name: "sosprintlabelpreview",
+        meta: {
+          analytic: {
+            module: 'irons',
+            product: 'ironforms',
+            menu: 'sos print label preview',
+            action: 'view'
+          }
+        },
+        component: () => {
+          return import("../views/dma/sos-print-label/Preview.vue");
+        },
+      },
+    ]
+  },
+  {
+    path: "/ironforms/versionhistory",
+    name: "changelog",
+    meta: {
+      analytic: {
+        module: 'irons',
+        product: 'ironforms',
+        menu: 'version history',
+        action: 'view'
+      }
+    },
+    component: () => {
+      return import("../views/dma/change-log/Index.vue");
+    }
+  },
+  {
+    path: "/ironforms/versionhistory/:model/:pstype",
+    component: () => {
+      return import("../views/dma/change-log/Index.vue");
+    }
+  },
+  {
+    path: "/ironforms/versionhistory/:menu",
+    name: "taskcollection",
+    component: () => {
+      return import("../views/dma/change-log/Index.vue");
+    }
+  },
+  {
+    path: "/ironforms/formpreview/:model/:pstype",
+    name: "formpreview",
+    component: () => {
+      return import("../views/dma/change-log/FormPreview.vue");
+    }
+  },
   // ================================================================
   // ================= IronPortal Version History ===================
   // ================================================================
@@ -130,7 +440,7 @@ const routes: Array<RouteRecordRaw> = [
       }
     },
     component: () => {
-      return import(/* webpackChunkName: "ironportal" */ "../views/iron-portal/change-log/Index.vue");
+      return import("../views/iron-portal/change-log/Index.vue");
     }
   },
   {
@@ -309,7 +619,7 @@ const routes: Array<RouteRecordRaw> = [
           title: `${staticTitle} - IronPortal`
         },
         component: () => {
-          return import(/* webpackChunkName: "ironportal" */ "../views/iron-portal/dashboard/Landing.vue")
+          return import("../views/iron-portal/dashboard/Landing.vue")
         },
       },
       {
@@ -399,13 +709,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "404",
     component: () => {
       return import("../views/crafted/authentication/Error404.vue");
-    },
-  },
-  {
-    path: "/500",
-    name: "500",
-    component: () => {
-      return import("../views/crafted/authentication/Error500.vue");
     },
   },
   {

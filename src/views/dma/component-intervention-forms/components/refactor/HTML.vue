@@ -62,7 +62,7 @@ const isTaskUpdated = computed(() => {
   return props.task.updatedBy != ""
 })
 const content = computed(() => {
-  return addSpanOnHyphen(props.item.value).replaceAll('{BLOB_URL}', process.env.VUE_APP_BASE_URL_VERSIONING_DIGITAL)
+  return addSpanOnHyphen(props.item.value).replaceAll('{BLOB_URL}', import.meta.env.VITE_APP_BASE_URL_VERSIONING_DIGITAL)
 })
 const potraitWidthStyle = computed(() => {
   let customClass = ''

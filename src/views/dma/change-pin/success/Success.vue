@@ -10,7 +10,7 @@
   >
     <div class="row text-center pb-5 pt-5 text-dark processing-time-container">
       <div class="icon mb-4">
-        <inline-svg src="media/svg/dma/green-checklist.svg" />
+        <inline-svg src="/media/svg/dma/green-checklist.svg" />
       </div>
       <h3 class="mb-2">Success</h3>
       <span>

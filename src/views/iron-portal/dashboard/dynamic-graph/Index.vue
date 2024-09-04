@@ -20,16 +20,16 @@ import {
 } from "vue";
 import {
   useAuthenticationStore
-} from "@/store/pinia/application/useAuthenticationStore";
-import ApiService from "@/core/services/ApiService";
-import PbiReportDynamicGraph from '@/components/pbi/PbiReportDynamicGraph.vue';
-import { GET_PROFILE } from "@/store/pinia/application/newUrls";
-import { useStore } from 'vuex';
+} from "../../../../store/pinia/application/useAuthenticationStore";
+import ApiService from "../../../../core/services/ApiService";
+import PbiReportDynamicGraph from '../../../../components/pbi/PbiReportDynamicGraph.vue';
+import { GET_PROFILE } from "../../../../store/pinia/application/newUrls";
+import { usePbiEmbeddedStore } from '../../../../store/templates/usePbiEmbeddedStore';
 import {
   Mutations
-} from "@/store/enums/PbiEmbeddedEnums";
+} from "../../../../store/enums/PbiEmbeddedEnums";
 
-const store = useStore();
+const store = usePbiEmbeddedStore();
 const authStore = useAuthenticationStore();
 
 const reportName = "AM-EHM-Dynamic-Graph";
@@ -64,7 +64,7 @@ const getUserInfo = async () => {
 };
 
 onBeforeMount(() => {
-  store.commit(Mutations.SET_PBI_URL, `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
+  store[Mutations.SET_PBI_URL](`${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
 })
 
 onMounted(() => {

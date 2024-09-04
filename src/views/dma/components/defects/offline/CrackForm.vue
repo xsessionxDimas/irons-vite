@@ -546,7 +546,7 @@
       :caption="reviseCaption"
       @on-no-confirm="() => { showReviseConfirm = false }" @on-yes-confirm="handleModifyAndShowCancelButton" />
     <MessageBox :show="messageBoxVisible" @close="onOk" :message="completeMessage"/>
-    <MessageBox :show="errorMessageBoxVisible" @close="onOk" :message="errorMessage" icon="media/svg/dma/alert.svg"/>
+    <MessageBox :show="errorMessageBoxVisible" @close="onOk" :message="errorMessage" icon="/media/svg/dma/alert.svg"/>
     <DefectDecline
       :visibility="showDeclineReason"
       formTitle="Are you sure want to decline this defect information?"

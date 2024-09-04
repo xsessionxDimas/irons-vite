@@ -1,0 +1,1 @@
+const _={STATUS_IN_RANGE:"In range",STATUS_NOT_IN_RANGE:"Not in range",STATUS_NOT_IN_RANGE_LOWERCASE:"not in range",STATUS_OUT_OF_RANGE:"Out of range",MACHINESMUTITLE:()=>"Machine SMU",TITLE:T=>`Machine SMU - ${T}`,VIEW_DIALOG_LABEL:T=>`Machine SMU ${T?"":` ${_.STATUS_NOT_IN_RANGE_LOWERCASE}`}`};export{_ as M};

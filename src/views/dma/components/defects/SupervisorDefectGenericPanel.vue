@@ -86,7 +86,7 @@
                     :class="declineStatus(header)"
                     >
                     <div class="mx-3 little-box rounded-circle d-flex p-3 justify-content-center align-items-center mx-auto" style="margin-top: 6px;cursor: initial">
-                      <img v-if="viewIconDownload(header.status)" @click="handleConfirmationPrintPDF(header.defectHeaderId)" class="ms-4 me-2 download-icon" src="media/svg/dma/document_download.svg" :class="!isDownloaded(header.downloadHistory) ? 'icon-red':'icon-green'" style="height: 18px" alt="">
+                      <img v-if="viewIconDownload(header.status)" @click="handleConfirmationPrintPDF(header.defectHeaderId)" class="ms-4 me-2 download-icon" src="/media/svg/dma/document_download.svg" :class="!isDownloaded(header.downloadHistory) ? 'icon-red':'icon-green'" style="height: 18px" alt="">
                     </div>
                   </div>
                   </div>

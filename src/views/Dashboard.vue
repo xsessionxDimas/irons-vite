@@ -1,11 +1,11 @@
 <template>
   <div class="d-flex flex-column" style="margin-left: 0.5rem">
     <div
-      class="d-flex align-items-center my-3 mt-5 page-title-dashboard"
+      class="d-flex align-items-center my-3 mt-5 page-title-dashboard sample-dimas-style"
       style="line-height: 36px">
-      {{ translate("WELCOME", t, te) }} {{ authStore.user.Name }}!
+      Welcome {{ authStore.user.Name }}!
     </div>
-    <p class="page-subtitle my-3 mt-4">{{ translate("PICKUP", t, te) }}</p>
+    <p class="page-subtitle my-3 mt-4">Pick the app that you want to use</p>
   </div>
   <div class="row gy-5 g-xl-8 m-2 h-250px">
     <template v-for="(item) in MainMenuConfig" :key="item">
@@ -78,7 +78,7 @@
 </style>
 
 <script lang="ts" setup>
-import { computed, onMounted } from "vue";
+import { computed, onBeforeMount } from "vue";
 import { useMenuStore as useAppMenuStore } from "../store/templates/useMenuStore"; 
 import { Actions } from "../store/enums/StoreEnums";
 import { setCurrentPageTitle } from "../core/helpers/breadcrumb";
@@ -90,9 +90,11 @@ import {
   useAuthenticationStore
 } from "../store/pinia/application/useAuthenticationStore";
 import { useMenuStore } from "../store/pinia/application/useMenuStore";
+import { downloadLanguage } from "../core/helpers/get-user-info"
 
 const store = useAppMenuStore();
 const { t, te } = useI18n();
+
 store[Actions.ACTIVE_PAGE]("Dashboard");
 const authStore = useAuthenticationStore();
 const menuStore = useMenuStore();
@@ -116,8 +118,8 @@ const cardDetail = (menu: string) => {
   return MainMenuCardConfig.value[menu]
 }
 
-
-onMounted(() => {
+onBeforeMount(async () => {
+  await downloadLanguage()
   setCurrentPageTitle("Dashboard")
-});
+})
 </script>

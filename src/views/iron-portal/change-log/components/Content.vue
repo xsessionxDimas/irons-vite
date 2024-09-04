@@ -1,6 +1,13 @@
 <template>
   <div class="version-wrapper overflow-auto">
     <!-- pdf embed -->
+    <vue-pdf-embed
+      v-if="!isLoading"
+      @click="handleOnClick"
+      :source="pdfUrl"
+      class="w-100 h-100"
+      :annotationLayer="true"
+    />
   </div>
 </template>
 
@@ -13,7 +20,8 @@ import {
   watch,
   toRef
 } from 'vue'
-import ApiService from '@/core/services/ApiService';
+import ApiService from '../../../../core/services/ApiService';
+import VuePdfEmbed from 'vue-pdf-embed'
 
 const props = defineProps({
   blobUrl: {

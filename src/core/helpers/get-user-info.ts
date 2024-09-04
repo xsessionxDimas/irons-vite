@@ -31,6 +31,10 @@ export const removePageLoadingClassthenRedirectSignIn = () => {
   router.push({ name: "signin" })
 }
 
+export const downloadLanguage = async () => {
+  if (!langStore.isDictionarySet) await langStore.downloadLanguage("EN")
+}
+
 export const checkSignInStatus = async (instance: PublicClientApplication) => {
   if (!localStorage.getItem("account-info-cache") || localStorage.getItem("account-info-cache") == 'undefined') {
     store[Actions.REMOVE_BODY_CLASSNAME]("page-loading")
@@ -49,7 +53,7 @@ export const checkSignInStatus = async (instance: PublicClientApplication) => {
       localStorage.setItem("login-tracked", "true")
     }
     if (!menuStore.isMenuSet) await menuStore.getMenu(authStore.user.EmployeeId.toString())
-    if (!langStore.isDictionarySet) await langStore.downloadLanguage("EN")
+    await downloadLanguage()
     DrawerComponent.bootstrap()
     ScrollComponent.bootstrap()
     DrawerComponent.updateAll()

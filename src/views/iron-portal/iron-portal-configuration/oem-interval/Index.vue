@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 /* imports here */
-import { useStore } from "vuex";
+import { useMenuStore } from "../../../../store/templates/useMenuStore";
 import {
   ref,
   onBeforeMount,
@@ -40,15 +40,15 @@ import {
   computed
 } from "vue";
 import { useRoute } from "vue-router";
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { setCurrentPageBreadcrumbs } from "../../../../core/helpers/breadcrumb";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 /* import components here */
-import Filter from "@/components/buttons/FilterIconButton.vue";
-import Add from "@/components/buttons/AddIconButton.vue";
-import Upload from "@/components/buttons/UploadIconButton.vue";
-import Download from "@/components/buttons/DownloadIconButton.vue";
+import Filter from "../../../../components/buttons/FilterIconButton.vue";
+import Add from "../../../../components/buttons/AddIconButton.vue";
+import Upload from "../../../../components/buttons/UploadIconButton.vue";
+import Download from "../../../../components/buttons/DownloadIconButton.vue";
 import Grid from "./components/Grid.vue";
 import FormAddDialog from "./components/FormAddDialog.vue";
 import FormEditDialog from "./components/FormEditDialog.vue";
@@ -56,16 +56,16 @@ import UploadBulkDialog from "./components/UploadBulkDialog.vue";
 import FilterDialog from "./components/FilterDialog.vue";
 import {
   useOemIntervalListStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/oem-interval/useOemIntervalListStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/oem-interval/useOemIntervalListStore";
 import {
   useOemIntervalBulkStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/oem-interval/useOemIntervalBulkStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/oem-interval/useOemIntervalBulkStore";
 import {
   useOemIntervalFormStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/oem-interval/useOemIntervalFormStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/oem-interval/useOemIntervalFormStore";
 import { saveAs } from "file-saver";
 
-const store = useStore();
+const store = useMenuStore();
 const listStore = useOemIntervalListStore();
 const formStore = useOemIntervalFormStore();
 const bulkStore = useOemIntervalBulkStore();
@@ -91,7 +91,7 @@ const handlePaginationChange = (newPage: number) => {
 
 /* life cycle hooks */
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, useRoute().meta.parentMenu);
+  store[StoreActions.ACTIVE_PAGE](useRoute().meta.parentMenu as string);
   setCurrentPageBreadcrumbs("OEM Interval", [
     {
       pageName: useRoute().meta.parentMenu as string,

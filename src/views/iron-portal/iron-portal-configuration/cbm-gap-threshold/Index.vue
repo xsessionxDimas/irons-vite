@@ -39,28 +39,28 @@ import {
   computed
 } from "vue";
 import { useRoute } from "vue-router";
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { setCurrentPageBreadcrumbs } from "../../../../core/helpers/breadcrumb";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 /* import components here */
-import Filter from "@/components/buttons/FilterIconButton.vue";
-import Add from "@/components/buttons/AddIconButton.vue";
-import Upload from "@/components/buttons/UploadIconButton.vue";
-import Download from "@/components/buttons/DownloadIconButton.vue";
+import Filter from "../../../../components/buttons/FilterIconButton.vue";
+import Add from "../../../../components/buttons/AddIconButton.vue";
+import Upload from "../../../../components/buttons/UploadIconButton.vue";
+import Download from "../../../../components/buttons/DownloadIconButton.vue";
 import Grid from "./components/Grid.vue";
 import FormAddDialog from "./components/FormAddDialog.vue";
 import UploadBulkDialog from "./components/UploadBulkDialog.vue";
 import FilterDialog from "./components/FilterDialog.vue";
 import {
   useCbmGapThresholdListStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/cbm-gap-threshold/useCbmGapThresholdListStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/cbm-gap-threshold/useCbmGapThresholdListStore";
 import {
   useCbmGapThresholdBulkStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/cbm-gap-threshold/useCbmGapThresholdBulkStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/cbm-gap-threshold/useCbmGapThresholdBulkStore";
 import {
   useCbmGapThresholdFormStore
-} from "@/store/pinia/iron-portal/iron-portal-configuration/cbm-gap-threshold/useCbmGapThresholdFormStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-configuration/cbm-gap-threshold/useCbmGapThresholdFormStore";
 import { saveAs } from "file-saver";
 
 const store = useStore();
@@ -90,7 +90,7 @@ const handlePaginationChange = (newPage: number) => {
 
 /* life cycle hooks */
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, useRoute().meta.parentMenu);
+  store[StoreActions.ACTIVE_PAGE](useRoute().meta.parentMenu as string);
   setCurrentPageBreadcrumbs("CBM Compliance Gap Threshold", [
     {
       pageName: useRoute().meta.parentMenu as string,

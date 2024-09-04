@@ -412,7 +412,7 @@ const handleResetError = () => {
   display: inline-block;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
-  content: url(../../../../../../../public/media/icons/bumaau/search.svg);
+  content: url("/media/icons/bumaau/search.svg");
   position: absolute;
   left: 10px; /* Adjust as needed to position the icon */
   top: 58%; /* Adjust as needed to vertically center the icon */

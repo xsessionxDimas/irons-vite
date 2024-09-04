@@ -15,20 +15,20 @@ import {
 } from "vue";
 import {
   useAuthenticationStore
-} from "@/store/pinia/application/useAuthenticationStore";
-import ApiService from "@/core/services/ApiService";
-import { GET_PROFILE } from "@/store/pinia/application/newUrls";
-import PbiReportEquipment from '@/components/pbi/PbiReportEquipment.vue';
+} from "../../../../store/pinia/application/useAuthenticationStore";
+import ApiService from "../../../../core/services/ApiService";
+import { GET_PROFILE } from "../../../../store/pinia/application/newUrls";
+import PbiReportEquipment from '../../../../components/pbi/PbiReportEquipment.vue';
 import {
   Mutations
-} from "@/store/enums/PbiEmbeddedEnums";
-import { useStore } from 'vuex';
+} from "../../../../store/enums/PbiEmbeddedEnums";
+import { usePbiEmbeddedStore } from '../../../../store/templates/usePbiEmbeddedStore';
 
 const reportName = "AM-EHM-Equipment";
 const extendExpiredLogin = ref<boolean>(false);
 const isOnMounted = ref<boolean>(false);
 const authStore = useAuthenticationStore();
-const store = useStore();
+const store = usePbiEmbeddedStore();
 
 const propsData = computed(() => {
   return {
@@ -51,7 +51,7 @@ const getUserInfoInterval = setInterval(() => {
 }, timeToUpdate * 60 * 1000);
 
 onBeforeMount(() => {
-  store.commit(Mutations.SET_PBI_URL, `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
+  store[Mutations.SET_PBI_URL](`${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
 })
 
 const getUserInfo = async () => {

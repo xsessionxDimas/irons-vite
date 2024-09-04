@@ -19,7 +19,7 @@ export const config = computed(() => {
  * @returns {boolean}
  */
 export const displaySidebar = computed(() => {
-  return store.layoutConfig["sidebar.display"];
+  return store.layoutConfig("sidebar.display", "");
 });
 
 /**
@@ -27,7 +27,7 @@ export const displaySidebar = computed(() => {
  * @returns {boolean}
  */
 export const footerWidthFluid = computed(() => {
-  return store.layoutConfig["footer.width"] === "fluid";
+  return store.layoutConfig("footer.width", "") === "fluid";
 });
 
 /**
@@ -35,7 +35,7 @@ export const footerWidthFluid = computed(() => {
  * @returns {boolean}
  */
 export const headerWidthFluid = computed(() => {
-  return store.layoutConfig["header.width"] === "fluid";
+  return store.layoutConfig("header.width", "") === "fluid";
 });
 
 /**
@@ -43,7 +43,7 @@ export const headerWidthFluid = computed(() => {
  * @returns {string}
  */
 export const headerLeft = computed(() => {
-  return store.layoutConfig["header.left"];
+  return store.layoutConfig("header.left", "");
 });
 
 /**
@@ -51,7 +51,7 @@ export const headerLeft = computed(() => {
  * @returns {boolean}
  */
 export const asideDisplay = computed(() => {
-  return store.layoutConfig["aside.display"] === true;
+  return store.layoutConfig("aside.display", "") === true;
 });
 
 /**
@@ -59,7 +59,7 @@ export const asideDisplay = computed(() => {
  * @returns {boolean}
  */
 export const toolbarWidthFluid = computed(() => {
-  return store.layoutConfig["toolbar.width"] === "fluid";
+  return store.layoutConfig("toolbar.width", "") === "fluid";
 });
 
 /**
@@ -67,7 +67,7 @@ export const toolbarWidthFluid = computed(() => {
  * @returns {boolean}
  */
 export const toolbarDisplay = computed(() => {
-  return store.layoutConfig["toolbar.display"];
+  return store.layoutConfig("toolbar.display", "");
 });
 
 /**
@@ -75,7 +75,7 @@ export const toolbarDisplay = computed(() => {
  * @returns {boolean}
  */
 export const loaderEnabled = computed(() => {
-  return store.layoutConfig["loader.display"];
+  return store.layoutConfig("loader.display", "");
 });
 
 /**
@@ -83,7 +83,7 @@ export const loaderEnabled = computed(() => {
  * @returns {boolean}
  */
 export const contentWidthFluid = computed(() => {
-  return store.layoutConfig["content.width"] === "fluid";
+  return store.layoutConfig("content.width", "") === "fluid";
 });
 
 /**
@@ -91,7 +91,7 @@ export const contentWidthFluid = computed(() => {
  * @returns {string}
  */
 export const loaderLogo = computed(() => {
-  return import.meta.env.BASE_URL + store.layoutConfig["loader.logo"];
+  return import.meta.env.BASE_URL + store.layoutConfig("loader.logo", "");
 });
 
 /**
@@ -99,7 +99,7 @@ export const loaderLogo = computed(() => {
  * @returns {boolean}
  */
 export const asideEnabled = computed(() => {
-  return !!store.layoutConfig["aside.display"];
+  return !!store.layoutConfig("aside.display", "");
 });
 
 /**
@@ -107,7 +107,7 @@ export const asideEnabled = computed(() => {
  * @returns {string}
  */
 export const asideTheme = computed(() => {
-  return store.layoutConfig["aside.theme"];
+  return store.layoutConfig("aside.theme", "");
 });
 
 /**
@@ -115,7 +115,7 @@ export const asideTheme = computed(() => {
  * @returns {boolean}
  */
 export const subheaderDisplay = computed(() => {
-  return store.layoutConfig["toolbar.display"];
+  return store.layoutConfig("toolbar.display", "");
 });
 
 /**
@@ -123,7 +123,7 @@ export const subheaderDisplay = computed(() => {
  * @returns {string}
  */
 export const asideMenuIcons = computed(() => {
-  return store.layoutConfig["aside.menuIcon"];
+  return store.layoutConfig("aside.menuIcon", "");
 });
 
 /**
@@ -131,7 +131,7 @@ export const asideMenuIcons = computed(() => {
  * @returns {string}
  */
 export const themeLightLogo = computed(() => {
-  return store.layoutConfig["main.logo.light"];
+  return store.layoutConfig("main.logo.light", "");
 });
 
 /**
@@ -139,7 +139,7 @@ export const themeLightLogo = computed(() => {
  * @returns {string}
  */
 export const themeDarkLogo = computed(() => {
-  return store.layoutConfig["main.logo.dark"];
+  return store.layoutConfig("main.logo.dark", "");
 });
 
 /**
@@ -147,7 +147,7 @@ export const themeDarkLogo = computed(() => {
  * @returns {string}
  */
 export const headerMenuIcons = computed(() => {
-  return store.layoutConfig["header.menuIcon"];
+  return store.layoutConfig("header.menuIcon", "");
 });
 
 /**
@@ -155,5 +155,5 @@ export const headerMenuIcons = computed(() => {
  * @returns {string}
  */
 export const headerChangeColor = computed(() => {
-  return localStorage.getItem["ThemeConfig"] as string;
+  return localStorage.getItem("ThemeConfig") as string;
 });

@@ -275,7 +275,7 @@ const onReset = () => {
   }
 
   &::before {
-    content: url("../../../../../../public/media/icons/bumaau/search.svg");
+    content: url("/media/icons/bumaau/search.svg");
     position: absolute;
     top: 0.5rem;
     left: 0.75rem;

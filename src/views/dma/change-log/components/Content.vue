@@ -54,7 +54,7 @@ const getPDF = async () => {
   if (blobUrl.value != '') {
     const params = `ver=v1&fileUrl=${blobUrl.value}`
     try {
-      const GET_IMAGE_API_URL = `${process.env.VUE_APP_BASE_URL_DIGITAL}/${process.env.VUE_APP_API_UTILITY}/api/master_attachment/download_by_url?${params}`
+      const GET_IMAGE_API_URL = `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_UTILITY}/api/master_attachment/download_by_url?${params}`
       console.log(GET_IMAGE_API_URL)
       const response: AxiosResponse<Blob> = await ApiService.getBlob(GET_IMAGE_API_URL)
       const buffer = response.data;

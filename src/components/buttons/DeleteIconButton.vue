@@ -40,9 +40,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useStore } from "vuex";
-import { Mutations } from "@/store/enums/PageEnum";
-import { translate } from "@/core/helpers/language";
+import { useMenuStore } from "../../store/templates/useMenuStore";
+import { Mutations } from "../../store/enums/PageEnum";
+import { translate } from "../../core/helpers/language";
 import { useI18n } from "vue-i18n";
 
 export default defineComponent({
@@ -54,10 +54,10 @@ export default defineComponent({
   },
   emits: ["show-dialog"],
   setup(props, { emit }) {
-    const store = useStore();
+    const store = useMenuStore();
     const { t, te } = useI18n();
     const changePage = () => {
-      store.commit(Mutations.SET_PAGE, props.routeName);
+      store[Mutations.SET_PAGE](props.routeName);
     };
     const handleModalToggle = () => {
       emit("show-dialog", null);

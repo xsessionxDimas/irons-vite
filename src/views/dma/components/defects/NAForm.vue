@@ -97,7 +97,7 @@
     />
     <ToastWithIcon :show="successMessageBoxVisible" :message="completeMessage" />
   </el-dialog>
-  <MessageBox :show="errorMessageBoxVisible" @close="onOk" :message="errorMessage" icon="media/svg/dma/alert.svg"/>
+  <MessageBox :show="errorMessageBoxVisible" @close="onOk" :message="errorMessage" icon="/media/svg/dma/alert.svg"/>
 </template>
 
 <script lang="ts" setup>

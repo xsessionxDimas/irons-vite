@@ -19,18 +19,16 @@ import {
   onMounted,
   onUnmounted
 } from 'vue';
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import { useStore } from 'vuex';
-import { setCurrentPageBreadcrumbs } from "@/core/helpers/breadcrumb";
-import { generateId as generateIdHelper } from '@/core/helpers/generate-id';
+import { useErrorHandleStore } from '../../../../store/templates/useErrorStore';
+import { usePbiEmbeddedStore } from '../../../../store/templates/usePbiEmbeddedStore';
+import { generateId as generateIdHelper } from '../../../../core/helpers/generate-id';
 import {
   Mutations as ErrorHandleMutations
-} from "@/store/enums/ErrorHandleEnum"
-import { Mutations as PageMutations } from '@/store/enums/PageEnum';
-import PbiReport from '@/components/pbi/PbiReportCbm.vue';
+} from "../../../../store/enums/ErrorHandleEnum"
+import PbiReport from '../../../../components/pbi/PbiReportCbm.vue';
 import {
   Mutations
-} from "@/store/enums/PbiEmbeddedEnums";
+} from "../../../../store/enums/PbiEmbeddedEnums";
 
 const props = defineProps([
   "breadCrumb",
@@ -40,7 +38,8 @@ const props = defineProps([
   "isPublic",
   "isHideVisualHeaders",
 ])
-const store = useStore();
+const store = useErrorHandleStore();
+const pbiStore = usePbiEmbeddedStore();
 
 const reportId = "a9befe6f-7bc4-4d4a-91c1-8715b01416c5";
 const workspaceId = "d90b69f1-3a2e-423e-9e27-e341dc02a972";
@@ -59,23 +58,15 @@ const generatePageName: ComputedRef<string> = computed(() => {
 // end: METHODS ===============================================
 
 onBeforeMount(() => {
-  store.commit(Mutations.SET_PBI_URL, `${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
+  pbiStore[Mutations.SET_PBI_URL](`${import.meta.env.VITE_APP_BASE_URL_DIGITAL}/${import.meta.env.VITE_APP_API_AM_ADM}`)
 })
 
 onMounted(async () => {
-  store.commit(ErrorHandleMutations.SET_ERROR_PAGES, generatePageName.value)
-  // store.dispatch(StoreActions.ACTIVE_PAGE, props.breadCrumb.activePage);
-  // setCurrentPageBreadcrumbs(props.breadCrumb.currentPageBreadCrumb,
-  //   props.breadCrumb.breadCrumbList
-  // );
-  // store.commit(PageMutations.SET_CURRENT_MODULE, {
-  //   module: generatePageName.value,
-  //   initialPage: 'pbi-list-module'
-  // })
+  store[ErrorHandleMutations.SET_ERROR_PAGES](generatePageName.value)
 })
 
 onUnmounted(async () => {
   // reset error state
-  store.commit(ErrorHandleMutations.SET_ERROR_PAGES, generatePageName.value)
+  store[ErrorHandleMutations.SET_ERROR_PAGES](generatePageName.value)
 })
 </script>

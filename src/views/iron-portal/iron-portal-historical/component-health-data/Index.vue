@@ -22,26 +22,26 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useStore } from "vuex";
-import { setCurrentPageBreadcrumbs } from '@/core/helpers/breadcrumb';
+import { useMenuStore } from "../../../../store/templates/useMenuStore";
+import { setCurrentPageBreadcrumbs } from '../../../../core/helpers/breadcrumb';
 import {
   computed,
   onBeforeMount,
   onUnmounted,
   watch,
 } from 'vue';
-import { Actions as StoreActions } from "@/store/enums/StoreEnums";
-import Pagination from "@/components/pager/Pagination.vue";
-import PaginationType from "@/core/types/misc/Pagination";
+import { Actions as StoreActions } from "../../../../store/enums/StoreEnums";
+import Pagination from "../../../../components/pager/Pagination.vue";
+import PaginationType from "../../../../core/types/misc/Pagination";
 import {
   useComponentHealthDataListStore
-} from "@/store/pinia/iron-portal/iron-portal-historical/component-health-data/useComponentHealthDataListStore";
+} from "../../../../store/pinia/iron-portal/iron-portal-historical/component-health-data/useComponentHealthDataListStore";
 
 /* import components here */
 import Filters from "./components/Filters.vue"
 import Grid from "./components/Grid.vue"
 
-const store = useStore();
+const store = useMenuStore();
 const listStore = useComponentHealthDataListStore();
 
 /* computed */
@@ -80,7 +80,7 @@ watch(filterData, async () => {
 
 /* life cycle hooks */
 onBeforeMount(async () => {
-  store.dispatch(StoreActions.ACTIVE_PAGE, "IronPortal");
+  store[StoreActions.ACTIVE_PAGE]("IronPortal");
   setCurrentPageBreadcrumbs("Component Health Data", [
     {
       pageName: "IronPortal",

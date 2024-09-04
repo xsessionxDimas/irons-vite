@@ -528,7 +528,7 @@
     <CompleteOrLaterDialog :show="confirmVisible" :parts-warning="partsWarningVisible" @add-parts="onAddParts"
       @close="onCancel" @submit="onSave" />
     <MessageBox :show="messageBoxVisible" @close="onOk" :message="completeMessage"/>
-    <MessageBox :show="errorMessageBoxVisible" @close="onOk" :message="errorMessage" icon="media/svg/dma/alert.svg"/>
+    <MessageBox :show="errorMessageBoxVisible" @close="onOk" :message="errorMessage" icon="/media/svg/dma/alert.svg"/>
     <DefectDecline
       :visibility="showDeclineReason"
       formTitle="Are you sure want to decline this defect information?"

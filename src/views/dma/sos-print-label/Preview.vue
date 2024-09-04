@@ -14,7 +14,7 @@
               type="button"
               @click="toPrevPage">
               <inline-svg
-                src="media/icons/bootstrap-icon/arrow-left-short.svg"
+                src="/media/icons/bootstrap-icon/arrow-left-short.svg"
                 fill="black"
                 width="20"
                 height="20"
@@ -33,13 +33,13 @@
               Discard Changes
             </el-button>
             <el-button type="success" class="button" :disabled="isSaveDisabled" @click="saveChanged">
-              <img src="media/svg/buttons/save.svg" class="me-2" style="height: 18px" alt="icon">
+              <img src="/media/svg/buttons/save.svg" class="me-2" style="height: 18px" alt="icon">
               Save
             </el-button>
           </div>
           <div v-else class="d-flex flex-row align-items-center">
             <el-button type="button" class="edit-button" :disabled="!isCanEdit" @click="changeToEdit">
-              <img src="media/svg/buttons/edit.svg" class="me-2" style="height: 18px" alt="icon">
+              <img src="/media/svg/buttons/edit.svg" class="me-2" style="height: 18px" alt="icon">
               Edit
             </el-button>
             <el-button v-if="isCanGenerate" type="success" class="secondary-button" @click="generateLabel">
@@ -49,7 +49,7 @@
               Regenerate Label Number
             </el-button>
             <el-button type="success" class="button" :disabled="isCanGenerate" @click="handleDownload">
-              <img src="media/svg/buttons/print.svg" class="me-2" style="height: 18px" alt="icon">
+              <img src="/media/svg/buttons/print.svg" class="me-2" style="height: 18px" alt="icon">
               Print PDF
             </el-button>
           </div>
